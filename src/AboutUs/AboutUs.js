@@ -22,7 +22,7 @@ function useLoadContentFromLocalStorage(ref, pageKey) {
         styleElement.innerHTML = savedCss;
         document.head.appendChild(styleElement);
 
-        const mapContainer = document.getElementById({uniqueID});
+        const mapContainer = localStorage.getItem(`savedHtml${pageKey}`);
         // const mapContainer = document.querySelector('myMapContainer');
         if (mapContainer) {
 
@@ -67,7 +67,7 @@ function AboutUs() {
                 </div>
 
                 <div className='philosophy' >'PLACE" is an acronym for Professional, Local, Adult Community Education.'</div>
-            </div>
+            </div>``
 
             <div className='section1'>
                 <div className='overview'>
