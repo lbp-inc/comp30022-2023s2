@@ -1,0 +1,17 @@
+.EditLogin {
+    position: fixed;  
+    top: 20px;        
+    right: 10px;      
+    z-index: 1000;
+
+  }
+
+.EditLoginButton {
+  color:#756e6eb4;
+  font-size: 28px;
+  transition: transform 0.5s, color 0.5s;
+}
+
+.EditLoginButton :hover {
+    color: #000000;
+  }
