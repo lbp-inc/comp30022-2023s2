@@ -1,3 +1,67 @@
+deploy url：
+------------------------
+
+Front end: [LongBeach Place Inc (longbeachfrontend0adcfe405469.herokuapp.com)](https://longbeachfrontend-0adcfe405469.herokuapp.com/)
+------------------------
+
+## Back end: [Error (longbeachbackend-2c4b09f98b44.herokuapp.com)](https://longbeachbackend-2c4b09f98b44.herokuapp.com/) // dw about the error
+
+------------
+
+Patch note in **23/9/2023**
+
+1. Deploy successful in front and back end
+2. Edit function now can be easily use and access to the database
+3. Over all layout and portal for other group has been finalised
+4. Minor bug to be fix in website
+   - including layout in different page, nav bar now would stack with the text
+   - edit function's Layout preview need to be fix
+
+----------------------
+
+```
+For deployment in Frontend
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass can be use when access not granted
+
+1. **cd frontend** // for front end use only
+2. git remote add longbeach-frontend https://git.heroku.com/longbeachfrontend.git //get access from Wenda Zhang
+3. git remote -v // To check whether if remote access has been granted
+4. git remote rm heroku
+5. **heroku login**
+6. heroku logs --app longbeachfrontend --tail
+7. **npm run build** to deploy // make sure to run build in COMP30022-Content/frontend path
+8. Remember to commit to the 'main' branch after each build complete
+9. **git subtree push --prefix=frontend longbeach-frontend main** // cd .. back to the toplevel of the working tree
+10. heroku open --app longbeachfrontend // to check if deploy has been successful
+
+
+For deployment in Backend
+
+1. **cd Backend** // for backend use only
+2. git remote add longbeach-backend https://git.heroku.com/longbeachfrontend.git //get access from Wenda Zhang
+3. git remote -v // To check whether if remote access has been granted
+4. git remote rm heroku
+5. **heroku login**
+6. heroku logs --app longbeachbackend --tail
+7. Remember to commit to the 'main' branch after changes
+8. **git subtree push --prefix=backend longbeach-backend main** // cd .. back to the toplevel of the working tree
+10. heroku open --app longbeachbackend // to check if deploy has been successful
+
+
+
+```
+
+
+
+# For backend server
+
+Make sure to use `cd backend` 
+
+`npm run build` at the first time
+
+`npm start`
+
+------------------------
 
 # Getting Started with Create React App
 
@@ -7,8 +71,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-make sure to
-### `npm install` first
+### `npm install`
 
 ### `npm start`
 
@@ -72,3 +135,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass 
+
+Deploy command
+
+### Backend deploy - run at root folder test
+
+git subtree push --prefix=backend longbeach-backend main
+
+### Frontend deploy - run at root folder
+
+git subtree push --prefix=frontend longbeach-frontend main
