@@ -1,0 +1,99 @@
+.page {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.logo {
+    background-color: rgba(255, 255, 255, 0);
+    text-align: auto;
+    position: absolute; 
+    top: 0px;   
+    left: 40px; 
+}
+
+/* 缩小logo图像 */
+.logo img {
+    max-width: 100%; /* 图像宽度最大不超过容器宽度 */
+    max-height: 100px; /* 图像高度最大不超过100像素 */
+}
+
+.title {
+    background-color: rgba(255, 255, 255, 0);
+    font-family: 'SF FONT bold', Arial, sans-serif;
+    /* color: #D89D5B; */
+    color: #3b9da6;
+
+    padding: 20px;
+    font-size: 46px;
+    position: absolute; 
+    top: 13px;   
+    left: 160px;          
+    
+}
+@media screen and (max-width: 950px) {
+    .page {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .logo {
+        top: 0cqi;
+        left: 20px;
+    }
+    /* 在小屏幕上进一步缩小logo图像 */
+    .logo img {
+        max-height: 100px; /* 图像高度最大不超过80像素 */
+    }
+    .title {
+        font-size: 28px;
+        top: 30px;
+        left: 140px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .page {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .logo {
+        top: 5px;
+        left: 5px;
+    }
+
+    /* 在小屏幕上进一步缩小logo图像 */
+    .logo img {
+
+        max-width: 50%; /* 图像高度最大不超过80像素 */
+    }
+
+    .title {
+        font-size: 25px;
+        top: 0px;
+        left: 70px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .page {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .logo {
+        top: 5px;
+        left: 5px;
+    }
+
+    /* 在小屏幕上进一步缩小logo图像 */
+    .logo img {
+        max-width: 40%; /* 图像高度最大不超过80像素 */
+    }
+
+    .title {
+        font-size: 15px;
+        top: 0px;
+        left: 50px;
+    }
+}

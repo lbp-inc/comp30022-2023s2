@@ -1,0 +1,102 @@
+@font-face {
+    font-family: 'SF FONT bold'; 
+    src: url('../fonts/SFPRODISPLAYBOLD.OTF') format('opentype');
+}
+@font-face {
+    font-family: 'SF FONT regular'; 
+    src: url('../fonts/SFPRODISPLAYREGULAR.OTF') format('opentype');
+}
+
+/* 这是我加的popup animation */
+@keyframes popUp {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+}
+
+.pageContainer {
+    width: 100%;
+}
+
+.content {
+    background-color: #000000;
+    font-family: 'SF FONT regular', Arial, sans-serif;
+    color:#D89D5B;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; 
+    top: 80px;
+}
+
+.swiper-container{
+    /* background-image: url('../image/Frontpage1.webp'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    text-align: center;
+    margin-top: 150px;
+    border-radius: 80px;
+
+}
+
+.swiper {
+    width: auto;
+    height: auto;
+}
+
+.swiper-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.swiper-slide img {
+    margin-right: 10px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.background-container {
+    background-color: #a2daeba6;
+    padding: 20px;
+}
+  
+.split-container {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+  
+.split-container .text-part {
+    flex: 1;
+    padding: 20px;
+    font-size: 1.2em;
+    color: rgb(194, 32, 32);
+}
+  
+.split-container .image-part {
+    flex: 1;
+    padding: 20px;
+}
+  
+.image-part img {
+    animation: popUp 1s ease-out; 
+}
+
+.swiper-button-next::after, .swiper-button-prev::after {
+    display: none;
+}
+
+
+

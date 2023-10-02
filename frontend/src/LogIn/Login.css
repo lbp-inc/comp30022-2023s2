@@ -1,0 +1,89 @@
+/* For animation of drop menu*/
+@keyframes slideFade {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.loginSection {
+    padding-bottom: 40px;
+    text-align: center;
+    position: relative;
+    background-image: url('../image/Frontpage1.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin-top: 70px;
+    margin-bottom: 40px;
+    width: 100%;
+    height: 100vh;
+}
+
+.loginTitle{
+    background-color: #0a2455;
+    color: #ffffff;
+    font-family: Georgia, serif;
+    font-size: 50px;
+    padding: 0.02px;
+}
+
+.loginTable{
+    font-family: Verdana, sans-serif;
+    color: #0a2455;
+    margin: top 0px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    position: relative; 
+}
+
+.loginTable table {
+	margin-left: auto;
+	margin-right: auto;
+	width: 60%;
+    height: 450px;
+}
+
+.loginTable td {
+    background-color: #ffffffcb;
+    font-family: 'SF FONT bold', Arial, sans-serif;
+    border: solid #0a2455 0.5px;
+    border-radius:10px;
+	width: 275px;
+}
+
+.loginPlaceTitle{
+    font-size: 30px;
+}
+
+.loginPlaceDescription {
+    padding: 50px;
+    font-size: 19px;
+}
+
+.LoginButton{
+    margin-top: 60px;
+}
+
+.memberLogin {
+    font-family: 'SF FONT bold', Arial, sans-serif;
+    font-size: 13px;
+    border: solid #0a2455 0px;
+    background-color: #8cbeb4cc;
+    color: #0a2455;
+    border-radius: 13px;
+    padding: 21px;
+    cursor: pointer;
+}
+
+.memberLogin:hover{
+	background-color: #B2E5E4;
+    color: #0a2455;
+}
+

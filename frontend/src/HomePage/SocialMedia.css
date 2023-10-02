@@ -1,0 +1,64 @@
+.socialMediaLinks {
+    display: flex;
+    align-items: center;
+    position: absolute; 
+    top: 35px;       
+    right: 130px;     
+/*
+    top: 37px;
+    right: 82px;
+*/
+}
+
+.socialMediaLinks i {
+    margin: 0 20px; 
+    font-size: 40px;
+    cursor: pointer;
+    color: #3b9da6;
+    text-decoration: none;
+    transition: transform 0.5s, color 0.5s;
+}
+
+.socialMediaLinks i:hover {
+    color: #5bf4ff;
+    transition: transform 0.7s, color 0.7s; 
+}
+
+@media screen and (max-width: 950px) {
+
+    .socialMediaLinks {
+        top: 50px; /* 调整顶部位置以适应小屏幕 */
+        right: 70px; /* 调整右边距以适应小屏幕 */
+    }
+
+    .socialMediaLinks i {
+
+        margin: 0 12px; /* 调整图标之间的间距以适应小屏幕 */
+
+        font-size: 30px; /* 进一步缩小图标大小 */
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .socialMediaLinks {
+        top: 16px; /* 调整顶部位置以适应小屏幕 */
+        right: 48px; /* 调整右边距以适应小屏幕 */
+    }
+
+    .socialMediaLinks i {
+        margin: 0 12px; /* 调整图标之间的间距以适应小屏幕 */
+        font-size: 30px; /* 进一步缩小图标大小 */
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .socialMediaLinks {
+        top: 16px; /* 调整顶部位置以适应小屏幕 */
+        right: 37px; /* 调整右边距以适应小屏幕 */
+    }
+
+    .socialMediaLinks i {
+        margin: 0 10px; /* 调整图标之间的间距以适应小屏幕 */
+        font-size: 19px; /* 进一步缩小图标大小 */
+    }
+}
