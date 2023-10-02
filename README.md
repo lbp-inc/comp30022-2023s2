@@ -54,12 +54,15 @@ For deployment in Backend
 
 
 # For backend server
+The backend code follows the MCV structure:
 
-Make sure to use `cd backend` 
+1: Make sure to use `cd backend` 
 
-`npm run build` at the first time
+2:`npm install` at the first time
 
-`npm start`
+3: Go to mongoDB website and add your current IP address
+
+4:`nodemon server` or `node server`, please restart your server if you use `node server`.
 
 ------------------------
 
