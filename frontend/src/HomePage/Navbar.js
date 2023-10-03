@@ -46,7 +46,7 @@ function Navbar() {
             <Link to="/Events">EVENTS</Link>
             <Link to="/Getinvolved">GET INVOLVED</Link>
             <Link to="/RoomHire">ROOM HIRE</Link>
-            <Link to="/contact">CONTACT</Link>
+            <Link to="/Contact">CONTACT</Link>
           </div>
           <table>
           <tr>
@@ -75,60 +75,11 @@ function Navbar() {
                               </div>
                           )}
                       </td>
-                      <td onMouseEnter={() => setActiveDropdown('showcase')} onMouseLeave={() => setActiveDropdown(null)}>
-                      <Link to="/Showcase">SHOWCASE</Link>
-                          {activeDropdown === 'showcase' && (
-                              <div className="dropdownContent">
-                                  <table>
-                                      <tr><td>Showcase 1</td></tr>
-                                      <tr><td>Showcase 2</td></tr>
-                                  </table>
-                              </div>
-                          )}
-                      </td>
-                      <td onMouseEnter={() => setActiveDropdown('events')} onMouseLeave={() => setActiveDropdown(null)}>
-                      <Link to="/Events">EVENTS</Link>
-                          {activeDropdown === 'events' && (
-                              <div className="dropdownContent">
-                                  <table>
-                                      <tr><Link to="/Events"><td>Event 1</td></Link></tr>
-                                      <tr><Link to="/Events"><td>Event 2</td></Link></tr>
-                                  </table>
-                              </div>
-                          )}
-                      </td>
-                      <td onMouseEnter={() => setActiveDropdown('involved')} onMouseLeave={() => setActiveDropdown(null)}>
-                      <Link to="/Getinvolved">GETINVOLVED</Link>
-                          {activeDropdown === 'involved' && (
-                              <div className="dropdownContent">
-                                  <table>
-                                      <tr><Link to="/Getinvolved"><td>Involved 1</td></Link></tr>
-                                      <tr><Link to="/Getinvolved"><td>Involved 2</td></Link></tr>
-                                  </table>
-                              </div>
-                          )}
-                      </td>
-                      <td onMouseEnter={() => setActiveDropdown('hire')} onMouseLeave={() => setActiveDropdown(null)}>
-                      <Link to="/RoomHire">ROOMHIRE</Link>
-                          {activeDropdown === 'hire' && (
-                              <div className="dropdownContent">
-                                  <table>
-                                      <tr><Link to="/RoomHire"><td>Hire 1</td></Link></tr>
-                                      <tr><Link to="/RoomHire"><td>Hire 2</td></Link></tr>
-                                  </table>
-                              </div>
-                          )}
-                      </td>
-                      <td onMouseEnter={() => setActiveDropdown('contact')} onMouseLeave={() => setActiveDropdown(null)}>
-                          CONTACT
-                          {activeDropdown === 'contact' && (
-                              <div className="dropdownContent">
-                                  <table>
-                                      <tr><Link to="/contact"><td>Contact1</td></Link></tr>
-                                  </table>
-                              </div>
-                          )}
-                      </td>
+                      <td><Link to="/Showcase">SHOWCASE</Link></td>
+                      <td><Link to="/Events">EVENTS</Link></td>
+                      <td><Link to="/Getinvolved">GETINVOLVED</Link></td>
+                      <td><Link to="/RoomHire">ROOMHIRE</Link></td>
+                      <td><Link to="/Contact">CONTACT</Link></td>
                   </tr>
           </table>
         </div>

@@ -13,11 +13,10 @@ import { faCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import slideImage from '../image/event.webp';
 
 function useLoadContentFromDatabase(ref, pageKey) {
-  const backendUrl  = 'http://localhost:5000';
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get(`${backendUrl}/api/users/load-content/${pageKey}`); 
+          const response = await axios.get(`http://localhost:4000/api/load/${pageKey}`);
           if (response.data.success) {
             const { html, css } = response.data;
   
@@ -90,7 +89,31 @@ function Showcase() {
                     <Swiper
                         modules={[Navigation, Autoplay]}
                         spaceBetween={10}
-                        slidesPreview={3}
+                        slidesPerView={3}
+                        loop={true}
+                        navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}
+                        autoplay={{
+                            delay: 3500,
+                            disableOnInteraction: false,
+                        }}
+                    >
+
+                    {slides.map((slide, index) => (
+                        <SwiperSlide key={index}>
+                            <img src={slide.image} alt={slide.text}/>
+                        </SwiperSlide>
+                    ))}
+
+                    <div className="swiper-button-prev"><FontAwesomeIcon icon={faCircleLeft} color='#fff'></FontAwesomeIcon></div>
+                    <div className="swiper-button-next"><FontAwesomeIcon icon={faCircleRight} color='#fff'></FontAwesomeIcon></div>
+                    </Swiper>
+                </div>
+
+                <div className="galleryItemResponsive">
+                    <Swiper
+                        modules={[Navigation, Autoplay]}
+                        spaceBetween={10}
+                        slidesPerView={1}
                         loop={true}
                         navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}
                         autoplay={{
