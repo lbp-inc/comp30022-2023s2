@@ -2,6 +2,7 @@ import express from "express";
 const router = express.Router();
 import { authUser, registerUser, logoutUser, getUserProfile, updateUserProfile, forgetPassword, resetPassword,emailVerify} from "../../controllers/userController.js";
 import { protect } from "../../utils/asyncHandler.js";
+import { savePreviewPage, loadPreviewPage } from "../../controllers/editController.js";
 
 
 router.post("/forget-password", forgetPassword);
@@ -14,4 +15,8 @@ router.post("/logout", logoutUser);
 router.post("/getInfo", getUserProfile);
 router.post("/updateInfo", updateUserProfile);
 router.post("/verify-email", emailVerify);
+
+router.post("/save-content", savePreviewPage);
+router.get("/load-content/:pageKey", loadPreviewPage);
+
 export default router;

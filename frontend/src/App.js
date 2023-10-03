@@ -12,31 +12,9 @@ import Editor from './Edit/Editor';
 import EditorLogin from './Edit/EditorLogin';
 import 'leaflet/dist/leaflet.css';
 import React from 'react';
-import axios from 'axios';
 
 
 function App() {
-
-    const [data, setData] = React.useState(null);
-
-    React.useEffect(() => {
-      const backendUrl = process.env.REACT_APP_BACKEND_URL || 'https://longbeachbackend-2c4b09f98b44.herokuapp.com';
-
-      fetch(`${backendUrl}/backend/src/api`)
-        .then((res) => res.json())
-        .then((data) => setData(data.message));
-
-        axios.get(`${backendUrl}/api/save`)
-        .then(response => {
-          setData(response.data);
-        })
-        .catch(error => {
-          console.error("There was an error fetching data", error);
-        });
-
-    }, []);
-
-
   return (
       <BrowserRouter>
           <div className="App">

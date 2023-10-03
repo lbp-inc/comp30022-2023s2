@@ -22,10 +22,10 @@ import ContactPage from '../Contact/Contact';
 import LogIn from '../LogIn/Login';
 
 const saveToDatabase = async (html, css, page) => {
-  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'https://longbeachbackend-2c4b09f98b44.herokuapp.com';
+  const backendUrl = 'http://localhost:5000';
 
   try {
-    const response = await axios.post(`${backendUrl}/api/save`, {
+    const response = await axios.post(`${backendUrl}/api/users/save-content`, {
       html,
       css,
       page
@@ -52,10 +52,10 @@ const EditorFuction = () => {
   const [currentPage, setCurrentPage] = useState("");
   const currentPageRef = useRef("");
 
-  const loadPageContentFromServer = async (page) => {
-    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'https://longbeachbackend-2c4b09f98b44.herokuapp.com';
+  const loadPageContentFromServer = async (pageKey) => {
+    const backendUrl = 'http://localhost:5000';
     try {
-      const response = await axios.get(`${backendUrl}/api/load/${page}`);
+      const response = await axios.get(`http://localhost:5000/api/users/load-content/${pageKey}`);
       if (response.data.success) {
         return response.data.html;
       }
@@ -105,7 +105,7 @@ const EditorFuction = () => {
     id: 'save-db',
     className: 'fa fa-floppy-o',
     command: 'save-db',
-    attributes: { title: 'Save DB' }
+    attributes: { title: 'Save' }
   }]);
   
 
@@ -215,13 +215,6 @@ const EditorFuction = () => {
         onEditor={onEditor}
       />
       <div id="custom-section-select" className="custom-section-select"></div>
-      {/* <div className="topBar">
-        <div className="exitEditor">
-          <Link to="/">
-            <FontAwesomeIcon icon={faRightFromBracket} className="exitEditorButton" />
-          </Link>
-        </div>
-      </div>  */}
       <div className="pagePreview">
         {renderPreview()}
       </div>
