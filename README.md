@@ -38,7 +38,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass can be use when acces
 For deployment in Backend
 
 1. **cd Backend** // for backend use only
-2. git remote add longbeach-backend https://git.heroku.com/longbeachfrontend.git //get access from Wenda Zhang
+2. git remote add longbeach-backend https://git.heroku.com/longbeachbackend.git //get access from Wenda Zhang
 3. git remote -v // To check whether if remote access has been granted
 4. git remote rm heroku
 5. **heroku login**
