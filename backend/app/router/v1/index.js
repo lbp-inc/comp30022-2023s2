@@ -4,6 +4,8 @@ import { authUser, registerUser, logoutUser, getUserProfile, updateUserProfile, 
 import { protect } from "../../utils/asyncHandler.js";
 import { savePreviewPage, loadPreviewPage } from "../../controllers/editController.js";
 
+router.post("/save-content", savePreviewPage);
+router.get("/load-content/:pageKey", loadPreviewPage);
 
 router.post("/forget-password", forgetPassword);
 router.post("/reset-password", resetPassword);
@@ -16,7 +18,5 @@ router.post("/getInfo", getUserProfile);
 router.post("/updateInfo", updateUserProfile);
 router.post("/verify-email", emailVerify);
 
-router.post("/save-content", savePreviewPage);
-router.get("/load-content/:pageKey", loadPreviewPage);
 
 export default router;

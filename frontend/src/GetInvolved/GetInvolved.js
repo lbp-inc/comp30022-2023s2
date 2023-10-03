@@ -4,12 +4,12 @@ import Layout from '../Layout';
 import './GetInvolved.css'
 
 function useLoadContentFromDatabase(ref, pageKey) {
-  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'https://longbeachbackend-2c4b09f98b44.herokuapp.com';
+  const backendUrl  = 'http://localhost:5000';
 
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get(`${backendUrl}/api/load/${pageKey}`);
+          const response = await axios.get(`${backendUrl}/api/users/load-content/${pageKey}`); 
           if (response.data.success) {
             const { html, css } = response.data;
   

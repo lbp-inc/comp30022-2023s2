@@ -55,7 +55,7 @@ const EditorFuction = () => {
   const loadPageContentFromServer = async (pageKey) => {
     const backendUrl = 'http://localhost:5000';
     try {
-      const response = await axios.get(`http://localhost:5000/api/users/load-content/${pageKey}`);
+      const response = await axios.get(`${backendUrl}/api/users/load-content/${pageKey}`);
       if (response.data.success) {
         return response.data.html;
       }
