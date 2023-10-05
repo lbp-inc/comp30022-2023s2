@@ -16,7 +16,7 @@
 }
 .userMenuContainer {
     position: absolute;
-    top: 30px;
+    top: 34px;
     right: 70px;
     z-index: 1001;
 }
@@ -25,6 +25,10 @@
     color: #3b9da6;
     font-size: 40px;
     cursor: pointer;
+}
+
+.login-button{
+    background-color: #3b9da6;
 }
 
 @media screen and (max-width: 950px) {
