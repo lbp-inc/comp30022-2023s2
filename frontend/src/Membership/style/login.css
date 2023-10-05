@@ -1,0 +1,52 @@
+.login {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+@media screen and (max-width: 768px) {
+    .login-container {
+        width: 90%;
+        height: 420px;
+    }
+}
+
+@media screen and (max-width: 992px) and (min-width: 768px) {
+    .login-container {
+        width: 50%;
+        height: 340px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .login-container {
+        width: 440px;
+        height: 360px;
+    }
+}
+
+.login-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #D1FBFC;
+}
+
+.login-checkbox-label {
+    color: #000000;
+}
+
+.login-form-forgot {
+    color: #000000;
+    float: right;
+}
+
+.button {
+    background-color: #368771;
+}
+
+.button:hover {
+    background-color: #368771;
+    border-color: #368771;
+}

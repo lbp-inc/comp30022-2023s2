@@ -1,0 +1,42 @@
+.sider {
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #D1FBFC;
+}
+
+.button-space {
+    width: 80%;
+    height: 30%;
+    position: absolute;
+    left:50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sider-button {
+    background-color: #ffffff;
+    color: #368771;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+    .sider-button {
+        font-size: 10px !important;
+    }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+    .sider-button {
+        font-size: 12px !important;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .sider-button {
+        font-size: 12px !important;
+    }
+}

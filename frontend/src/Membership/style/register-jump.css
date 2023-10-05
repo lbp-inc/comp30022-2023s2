@@ -1,0 +1,43 @@
+.register-jump {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+@media screen and (max-width: 768px) {
+    .register-jump-container {
+        width: 90%;
+        height: 420px;
+    }
+}
+
+@media screen and (max-width: 992px) and (min-width: 768px) {
+    .register-jump-container {
+        width: 50%;
+        height: 340px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .register-jump-container {
+        width: 50%;
+        height: 80%;
+    }
+}
+
+.register-jump-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #D1FBFC;
+}
+
+.result-body {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 60%;
+    transform: translate(-50%, -50%);
+}
+

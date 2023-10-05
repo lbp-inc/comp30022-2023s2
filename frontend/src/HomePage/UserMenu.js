@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 function TopCorner() {  
     return (
         <div className="userMenuContainer">
-            <Link to="/LogIn">
+            {/* <Link to="/LogIn"> */}
+            <Link to="/login">
                 <FontAwesomeIcon icon={faUser} 
                  className="userIcon" 
             /></Link>
