@@ -45,7 +45,7 @@ const ResetPassword = () => {
 
         try {
             const payload = {
-                name: username,
+                username: username,
                 token: token,
                 password: values["new-password"]
             };
