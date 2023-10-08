@@ -2,9 +2,6 @@
     width: 20%;
     height: 100%;
     position: absolute;
-    left: 10%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     background-color: #D1FBFC;
 }
 
@@ -29,13 +26,21 @@
     }
 }
 
-@media screen and (max-width: 1024px) and (min-width: 768px) {
+@media screen and (max-width: 992px) and (min-width: 768px) {
+    .sider {
+        width: 27%;
+    }
+
     .sider-button {
         font-size: 12px !important;
     }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 992px) {
+    .sider {
+        width: 20%;
+    }
+
     .sider-button {
         font-size: 12px !important;
     }

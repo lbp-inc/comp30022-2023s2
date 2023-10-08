@@ -8,6 +8,8 @@ import AdminDrawerSider from "../../components/admin-drawer-sider";
 
 import Layout from '../../../Layout';
 
+import "../../style/my-booking.css"
+
 // Test Data
 const columns = [
     {
@@ -146,6 +148,7 @@ const MyBooking = () => {
                 <Card className="content">
                     <Table 
                         // columns={columns}
+                        // className="booking-table"
                         columns={isDesktop ? columns : columnsSmall}
                         dataSource={data}
                         pagination={{
