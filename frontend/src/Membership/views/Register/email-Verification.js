@@ -6,7 +6,7 @@ import Layout from '../../../Layout';
 
 
 // This component will allow users to enter their registered 
-// email address and send a password reset link to their email address.
+// email address and send a varification email to their email address.
 const EmailVerification = () => {
     const [form] = Form.useForm();
 

@@ -26,7 +26,7 @@ const Login = () => {
 
     // Send login request to backend
     const onFinish = async (values) => {
-        console.log(values);
+        // console.log(values);
         try {
             // Send form values to backend for login
             const response = await fetch("http://localhost:5000/api/users/auth", {
