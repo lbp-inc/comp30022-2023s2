@@ -97,7 +97,7 @@ const enUS = {
 
   jump: {
     register_success: "You have registered successfully",
-    reset_success: "You successfully reset your password",
+    reset_success: "You have successfully reset your password.",
   },
 
   password_strength: {
