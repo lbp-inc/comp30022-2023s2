@@ -68,11 +68,13 @@ const enUS = {
 
   form_tooltip: {
     username: "This is used to log in.",
+    passowrd: "The password should contain uppercase and lowercase letters, numbers, and special symbols (e.g., !, ., @, #, $, %), and its length must be greater than 8 characters.",
   },
 
   alert_message: {
+    ue_exist: "Username and email already exist.",
     username_exist: "Username already exists.",
-    username_space: "Username should not contain any space",
+    username_space: "Username should not contain space !",
     email_exist: "Email has been registered.",
     verification_code_sent: "Password reset link has been sent to your email",
     verification_email: "Email verification email has been sent successfully",
@@ -80,7 +82,12 @@ const enUS = {
     username_not_exist: "Username does not exist",
     email_not_exist: "Email does not exist",
     password_incorrect: "Incorrect password",
+    password_invalid: "↖ See tip, password is invalid !",
     out_of_time: "This link has timed out, please resend the request.",
+  },
+
+  message: {
+    update_s: "Personal information updated successfully",
   },
 
   input_placeholder: {

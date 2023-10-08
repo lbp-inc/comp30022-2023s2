@@ -49,7 +49,7 @@ const Login = () => {
                 // localStorage.setItem('token', responseData.data);
                 localStorage.setItem('token', responseData.data["token"]);
                 localStorage.setItem('auth_token', responseData.data["auth_token"]);
-                localStorage.setItem('role', responseData.data["role"]);
+                // localStorage.setItem('role', responseData.data["role"]);
                 // Login successful, jump to member page
                 window.location.href = "/personal-info";
             } else if (response.status === 201) {
