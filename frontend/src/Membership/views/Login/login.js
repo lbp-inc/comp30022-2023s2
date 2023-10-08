@@ -43,11 +43,11 @@ const Login = () => {
             } else if (response.status === 401) {
                 // Password is not correct
                     console.log("password is not correct");
-                    errorPassword();
+                    errorLogin();
             } else if (response.status === 404) {
                 // User not found
                     console.log("User not found");
-                    errorUsername();     
+                    errorLogin();     
             } else {
                 // Login failed, processing error message
                 const errorData = await response.json();
@@ -58,19 +58,25 @@ const Login = () => {
         }
     };
 
-    const errorUsername = () => {
+    // const errorUsername = () => {
+    //     messageApi.open({
+    //       type: 'error',
+    //       content: enUS.alert_message.username_not_exist,
+    //     });
+    // };
+    const errorLogin = () => {
         messageApi.open({
           type: 'error',
-          content: enUS.alert_message.username_not_exist,
+          content: enUS.alert_message.login_alert,
         });
     };
 
-    const errorPassword = () => {
-        messageApi.open({
-          type: 'error',
-          content: enUS.alert_message.password_incorrect,
-        });
-    };
+    // const errorPassword = () => {
+    //     messageApi.open({
+    //       type: 'error',
+    //       content: enUS.alert_message.password_incorrect,
+    //     });
+    // };
     
 
     return (

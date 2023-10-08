@@ -72,6 +72,7 @@ const enUS = {
   },
 
   alert_message: {
+    login_alert: "Invalid username or password.",
     ue_exist: "Username and email already exist.",
     username_exist: "Username already exists.",
     username_space: "Username should not contain space !",
