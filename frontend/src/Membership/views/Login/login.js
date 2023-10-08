@@ -1,28 +1,13 @@
-import { Card, Form, Input, Button, Checkbox, Alert} from 'antd'
+import { Card, Form, Input, Button, Checkbox, message} from 'antd'
 import '../../style/login.css'
 import { Link } from 'react-router-dom';
 import {enUS} from '../../locales/en-us'
-import { useState } from 'react';
 
 import Layout from '../../../Layout';
 
 // This component provides a login interface
 const Login = () => {
-    // Defines whether the username exists
-    const [isUsernameExist, setIsUsernameExist] = useState(false);
-
-    // Defines whether the password correct
-    const [isPasswordCorrect, setIsPasswordCorrect] = useState(false);
-
-    // Modify isUsernameExist status
-    const onUsernameChange = () => {
-        setIsUsernameExist(false);
-    }
-
-    // Modify isPasswordCorrect status
-    const onPasswordChange = () => {
-        setIsPasswordCorrect(false);
-    }
+    const [messageApi, contextHolder] = message.useMessage();
 
     // Send login request to backend
     const onFinish = async (values) => {
@@ -58,11 +43,11 @@ const Login = () => {
             } else if (response.status === 401) {
                 // Password is not correct
                     console.log("password is not correct");
-                    setIsPasswordCorrect(true);
+                    errorPassword();
             } else if (response.status === 404) {
                 // User not found
                     console.log("User not found");
-                    setIsUsernameExist(true);     
+                    errorUsername();     
             } else {
                 // Login failed, processing error message
                 const errorData = await response.json();
@@ -72,94 +57,99 @@ const Login = () => {
             console.error('Login request error:', error);
         }
     };
+
+    const errorUsername = () => {
+        messageApi.open({
+          type: 'error',
+          content: enUS.alert_message.username_not_exist,
+        });
+    };
+
+    const errorPassword = () => {
+        messageApi.open({
+          type: 'error',
+          content: enUS.alert_message.password_incorrect,
+        });
+    };
     
 
-  return (
-    <Layout>
-    <div className="loginSection">
-    <div className="login">
-        <Card className="login-container">
-            <Form
-                name="form-login"
-                labelCol={{ span: 6 }} 
-                className="login-form"
-                initialValues={{
-                    remember: true,
-                }}
-                onFinish={onFinish}
-            >   
-                {/* Username form*/}
-                <Form.Item
-                    name="username"
-                    label={enUS.form_label.username}
-                    rules={[
-                        {
-                          required: true,
-                          message: enUS.form_message.username,
-                        },
-                    ]}
-                >
-                    <Input size="large" placeholder={enUS.input_placeholder.username} onChange={onUsernameChange}/>
-                </Form.Item>
-                
-                {/* Username does not exist warning */}
-                {isUsernameExist && (
-                    <Alert message={enUS.alert_message.username_not_exist} type="error" showIcon className="alert"/>
-                )}
-                    
-                {/* Password form*/}
-                <Form.Item
-                    name="password"
-                    label={enUS.form_label.password}
-                    rules={[
-                        {
-                          required: true,
-                          message: enUS.form_message.password,
-                        },
-                    ]}
-                >
-                    <Input.Password size="large" placeholder={enUS.input_placeholder.password} onChange={onPasswordChange} autoComplete="password"/>
-                </Form.Item>
-
-                {/* Incorrect password warning */}
-                {isPasswordCorrect && (
-                    <Alert message={enUS.alert_message.password_incorrect} type="error" showIcon className="alert"/>
-                )}
-                
-                {/* Remember me and Forgot password*/}
-                <Form.Item>
-                    <Form.Item name="remember" valuePropName="checked" noStyle>
-                        <Checkbox>{enUS.general.remember_me}</Checkbox>
+    return (
+        <Layout>
+        <div className="loginSection">
+        <div className="login">
+        {contextHolder}
+            <Card className="login-container">
+                <Form
+                    name="form-login"
+                    labelCol={{ span: 6 }} 
+                    className="login-form"
+                    initialValues={{
+                        remember: true,
+                    }}
+                    onFinish={onFinish}
+                >   
+                    {/* Username form*/}
+                    <Form.Item
+                        name="username"
+                        label={enUS.form_label.username}
+                        rules={[
+                            {
+                            required: true,
+                            message: enUS.form_message.username,
+                            },
+                        ]}
+                    >
+                        <Input size="large" placeholder={enUS.input_placeholder.username}/>
                     </Form.Item>
+                     
+                    {/* Password form*/}
+                    <Form.Item
+                        name="password"
+                        label={enUS.form_label.password}
+                        rules={[
+                            {
+                            required: true,
+                            message: enUS.form_message.password,
+                            },
+                        ]}
+                    >
+                        <Input.Password size="large" placeholder={enUS.input_placeholder.password} autoComplete="password"/>
+                    </Form.Item>
+                    
+                    {/* Remember me and Forgot password*/}
+                    <Form.Item>
+                        <Form.Item name="remember" valuePropName="checked" noStyle>
+                            <Checkbox>{enUS.general.remember_me}</Checkbox>
+                        </Form.Item>
 
-                    <a className="login-form-forgot" href="/forgot-password">
-                        {enUS.link.forgot_password}
-                    </a>
-                </Form.Item>
-                
-                {/* Login button */}
-                <Form.Item>
-                    {/* <Link to="/personal-info"> */}
-                        <Button type="primary" htmlType="submit" size="large" block className="button">
-                            {enUS.buttons.login}
-                        </Button>
-                    {/* </Link> */}
-                </Form.Item>
-                
-                {/* Register button */}
-                <Form.Item>
-                    <Link to="/register">
-                        <Button type="primary" htmlType="submit" size="large" block className="button">
-                            {enUS.buttons.register}
-                        </Button>
-                    </Link>
-                </Form.Item>
-            </Form>
-        </Card>
-    </div>
-    </div>
-    </Layout>
-  )
+                        <a className="login-form-forgot" href="/forgot-password">
+                            {enUS.link.forgot_password}
+                        </a>
+                    </Form.Item>
+                    
+                    {/* Login button */}
+                    <Form.Item>
+                        {/* <Link to="/personal-info"> */}
+                            <Button type="primary" htmlType="submit" size="large" block className="button">
+                                {enUS.buttons.login}
+                            </Button>
+                        {/* </Link> */}
+                    </Form.Item>
+                    
+                    {/* Register button */}
+                    <Form.Item>
+                        <Link to="/register">
+                            <Button type="primary" htmlType="submit" size="large" block className="button">
+                                {enUS.buttons.register}
+                            </Button>
+                        </Link>
+                    </Form.Item>
+                </Form>
+            </Card>
+        </div>
+        </div>
+        </Layout>
+    )
 }
 
 export default Login
