@@ -9,7 +9,7 @@ import cookieParser from "cookie-parser";
 import fs from "fs";
 import yaml from "js-yaml";
 import { notFound, errorHandler } from "./app/utils/errorHandler.js";
-
+import roomHireRoutes from "./app/controllers/roomHireController.js";
 
 const loadConfig = () => {
   try {
@@ -21,7 +21,7 @@ const loadConfig = () => {
   }
 };
 
-const port = process.env.PORT || loadConfig().port; 
+const port = process.env.PORT || loadConfig().port;
 
 connectDB();
 
@@ -33,6 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors());
 app.use("/api/users", userRoutes);
+app.use("/api/roomHire", roomHireRoutes);
 
 if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve();
