@@ -53,12 +53,12 @@
 
 @media screen and (max-width: 500px) {
     .socialMediaLinks {
-        top: 16px; /* 调整顶部位置以适应小屏幕 */
-        right: 37px; /* 调整右边距以适应小屏幕 */
+        top: 25px; /* 调整顶部位置以适应小屏幕 */
+        right: 58px; /* 调整右边距以适应小屏幕 */
     }
 
     .socialMediaLinks i {
-        margin: 0 10px; /* 调整图标之间的间距以适应小屏幕 */
-        font-size: 19px; /* 进一步缩小图标大小 */
+        margin: 10 20px; /* 调整图标之间的间距以适应小屏幕 */
+        font-size: 35px; /* 进一步缩小图标大小 */
     }
 }
