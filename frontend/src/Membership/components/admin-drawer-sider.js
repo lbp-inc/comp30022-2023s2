@@ -10,6 +10,10 @@ const AdminDrawerSider = () => {
     // Define the state of the menu
     const [open, setOpen] = useState(false);
 
+    // const [role, setRoal] = useState("user");
+    // const [role, setRoal] = useState("admin");
+    const [role, setRole] = useState("tutor");
+
     // Change status to open
     const showDrawer = () => {
         setOpen(true);
@@ -43,15 +47,22 @@ const AdminDrawerSider = () => {
                     <Link to='/notifications'>
                         <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.notification}</Button>
                     </Link>
-                    <Link to='/admin-personal-info'>
-                        <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.view_personal_info}</Button>
-                    </Link>
-                    <Link to='/admin-notification'>
-                        <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.edit_notification}</Button>
-                    </Link>
-                    <Link to='/Editor'>
-                        <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.admin}</Button>
-                    </Link>
+                    {role === 'admin' 
+                       ?<><Link to='/admin-personal-info'>
+                            <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.view_personal_info}</Button>
+                        </Link>
+                        <Link to='/admin-notification'>
+                            <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.edit_notification}</Button>
+                        </Link>
+                        <Link to='/Editor'>
+                            <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.admin}</Button>
+                        </Link></> 
+                       :(role === 'tutor' 
+                       ?<>
+                        {/* <Link to='/Editor'> */}
+                            <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.tutor}</Button>
+                        {/* </Link> */}
+                        </> : null)}
                 </Menu>
             </Drawer>
         </>

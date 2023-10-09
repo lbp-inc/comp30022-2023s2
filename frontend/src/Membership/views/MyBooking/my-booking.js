@@ -1,14 +1,13 @@
-import MembershipSider from "../../components/membership-sider"
 import { Card ,Table, Tooltip} from 'antd';
 import { enUS } from "../../locales/en-us";
 import { useMediaQuery } from 'react-responsive';
-import DrawerSider from "../../components/drawer-sider";
 import AdminSider from "../../components/admin-sider"
 import AdminDrawerSider from "../../components/admin-drawer-sider";
 
 import Layout from '../../../Layout';
 
 import "../../style/my-booking.css"
+import "../../style/personal-info.css"
 
 // Test Data
 const columns = [
@@ -133,18 +132,12 @@ const data = [
 const MyBooking = () => {
     const isDesktop = useMediaQuery({ minWidth: 768 });
 
-    const role = localStorage.getItem("role");
-
     return (
         <Layout>
         <div className="loginSection">
         <div className="membership">
             <div className="membership-card">
-                {/* Membership Sider */}
-                {role === "user"
-                    ? (isDesktop ? <MembershipSider /> : <DrawerSider className="drawersider"/>)
-                    : (isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>)}
-                {/* {isDesktop ? <MembershipSider /> : <DrawerSider className="drawersider"/>}; */}
+                {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>}
                 <Card className="content">
                     <Table 
                         // columns={columns}

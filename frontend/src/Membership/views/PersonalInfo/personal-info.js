@@ -1,9 +1,7 @@
 import "../../style/personal-info.css"
-import MembershipSider from "../../components/membership-sider"
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Card, Form, Input, DatePicker, Button } from 'antd';
 import { enUS } from "../../locales/en-us";
-import DrawerSider from "../../components/drawer-sider";
 import { useMediaQuery } from 'react-responsive';
 import { useState, useEffect } from "react";
 import moment from 'moment';
@@ -114,9 +112,7 @@ const PersonalInfo = () => {
         {/* <div className="membership"> */}
             {contextHolder}
             <div className="membership-card">
-                {role === "user"
-                    ? (isDesktop ? <MembershipSider /> : <DrawerSider className="drawersider"/>)
-                    : (isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>)}
+                {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>}
 
                 <Card className="content">
                     <div className="personal-content">

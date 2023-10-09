@@ -15,6 +15,7 @@ const enUS = {
     save: "Save",
     go_login: "Go to LogIn",
     admin: "Admin",
+    tutor: "Tutor"
   },
 
   link: {
