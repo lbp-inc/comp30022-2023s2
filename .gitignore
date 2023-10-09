@@ -132,4 +132,13 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-node_modules
+**.DS_Store
+**/__pycache__
+venv_name
+.venv_name
+
+**/node_modules
+**/package-lock.json
+
+**/secrets
+**/paymentSecrets.mjs
