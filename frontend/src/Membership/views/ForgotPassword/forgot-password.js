@@ -1,7 +1,6 @@
-import { Card, Form, Input, Button, Alert } from "antd"
+import { Card, Form, Input, Button, message} from "antd"
 import '../../style/forgot-password.css'
 import { enUS } from "../../locales/en-us";
-import { useState } from 'react';
 
 import Layout from '../../../Layout';
 
@@ -11,16 +10,7 @@ import Layout from '../../../Layout';
 const ForgotPassword = () => {
     const [form] = Form.useForm();
 
-    // Defines whether verification information is sent
-    const [isVerificationCodeSent, setIsVerificationCodeSent] = useState(false);
-    
-    // Defines whether email is exist
-    const [isEmailExist, setIsEmailExist] = useState(false);
-
-    // Modify isEmailExist status
-    const onEmailChange = () => {
-        setIsEmailExist(false);
-    }
+    const [messageApi, contextHolder] = message.useMessage();
 
     // Link backend request to send password reset email
     const getVerificationCode = async () => {
@@ -41,10 +31,10 @@ const ForgotPassword = () => {
             if (response.status === 200) {
                 // Sent successfully
                 console.log("Password reset link sent successfully");
-                setIsVerificationCodeSent(true);
+                successEmail()
             } else if (response.status === 211) {
                 // Email not found
-                setIsEmailExist(true)
+                errorEmail()
                 console.log("User not found");
             } else {
                 const errorData = await response.json();
@@ -55,10 +45,25 @@ const ForgotPassword = () => {
         }     
     }
 
+    const errorEmail = () => {
+        messageApi.open({
+          type: 'error',
+          content: enUS.alert_message.email_not_exist,
+        });
+    };
+
+    const successEmail = () => {
+        messageApi.open({
+          type: 'success',
+          content: enUS.alert_message.verification_email,
+        });
+    };
+
     return (
         <Layout>
         <div className="loginSection">
         <div className="forgot-password-form">
+            {contextHolder}
             <Card className="forgot-password-container">
                 <Form
                     name="forgot-password"
@@ -81,13 +86,8 @@ const ForgotPassword = () => {
                         },
                         ]}
                     >
-                        <Input onChange={onEmailChange}/>
+                        <Input/>
                     </Form.Item>
-
-                    {/* Alert message */}
-                    {isEmailExist && (
-                        <Alert message={enUS.alert_message.email_not_exist} type="error" showIcon className="alert"/>
-                    )}
                     
                     {/* Send button */}
                     <Form.Item >
@@ -95,11 +95,6 @@ const ForgotPassword = () => {
                             {enUS.buttons.reset}
                         </Button>
                     </Form.Item>
-                    
-                    {/* Alert message */}
-                    {isVerificationCodeSent && (
-                        <Alert message={enUS.alert_message.verification_code_sent} type="success" showIcon className="alert"/>
-                    )}
                 </Form>
             </Card>
         </div>
