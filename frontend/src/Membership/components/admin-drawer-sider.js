@@ -49,9 +49,9 @@ const AdminDrawerSider = () => {
                     <Link to='/admin-notification'>
                         <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.edit_notification}</Button>
                     </Link>
-                    {/* <Link to='/admin-notification'> */}
+                    <Link to='/Editor'>
                         <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.admin}</Button>
-                    {/* </Link> */}
+                    </Link>
                 </Menu>
             </Drawer>
         </>
