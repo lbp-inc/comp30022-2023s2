@@ -45,7 +45,8 @@
     "swiper": "^10.2.0",
     "uuid": "^9.0.1",
     "web-vitals": "^2.1.4",
-    "zxcvbn": "^4.4.2"
+    "zxcvbn": "^4.4.2",
+	"airwallex-payment-elements": "^1.9.0"
   },
   "scripts": {
     "start": "react-scripts start",

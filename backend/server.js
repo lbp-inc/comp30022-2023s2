@@ -10,6 +10,10 @@ import fs from "fs";
 import yaml from "js-yaml";
 import { notFound, errorHandler } from "./app/utils/errorHandler.js";
 import roomHireRoutes from "./app/controllers/roomHireController.js";
+import donationsRoutes from "./app/controllers/donationsController.mjs";
+
+import donationsTestRoutes from "./Tests/donationsTestSupport.mjs";
+
 
 const loadConfig = () => {
   try {
@@ -34,6 +38,8 @@ app.use(cookieParser());
 app.use(cors());
 app.use("/api/users", userRoutes);
 app.use("/api/roomHire", roomHireRoutes);
+app.use("/api/donations", donationsRoutes);
+app.use("/staging/__donationsTestRoutes", donationsTestRoutes);
 
 if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve();
