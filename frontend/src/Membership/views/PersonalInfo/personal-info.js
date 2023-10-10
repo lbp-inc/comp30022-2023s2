@@ -24,8 +24,6 @@ const PersonalInfo = () => {
     const [userInfo, setUserInfo] = useState({});
     const [loading, setLoading] = useState(true);
 
-    const [role, setRole] = useState();
-
     const saveSuccess = () => {
         messageApi.open({
           type: 'success',
@@ -52,10 +50,7 @@ const PersonalInfo = () => {
                     // Fetch successful
                     setUserInfo(responseData["data"])
                     setLoading(false);
-                    setRole(responseData["role"])
                     console.log("Fetch successful")
-                    console.log(responseData["role"])
-                    console.log(role)
                 } else {
                     // Fetch failed
                     console.log("Fetch failed")
@@ -66,7 +61,7 @@ const PersonalInfo = () => {
             }
         }
         fetchProfile();
-    }, [role]);
+    }, []);
 
     const onFinish = async (values) => {
         console.log(values)
