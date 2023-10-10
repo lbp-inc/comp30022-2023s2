@@ -23,8 +23,8 @@ import MyBooking from "./Membership/views/MyBooking/my-booking";
 import Notifications from "./Membership/views/Notifications/notifications";
 import AdminNotification from "./Membership/views/Notifications/admin-notification";
 import Content from "./Membership/views/Notifications/content";
-import RegisterJump from "./Membership/views/Jump/register-jump";
-import ResetJump from "./Membership/views/Jump/reset-jump";
+import RegisterJump from "./Membership/views/jump/register-jump";
+import ResetJump from "./Membership/views/jump/reset-jump";
 import PersonalInfoContent from "./Membership/views/PersonalInfo/personal-info-content";
 import EmailVerification from "./Membership/views/Register/email-Verification";
 
