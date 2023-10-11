@@ -15,7 +15,8 @@ const enUS = {
     save: "Save",
     go_login: "Go to LogIn",
     admin: "Admin",
-    tutor: "Tutor"
+    tutor: "Tutor",
+    captcha: "Get captcha",
   },
 
   link: {
@@ -65,11 +66,13 @@ const enUS = {
     email: "Please input your Email !",
     agreement: "You should accept agreement",
     verify: "Please enter the verification code, it has been sent to your email",
+    code: "Please input the captcha you got!",
   },
 
   form_tooltip: {
     username: "This is used to log in.",
     passowrd: "The password should contain uppercase and lowercase letters, numbers, and special symbols (e.g., !, ., @, #, $, %), and its length must be greater than 8 characters.",
+    email: "Please enter your email address and click the Get captcha button to get the verification code.",
   },
 
   alert_message: {
@@ -86,6 +89,11 @@ const enUS = {
     password_incorrect: "Incorrect password",
     password_invalid: "↖ See tip, password is invalid !",
     out_of_time: "This link has timed out, please resend the request.",
+    error_code: "Email is incorrect !",
+    success_code: "Verification code has been sent to your email.",
+    error_email: "Email verified fail! Please check your verification code again.",
+    success_email: "Email verified successfully.",
+    network_error: "Internal Server Error, please try again later.",
   },
 
   message: {
@@ -93,7 +101,7 @@ const enUS = {
   },
 
   input_placeholder: {
-    username: "Please enter username",
+    username: "Please enter username or email",
     password: "Please enter password",
   },
 

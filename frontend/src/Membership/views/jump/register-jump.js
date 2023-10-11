@@ -1,7 +1,7 @@
 import { Card, Result, Button } from "antd"
 import '../../style/register-jump.css'
 import { enUS } from "../../locales/en-us"
-// import { Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import Layout from '../../../Layout';
 
@@ -17,11 +17,11 @@ const RegisterJump = () => {
                     status="success"
                     title={enUS.jump.register_success}
                     extra={[
-                        // <Link to="/login">
+                        <Link to="/login">
                             <Button type="primary" htmlType="submit" size="large" className="button">
                                 {enUS.buttons.go_login}
                             </Button>
-                        // </Link>
+                        </Link>
                     ]}
                 />
             </Card>
