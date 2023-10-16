@@ -7,7 +7,7 @@ import Contact from './Contact/Contact';
 import Events from './Events/Events';
 import GetInvolved from './GetInvolved/GetInvolved';
 import RoomHire from './RoomHire/RoomHire';
-import LogIn from './LogIn/Login';
+// import LogIn from './LogIn/Login';
 import Editor from './Edit/Editor';
 import EditorLogin from './Edit/EditorLogin';
 import 'leaflet/dist/leaflet.css';

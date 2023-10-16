@@ -1,9 +1,7 @@
-import { Card, Form, Input, Button, Progress, Alert} from "antd"
+import { Card, Form, Input, Button, message} from "antd"
 import '../../style/forgot-password.css'
 import { enUS } from "../../locales/en-us"
-import zxcvbn from 'zxcvbn'
 import { useState } from 'react'
-import { red, orange, green } from '@ant-design/colors';
 import { useParams } from 'react-router-dom';
 
 import Layout from '../../../Layout';
@@ -12,34 +10,32 @@ import Layout from '../../../Layout';
 // This component will display a password reset form
 // where the user can enter a new password
 const ResetPassword = () => {
-    // Define password strength
-    const [passwordStrength, setPasswordStrength] = useState(0);
-
-    // Define whether the link is invalid
-    const [isOutOfTime, setisOutOfTime] = useState(false);
-
-    // Calculate password strength
-    const handlePasswordChange = (e) => {
-        const password = e.target.value;
-        const result = zxcvbn(password);
-    
-        const strengthPercentage = (result.score / 4) * 100;
-        setPasswordStrength(strengthPercentage);
-    };
-
-    // Display corresponding status according to password strength
-    const customFormat = () => {
-        if (passwordStrength === 25 || passwordStrength === 50) {
-            return enUS.password_strength.weak
-        } else if (passwordStrength === 75) {
-            return enUS.password_strength.medium
-        } else if (passwordStrength === 100){
-            return enUS.password_strength.strong
-        }
-    };
 
     // Get name and token from url
     const { username, token } = useParams();
+
+    const [messageApi, contextHolder] = message.useMessage();
+
+    // Define whether the password is valid
+    const [isPasswordValid, setIsPasswordValid] = useState(false);
+
+    // Check if Password valid
+    const handlePasswordChange = (e) => {
+        const password = e.target.value;
+        const hasUppercase = /[A-Z]/.test(password);
+        const hasLowercase = /[a-z]/.test(password);
+        const hasNumber = /[0-9]/.test(password);
+        const hasSpecialChar = /[!@#$%^&*()_+\-=\]{};':"\\|,.<>?]+/.test(password);
+        const hasMinLength = password.length > 8;
+      
+        if (hasUppercase && hasLowercase && hasNumber && hasSpecialChar && hasMinLength) {
+            console.log("Password valid")
+            setIsPasswordValid(true)
+        }else{
+            console.log("Password not valid")
+            setIsPasswordValid(false)
+        }
+    };
 
     const onFinish = async (values) =>{
 
@@ -65,10 +61,10 @@ const ResetPassword = () => {
                 // Reset password successful, jump to reset password successful page
                 window.location.href = "/reset-jump";
             } else if (response.status === 211) {
-                    console.log("Email does not exist!");
+                console.log("Email does not exist!");
             } else if (response.status === 500) {
-                    setisOutOfTime(true)
-                    console.log("Something went wrong");     
+                errorOutOfTime()
+                console.log("Token Out Of Time");     
             } else {
                 // Reset password failed, processing error message
                 const errorData = await response.json();
@@ -79,10 +75,19 @@ const ResetPassword = () => {
         }
     }
 
+    const errorOutOfTime = () => {
+        messageApi.open({
+          type: 'error',
+          content: enUS.alert_message.out_of_time,
+        });
+    };
+
+
     return (
         <Layout>
         <div className="loginSection">
         <div className="forgot-password-form">
+        {contextHolder}
             <Card className="reset-password-container">
                 <Form
                     name="reset-password"
@@ -94,6 +99,7 @@ const ResetPassword = () => {
                     <Form.Item
                         name="new-password"
                         label={enUS.form_label.new_password}
+                        tooltip={enUS.form_tooltip.passowrd}
                         rules={[
                         {
                             required: true,
@@ -101,22 +107,11 @@ const ResetPassword = () => {
                         },
                         ]}
                         hasFeedback
+                        validateStatus={isPasswordValid ? "success" : "error"}
+                        help={isPasswordValid ? "" : enUS.alert_message.password_invalid}
                     >
-                        <Input.Password onChange={handlePasswordChange}/>
+                        <Input.Password onChange={handlePasswordChange} autoComplete="new-password"/>
                     </Form.Item>
-                    
-                    {/* Show password strength status */}
-                    <div className="progress">
-                        <Progress
-                            type="line"
-                            status={passwordStrength === 100 ? 'success' : 'active'}
-                            percent={passwordStrength}
-                            format={customFormat}
-                            showInfo={true}
-                            steps={3}
-                            strokeColor={[red[5], orange[5], green[5]]}
-                        />
-                    </div>
                     
                     {/* Enter confirm new password form */}
                     <Form.Item
@@ -141,18 +136,13 @@ const ResetPassword = () => {
                         }),
                         ]}
                     >
-                        <Input.Password />
+                        <Input.Password autoComplete="new-password"/>
                     </Form.Item>
-
-                    {/* Alert message */}
-                    {isOutOfTime && (
-                        <Alert message={enUS.alert_message.out_of_time} type="error" showIcon className="alert"/>
-                    )}
                     
                     {/* Submit button */}
                     <Form.Item>
                         {/* <Link to="/reset-jump"> */}
-                            <Button type="primary" htmlType="submit" size="large" block className="reset-Password">
+                            <Button type="primary" disabled={!(isPasswordValid)} htmlType="submit" size="large" block className="reset-Password">
                                 {enUS.buttons.reset}
                             </Button>
                         {/* </Link> */}

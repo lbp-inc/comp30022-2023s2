@@ -15,7 +15,7 @@ const PersonalInfoContent = () => {
         <div className="loginSection">
         <div className="membership">
             <div className="membership-card">
-                {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>};
+                {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>}
                 <Card className="content">
                     <Card className="list-container">
                         <Link to='/admin-personal-info'><Button>{enUS.buttons.back}</Button></Link>

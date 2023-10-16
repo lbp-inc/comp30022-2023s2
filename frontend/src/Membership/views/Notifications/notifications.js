@@ -1,7 +1,5 @@
-import MembershipSider from "../../components/membership-sider"
 import { Card, List } from 'antd';
 import { Link } from 'react-router-dom';
-import DrawerSider from "../../components/drawer-sider";
 import { useMediaQuery } from 'react-responsive';
 import AdminSider from "../../components/admin-sider"
 import AdminDrawerSider from "../../components/admin-drawer-sider";
@@ -28,17 +26,12 @@ const data = [
 const Notifications = () => {
     const isDesktop = useMediaQuery({ minWidth: 768 });
 
-    const role = localStorage.getItem("role");
-
     return (
         <Layout>
         <div className="loginSection">
         <div className="membership">
             <div className="membership-card">
-                {role === "user"
-                    ? (isDesktop ? <MembershipSider /> : <DrawerSider className="drawersider"/>)
-                    : (isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>)}
-                {/* {isDesktop ? <MembershipSider /> : <DrawerSider className="drawersider"/>}; */}
+            {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>}
                 <Card className="content">
                     <Card className="list-container">
                         <List
