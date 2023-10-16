@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "server": "nodemon backend/server.js",
+    "server": "nodemon server.js",
     "client": "npm run dev --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "concurrently": "^8.0.1",
+    "jsdoc": "^4.0.2",
     "nodemon": "^2.0.22"
   }
 }

@@ -21,8 +21,27 @@ const userSchema = mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['user', 'admin'],
-      default: 'user'
+      enum: ["user", "admin", "tutor"],
+      default: "user",
+    },
+    name: {
+      type: String,
+      require: true,
+    },
+    gender: {
+      type: String,
+      require: true,
+    },
+    birthday: {
+      type: String,
+      require: true,
+    },
+    phone: {
+      type: String,
+      require: true,
+    },
+    emailVerificationCode:{
+      type: String
     }
   },
   {
@@ -43,6 +62,6 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-const User = mongoose.model("User", userSchema);
+const UserModel = mongoose.model("User", userSchema);
 
-export default User;
+export default UserModel;
