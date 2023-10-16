@@ -1,13 +1,12 @@
-import {Button, message} from 'antd'
-import '../../style/membership-layout.css'
-import { Link, Outlet } from 'react-router-dom'
-import {UserOutlined} from '@ant-design/icons'
+import { Button, message } from "antd";
+import "../../style/membership-layout.css";
+import { Link, Outlet } from "react-router-dom";
+import { UserOutlined } from "@ant-design/icons";
 // import {enUS} from '../../locales/en-us'
-import {Dropdown} from 'antd'
-import React, { useState, useEffect } from 'react';
+import { Dropdown } from "antd";
+import React, { useState, useEffect } from "react";
 
-import Layout from '../../../Layout';
-
+import Layout from "../../../Layout";
 
 // const logout = [
 //   {
@@ -65,8 +64,6 @@ import Layout from '../../../Layout';
 //   },
 // ];
 
-
-
 // This component returns the layout of the web page
 const MembershipLayout = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -82,15 +79,15 @@ const MembershipLayout = () => {
   }, []);
 
   const onClick = ({ key }) => {
-    if (key === '4') {
+    if (key === "4") {
       localStorage.removeItem("token");
       localStorage.removeItem("auth_token");
       localStorage.removeItem("role");
-      setIsLoggedIn(false)
+      setIsLoggedIn(false);
       console.log("logout successful");
       messageApi.open({
-        type: 'success',
-        content: 'Successfully logged out',
+        type: "success",
+        content: "Successfully logged out",
       });
     }
   };
@@ -98,12 +95,10 @@ const MembershipLayout = () => {
   // Signout menu
   const signout = [
     {
-      key: '1',
+      key: "1",
       label: (
-        <Link to='/login'>
-          <div>
-            Log In
-          </div>
+        <Link to="/login">
+          <div>Log In</div>
         </Link>
       ),
     },
@@ -112,69 +107,60 @@ const MembershipLayout = () => {
   // Login menu
   const login = [
     {
-      key: '1',
+      key: "1",
       label: (
-        <Link to='/personal-info'>
-          <div>
-            Personal Info
-          </div>
+        <Link to="/personal-info">
+          <div>Personal Info</div>
         </Link>
       ),
     },
     {
-      key: '2',
+      key: "2",
       label: (
-        <Link to='/my-booking'>
-          <div>
-            My Booking
-          </div>
+        <Link to="/my-booking">
+          <div>My Booking</div>
         </Link>
       ),
     },
     {
-      key: '3',
+      key: "3",
       label: (
-        <Link to='/notifications'>
-          <div>
-            Notification
-          </div>
+        <Link to="/notifications">
+          <div>Notification</div>
         </Link>
       ),
     },
     {
-      key: '4',
+      key: "4",
       label: (
-        <Link to='/'>
-          <div>
-            Sign out
-          </div>
+        <Link to="/">
+          <div>Sign out</div>
         </Link>
       ),
     },
   ];
 
-
   return (
     <Layout>
-    <div className="loginSection">
-    <div className="layout">
-      {contextHolder}
-      <header className="header">
-        {/* <div className="header-top">
+      <div className="loginSection">
+        <div className="layout">
+          {contextHolder}
+          <header className="header">
+            {/* <div className="header-top">
           <div className="web-logo"></div>
           <h1 className="web-name">{enUS.page_name.home_page}</h1> */}
-          <div className='login-button-form'>
-            {/* <Dropdown menu={{items: login,onClick}} placement="bottomRight"> */}
-            <Dropdown menu={{items:(isLoggedIn ? login : signout),onClick}} placement="bottomRight">
-              {/* <Link to='/login'> */}
-                <Button type='primary' className='login-button' shape='circle' size='large' icon={<UserOutlined />} />
-              {/* </Link> */}
-            </Dropdown>
-            {/* <Link to='/admin-notification'>
+            <div className="login-button-form">
+              {/* <Dropdown menu={{items: login,onClick}} placement="bottomRight"> */}
+              <Dropdown menu={{ items: isLoggedIn ? login : signout, onClick }} placement="bottomRight">
+                {/* <Link to='/login'> */}
+                <Button type="primary" className="login-button" shape="circle" size="large" icon={<UserOutlined />} />
+                {/* </Link> */}
+              </Dropdown>
+              {/* <Link to='/admin-notification'>
               <Button type='primary' className='login-button' size='large' icon={<UserOutlined />} />
             </Link> */}
-          </div>
-        {/* </div>
+            </div>
+            {/* </div>
         <div className="header-bottom">
           <div className="menu-bar">
             <div className="menu-item">HOME</div>
@@ -187,19 +173,17 @@ const MembershipLayout = () => {
             <div className="menu-item">CONTACT</div>
           </div>
         </div> */}
-      </header>
+          </header>
 
-      <main className="main">
-        <Outlet />
-      </main>
+          <main className="main">
+            <Outlet />
+          </main>
 
-      <footer className="footer">
-        
-      </footer>
-    </div>
-    </div>
+          <footer className="footer"></footer>
+        </div>
+      </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default MembershipLayout
+export default MembershipLayout;
