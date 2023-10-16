@@ -2,8 +2,8 @@ port: 8000
 
 mongodb:
    # uri: mongodb+srv://Yomiel:Yomiel@mernauth.oz6dpip.mongodb.net/MERNauth?
-   uri: mongodb+srv://rppen:1234567rppen@atlascluster.xktl2yd.mongodb.net/?retryWrites=true&w=majority
-   #uri: mongodb+srv://team_006:KYmAG6IOtHzWxmDM@cluster0.xwm6uwz.mongodb.net/?retryWrites=true&w=majority
+   # uri: mongodb+srv://rppen:1234567rppen@atlascluster.xktl2yd.mongodb.net/?retryWrites=true&w=majority
+   uri: mongodb+srv://team_006:KYmAG6IOtHzWxmDM@cluster0.xwm6uwz.mongodb.net/?retryWrites=true&w=majority
    retryWrites: true
    w: majority
 
