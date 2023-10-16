@@ -14,7 +14,7 @@ const Login = () => {
         // console.log(values);
         try {
             // Send form values to backend for login
-            const response = await fetch("http://localhost:5000/api/users/auth", {
+            const response = await fetch("http://localhost:8000/api/users/auth", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

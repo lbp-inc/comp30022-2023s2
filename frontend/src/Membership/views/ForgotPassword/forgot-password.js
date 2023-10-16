@@ -18,7 +18,7 @@ const ForgotPassword = () => {
         console.log(email)
         try {
             // Send a request to the backend to send a reset password link to the user's email
-            const response = await fetch("http://localhost:5000/api/users/forget-password", {
+            const response = await fetch("http://localhost:8000/api/users/forget-password", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
