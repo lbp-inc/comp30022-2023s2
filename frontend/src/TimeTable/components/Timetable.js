@@ -1,4 +1,4 @@
-import { Calendar, dateFnsLocalizer, momentLocalizer } from 'react-big-calendar'
+import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
 import { useState, useEffect } from 'react'
 import format from 'date-fns/format'
 import parse from 'date-fns/parse'
@@ -43,7 +43,7 @@ const MyCalendar = ({myEventsList, showEventApi, showEventsApi}) => {
 
   //function to fatch data from backend server
   const fetchData = async () => {
-    const res = await axios.get("https://timetable-itproj-backend-43cf4db34bc0.herokuapp.com/api/events");
+    const res = await axios.get("http://localhost:5000/api/events");
     setEvents(await res.data.map(event=>{
       return{
         title: event.title,
@@ -90,7 +90,7 @@ const MyCalendar = ({myEventsList, showEventApi, showEventsApi}) => {
       events={events}
       startAccessor="start"
       endAccessor="end"
-      style={{ height: 650 }}
+      style={{ height: 500 }}
       onSelectEvent={openEventClick}
       />}
       

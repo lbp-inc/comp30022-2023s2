@@ -6,13 +6,14 @@ import MyCalendar from './components/Timetable';
 function EventsTimetable() {
   return (            
     <Layout>
-        <div className='rowB'>
-        <div className='App-Timetable'>
-          <MyCalendar/>
-        </div>
+    <div id="Timetable"></div>
+      <div className='rowB'>
+      <div className='App-Timetable'>
+        <MyCalendar/>
       </div>
-    </Layout>
-    );
+    </div>
+  </Layout>
+  );
 }
 
 export default EventsTimetable;
