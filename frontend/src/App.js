@@ -27,6 +27,7 @@ import RegisterJump from "./Membership/views/jump/register-jump";
 import ResetJump from "./Membership/views/jump/reset-jump";
 import PersonalInfoContent from "./Membership/views/PersonalInfo/personal-info-content";
 import EmailVerification from "./Membership/views/Register/email-Verification";
+import EventsTimetable from './TimeTable/EventsTimetable';
 
 function App() {
   return (
