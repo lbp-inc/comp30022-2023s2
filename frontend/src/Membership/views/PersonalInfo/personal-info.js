@@ -35,7 +35,7 @@ const PersonalInfo = () => {
         const fetchProfile = async () => {
             try {
                 // Send a request to obtain personal information
-                const response = await fetch("http://localhost:5000/api/users/getInfo", {
+                const response = await fetch("http://localhost:8000/api/users/getInfo", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ const PersonalInfo = () => {
             };
 
             // Send form values to backend for update personal info
-            const response = await fetch("http://localhost:5000/api/users/updateInfo", {
+            const response = await fetch("http://localhost:8000/api/users/updateInfo", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
