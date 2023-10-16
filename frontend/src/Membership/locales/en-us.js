@@ -114,7 +114,7 @@ const enUS = {
     weak: "Weak Password, unacceptable.",
     medium: "Medium Password",
     strong: "Strong password, acceptable.",
-  }
+  },
 };
 
 module.exports = {
