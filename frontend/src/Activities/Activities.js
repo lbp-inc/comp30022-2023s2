@@ -8,6 +8,7 @@ import FallsAndBalanceImage from '../image/NewImage/Falls and Balance.jpg';
 import MicrosoftApplicationsImage from '../image/NewImage/Microsoft Applications.jpg';
 import WalkAndTalkImage from '../image/NewImage/Walk and Talk.jpg';
 import XeroImage from '../image/NewImage/Xero.jpg';
+import MyCalendar from '../TimeTable/EventsTimetable';
 
 
 function useLoadContentFromDatabase(ref, pageKey) {
@@ -141,6 +142,9 @@ function Activities() {
 
         <div id="content-only">
             <div className='activitiesPageContainer'>
+                <div className='timetable'>
+                    <MyCalendar/>
+                </div>
                 <div className='activitiesbanner'>
                     <h1>Activities</h1>
                 </div>
