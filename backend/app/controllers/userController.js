@@ -8,15 +8,22 @@ const JWT_SECRET = "liTq9vasHanieW0Sb8ClegPSs6dZV05xHLKSiEZhPUC4KPSurj0pmJJs66L8
 import Message from "../models/messageModel.js";
 import Course from "../models/courseModel.js";
 
-// @desc    Auth user & get token
-// @route   POST /api/users/auth
-// @access  Public
+/**
+ * @async
+ * @function authUser
+ * @description Authenticate a user with username and password
+ * @param {object} req - Express request object, expects username and password in body
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 const authUser = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
+  const usernameOrEmail = username;
   try {
     // find user
-    const userModel = await UserModel.findOne({ username });
-
+    const userModel = await UserModel.findOne({
+      $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
+    });
     if (userModel) {
       if (!userModel.isEmailVerified) {
         res.status(201).json({ message: "Email has not verified" });
@@ -40,12 +47,14 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Register a new user
-// @route   POST /api/users/register
-// @access  Public
-// @desc    Register a new user
-// @route   POST /api/users/register
-// @access  Public
+/**
+ * @async
+ * @function registerUser
+ * @description Register a new user, expects username, email and password in the request body
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
   try {
@@ -67,10 +76,12 @@ const registerUser = asyncHandler(async (req, res) => {
       gender: "",
       birthday: "",
       phone: "",
+      emailVerificationCode: "",
     });
 
     if (userModel) {
-      res.status(201).json({ status: "User created successfully" });
+      const token = jwt.sign({ _id: userModel._id }, JWT_SECRET);
+      res.status(201).json({ status: "User created successfully", data: token });
     } else {
       console.error(error);
       res.status(500).json({ message: "System error, please try again" });
@@ -81,9 +92,12 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Logout user / clear cookie
-// @route   POST /api/users/logout
-// @access  Public
+/**
+ * @function logoutUser
+ * @description Logout a user by clearing the jwt cookie.
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ */
 const logoutUser = (req, res) => {
   res.cookie("jwt", "", {
     httpOnly: true,
@@ -92,9 +106,14 @@ const logoutUser = (req, res) => {
   res.status(200).json({ message: "Logged out successfully" });
 };
 
-// @desc    Get user profile
-// @route   GET /api/users/profile
-// @access  Private
+/**
+ * @async
+ * @function getUserProfile
+ * @description Get the profile of a user, requires jwt token in request body
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 const getUserProfile = asyncHandler(async (req, res) => {
   const token = req.body.token;
   try {
@@ -121,18 +140,22 @@ const getUserProfile = asyncHandler(async (req, res) => {
     res.status(500).json({ message: "System error, please try again" });
   }
 });
-
-// @desc    Update user profile
-// @route   PUT /api/users/profile
-// @access  Private
+/**
+ * @async
+ * @function updateUserProfile
+ * @description Update user profile, requires jwt token and new user data in request body
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 const updateUserProfile = asyncHandler(async (req, res) => {
   try {
     const { token, name, gender, birthday, email, phone } = req.body;
     const verified = jwt.verify(token, JWT_SECRET);
     const userModel = await UserModel.findOne({ _id: verified._id });
-    if (email !== userModel.email) {
+    if (userModel && email !== userModel.email) {
       userModel.email = email;
-      user.isEmailVerified = false;
+      userModel.isEmailVerified = false;
       await userModel.save();
     }
     if (userModel) {
@@ -151,6 +174,14 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
+/**
+ * @async
+ * @function forgetPassword
+ * @description Sends an email to reset user's password
+ * @param {object} req - Express request object, expects email in body
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 const forgetPassword = asyncHandler(async (req, res) => {
   const { email } = req.body;
   try {
@@ -204,6 +235,14 @@ const forgetPassword = asyncHandler(async (req, res) => {
   }
 });
 
+/**
+ * @async
+ * @function resetPassword
+ * @description Resets a user's password, requires username, token and password in request body
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 const resetPassword = asyncHandler(async (req, res) => {
   const { username, token, password } = req.body;
   const userModel = await UserModel.findOne({ username });
@@ -221,6 +260,42 @@ const resetPassword = asyncHandler(async (req, res) => {
   }
 });
 
+/**
+ * @async
+ * @function getrole
+ * @description Get the role of a user, requires jwt token in request body
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
+const getrole = asyncHandler(async (req, res) => {
+  try {
+    const { token } = req.body;
+    const verified = jwt.verify(token, JWT_SECRET);
+    const userModel = await UserModel.findOne({ _id: verified._id });
+    res.status(200).json({ message: "User found", role: userModel.role });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+});
+
+/**
+ * @function generateRandomCode
+ * @description Generate a random six-digit code
+ * @returns {string} A random six-digit code
+ */
+const generateRandomCode = () => {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+};
+
+/**
+ * @async
+ * @function emailVerify
+ * @description Verify an email, expects email in request body
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 const emailVerify = asyncHandler(async (req, res) => {
   const { email } = req.body;
   try {
@@ -228,14 +303,12 @@ const emailVerify = asyncHandler(async (req, res) => {
     if (!userModel) {
       return res.status(211).json({ message: "Invalid or expired verification token" });
     }
-    const link = `http://localhost:3000/login`;
+    const verificationCode = generateRandomCode();
     const mailText = `Dear ${userModel.username},
+    
+    Your verification code is: ${verificationCode}
 
-    We have received a request to verified email. You have successfully created your account please click on the link below:
-
-    ${link}
-
-    If you did not register an account, you can ignore this email. Your account's security is important to us, and no changes will be made unless you confirm the request.
+    If you did not request this code, you can ignore this email. Your account's security is important to us, and no changes will be made unless you confirm the request.
 
     Thank you for using our service.
 
@@ -253,7 +326,7 @@ const emailVerify = asyncHandler(async (req, res) => {
     var mailOptions = {
       from: "rui487165@gmail.com",
       to: userModel.email,
-      subject: "Password Reset",
+      subject: "Email Verification",
       text: mailText,
     };
 
@@ -264,7 +337,7 @@ const emailVerify = asyncHandler(async (req, res) => {
         console.log("Email sent: " + info.response);
       }
     });
-    userModel.isEmailVerified = true;
+    userModel.emailVerificationCode = verificationCode;
     await userModel.save();
     return res.status(200).json({ message: "Email verified successfully", role: userModel.role });
   } catch (error) {
@@ -273,9 +346,40 @@ const emailVerify = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Get user groups
-// @route   GET /api/get-user-groups
-// @access  Private/Admin
+/**
+ * @async
+ * @function emailCodeMatch
+ * @description Match verification code for email verification, expects email and code in request body
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
+const emailCodeMatch = asyncHandler(async (req, res) => {
+  const { email, code } = req.body;
+  try {
+    const userModel = await UserModel.findOne({ email });
+    if (userModel && code === userModel.emailVerificationCode) {
+      userModel.isEmailVerified = true;
+      userModel.emailVerificationCode = "";
+      await userModel.save();
+      return res.status(200).json({ message: "Email verified successfully" });
+    } else {
+      return res.status(211).json({ message: "email verified fail!" });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+/**
+ * @async
+ * @function getUserGroups
+ * @description Get all user groups
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 const getUserGroups = asyncHandler(async (req, res) => {
   const courses = await Course.find({});
   if (courses) {
@@ -287,9 +391,14 @@ const getUserGroups = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Get users by user groups
-// @route   POST /api/get-user-list-by-group
-// @access  Private/Admin
+/**
+ * @async
+ * @function getUserListByGroup
+ * @description Get users by user group, expects groups in request body
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 const getUserListByGroup = asyncHandler(async (req, res) => {
   const { groups } = req.body;
   const courses = await Course.find({ course_name: { $in: groups } });
@@ -316,9 +425,14 @@ const getUserListByGroup = asyncHandler(async (req, res) => {
   res.json(userModel);
 });
 
-// @desc    Send message
-// @route   POST /api/send-message
-// @access  Private/Admin
+/**
+ * @async
+ * @function sendMessage
+ * @description Send messages to group, expects subject, text, isEmail, recipients and token in request body
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 const sendMessage = asyncHandler(async (req, res) => {
   const { subject, text, isEmail, recipients, token } = req.body;
   const decoded = jwt.verify(token, JWT_SECRET);
@@ -366,9 +480,14 @@ const sendMessage = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Get unread message number
-// @route   GET /api/get-unread-msg-num
-// @access  Private/User
+/**
+ * @async
+ * @function getUnreadMsgNum
+ * @description Get number of unread messages for a user
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 const getUnreadMsgNum = asyncHandler(async (req, res) => {
   const user = req.user;
   const messages = await Message.find({ "user_list.username": user.username });
@@ -383,9 +502,14 @@ const getUnreadMsgNum = asyncHandler(async (req, res) => {
   res.json({ unreadNum });
 });
 
-// @desc    Get all messages for a user
-// @route   GET /api/get-msg-list
-// @access  Private/User
+/**
+ * @async
+ * @function getMsgList
+ * @description Get all messages for a user
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 const getMsgList = asyncHandler(async (req, res) => {
   const user = req.user;
   const messages = await Message.find({ "user_list.username": user.username });
@@ -399,4 +523,4 @@ const getMsgList = asyncHandler(async (req, res) => {
   res.json(msgsForUser);
 });
 
-export { authUser, registerUser, logoutUser, getUserProfile, updateUserProfile, forgetPassword, resetPassword, emailVerify, getUserGroups, getUserListByGroup, sendMessage, getUnreadMsgNum, getMsgList };
+export { authUser, registerUser, logoutUser, getUserProfile, updateUserProfile, forgetPassword, resetPassword, emailVerify, getUserGroups, getUserListByGroup, sendMessage, getUnreadMsgNum, getMsgList, getrole, emailCodeMatch };

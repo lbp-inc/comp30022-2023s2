@@ -21,7 +21,7 @@ const userSchema = mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["user", "admin"],
+      enum: ["user", "admin", "tutor"],
       default: "user",
     },
     name: {
@@ -39,6 +39,9 @@ const userSchema = mongoose.Schema(
     phone: {
       type: String,
       require: true,
+    },
+    emailVerificationCode: {
+      type: String,
     },
   },
   {

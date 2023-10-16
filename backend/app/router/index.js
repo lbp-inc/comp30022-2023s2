@@ -1,9 +1,10 @@
 import express from "express";
 const router = express.Router();
 
-import { authUser, registerUser, logoutUser, getUserProfile, updateUserProfile, forgetPassword, resetPassword, emailVerify, getUserGroups, getUserListByGroup, sendMessage, getUnreadMsgNum, getMsgList } from "../controllers/userController.js";
+import { authUser, registerUser, logoutUser, getUserProfile, updateUserProfile, forgetPassword, resetPassword, emailVerify, getUserGroups, getUserListByGroup, sendMessage, getUnreadMsgNum, getMsgList, getrole, emailCodeMatch } from "../controllers/userController.js";
 
 import { admin } from "../utils/authHandler.js";
+import { get } from "mongoose";
 
 router.post("/forget-password", forgetPassword);
 router.post("/reset-password", resetPassword);
@@ -15,6 +16,8 @@ router.post("/logout", logoutUser);
 router.post("/getInfo", getUserProfile);
 router.post("/updateInfo", updateUserProfile);
 router.post("/verify-email", emailVerify);
+router.post("/get-role", getrole);
+router.post("/match_code", emailCodeMatch);
 
 router.route("/get-user-groups").get(admin, getUserGroups);
 router.route("/get-user-list-by-group").post(admin, getUserListByGroup);
