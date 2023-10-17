@@ -2,6 +2,7 @@ import cors from "cors";
 dotenv.config();
 import connectDB from "./app/utils/database/db_connect.js";
 import userRoutes from "./app/router/v1/index.js";
+import eventRoutes from "./app/router/eventRoute.js";
 import path from "path";
 import express from "express";
 import dotenv from "dotenv";
@@ -33,6 +34,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors());
 app.use("/api/users", userRoutes);
+
+// Events routes
+app.use("/api/events", eventRoutes);
 
 if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve();
