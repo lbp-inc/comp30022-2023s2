@@ -15,6 +15,7 @@ import cookieParser from "cookie-parser";
  */
 import connectDB from "./app/utils/connectDB.js";
 import userRoutes from "./app/router/index.js";
+import eventRoutes from "./app/router/eventRoute.js";
 import { notFound, errorHandler } from "./app/utils/errorHandler.js";
 import config from "./config/config.js";
 
@@ -40,6 +41,7 @@ app.use(cors());
 
 // Registering users related API routes.
 app.use("/api/users", userRoutes);
+app.use("/api/events", eventRoutes);
 
 // Default route - sanity check route.
 app.get("/", (req, res) => res.send("Server is ready"));

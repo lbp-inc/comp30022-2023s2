@@ -43,7 +43,7 @@ const MyCalendar = ({myEventsList, showEventApi, showEventsApi}) => {
 
   //function to fatch data from backend server
   const fetchData = async () => {
-    const res = await axios.get("http://localhost:5000/api/events");
+    const res = await axios.get("http://localhost:8000/api/events");
     setEvents(await res.data.map(event=>{
       return{
         title: event.title,
@@ -90,7 +90,7 @@ const MyCalendar = ({myEventsList, showEventApi, showEventsApi}) => {
       events={events}
       startAccessor="start"
       endAccessor="end"
-      style={{ height: 500 }}
+      style={{ height: 630 }}
       onSelectEvent={openEventClick}
       />}
       
