@@ -18,7 +18,7 @@ const EmailVerification = () => {
         console.log(email)
         try {
             // Send a request to the backend to send an verification code email to the user's email
-            const response = await fetch("http://localhost:5000/api/users/verify-email", {
+            const response = await fetch("http://localhost:8000/api/users/verify-email", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
