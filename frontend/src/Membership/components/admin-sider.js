@@ -65,12 +65,16 @@ const AdminSider = () => {
                         <Link to='/admin-notification'>
                             <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.edit_notification}</Button>
                         </Link>
+                        <Link to='/admin-timetable'>
+                            <Button type="text" shape="round" size="large" block className="sider-button">TimeTable</Button>
+                        </Link>
                         <Link to='/Editor'>
                             <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.admin}</Button>
-                        </Link></> 
+                        </Link>
+                        </> 
                        :(role === 'tutor' 
                        ?<>
-                        {/* <Link to='/Editor'> */}
+                        {/* <Link to=''> */}
                             <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.tutor}</Button>
                         {/* </Link> */}
                         </> : null)}

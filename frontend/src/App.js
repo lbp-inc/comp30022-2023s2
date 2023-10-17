@@ -28,6 +28,7 @@ import ResetJump from "./Membership/views/jump/reset-jump";
 import PersonalInfoContent from "./Membership/views/PersonalInfo/personal-info-content";
 import EmailVerification from "./Membership/views/Register/email-Verification";
 import EventsTimetable from './TimeTable/EventsTimetable';
+import TimeTable from './Membership/views/Timetable/timetable';
 
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
                     <Route path="/reset-jump" element={<ResetJump />}></Route>
                     <Route path="/personal-info-content" element={<PersonalInfoContent />}></Route>
                     <Route path="/email-verification" element={<EmailVerification/>}></Route>
+                    <Route path="/admin-timetable" element={<TimeTable/>}></Route>
               </Routes>
           </div>
       </BrowserRouter>  
