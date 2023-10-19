@@ -383,7 +383,7 @@ const emailCodeMatch = asyncHandler(async (req, res) => {
 const getUserGroups = asyncHandler(async (req, res) => {
   const courses = await Course.find({});
   if (courses) {
-    let courseNames = courses.map((course) => course.course_name);
+    let courseNames = courses.map((course) => course.name);
     res.json(courseNames);
   } else {
     res.status(404);
@@ -401,7 +401,7 @@ const getUserGroups = asyncHandler(async (req, res) => {
  */
 const getUserListByGroup = asyncHandler(async (req, res) => {
   const { groups } = req.body;
-  const courses = await Course.find({ course_name: { $in: groups } });
+  const courses = await Course.find({ name: { $in: groups } });
   if (!courses) {
     res.status(404);
     throw new Error("Course not found");
@@ -442,7 +442,7 @@ const sendMessage = asyncHandler(async (req, res) => {
   // }
 
   // get the list of users from all the courses
-  const courses = await Course.find({ course_name: { $in: recipients } });
+  const courses = await Course.find({ name: { $in: recipients } });
   if (!courses) {
     res.status(404);
     throw new Error("Course not found");
