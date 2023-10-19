@@ -24,7 +24,7 @@ async function getCourse(req, res) {
 }
 
 async function addCourse(req, res) {
-
+    console.log(req.body);
     let newCourse = new Course({
         name: req.body.name,
         type: req.body.type,
@@ -40,5 +40,10 @@ async function addCourse(req, res) {
     res.send(result).status(204);
 }
 
+async function initDb(req, res) {
+    console.log("Hahahaha database has been cleaned!");
+    let result = await Course.deleteMany();
+    res.send(result).status(200);
+}
 
-export { getCourses, getCourse, addCourse };
+export { getCourses, getCourse, addCourse, initDb };
