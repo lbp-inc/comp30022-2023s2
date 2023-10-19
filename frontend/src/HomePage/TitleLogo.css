@@ -11,10 +11,10 @@
     left: 40px; 
 }
 
-/* 缩小logo图像 */
+
 .logo img {
-    max-width: 100%; /* 图像宽度最大不超过容器宽度 */
-    max-height: 100px; /* 图像高度最大不超过100像素 */
+    max-width: 100%; 
+    max-height: 100px;
 }
 
 .title {
@@ -40,9 +40,9 @@
         top: 0cqi;
         left: 20px;
     }
-    /* 在小屏幕上进一步缩小logo图像 */
+
     .logo img {
-        max-height: 100px; /* 图像高度最大不超过80像素 */
+        max-height: 100px; 
     }
     .title {
         font-size: 28px;
@@ -62,10 +62,10 @@
         left: 5px;
     }
 
-    /* 在小屏幕上进一步缩小logo图像 */
+
     .logo img {
 
-        max-width: 50%; /* 图像高度最大不超过80像素 */
+        max-width: 50%;
     }
 
     .title {
@@ -86,9 +86,9 @@
         left: 5px;
     }
 
-    /* 在小屏幕上进一步缩小logo图像 */
+
     .logo img {
-        max-width: 40%; /* 图像高度最大不超过80像素 */
+        max-width: 40%; 
     }
 
     .title {

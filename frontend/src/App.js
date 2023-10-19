@@ -28,6 +28,7 @@ import ResetJump from "./Membership/views/jump/reset-jump";
 import PersonalInfoContent from "./Membership/views/PersonalInfo/personal-info-content";
 import EmailVerification from "./Membership/views/Register/email-Verification";
 import EventsTimetable from './TimeTable/EventsTimetable';
+import UserEventsTimetable from './TimeTable/UserEventsTimetable';
 import TimeTable from './Membership/views/Timetable/timetable';
 import FeeForServiceForm from "./Activities/Forms/FeeForService";
 import ACFEForm from "./Activities/Forms/ACFE_Form";
@@ -38,18 +39,19 @@ function App() {
       <BrowserRouter>
           <div className="App">
               <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/AboutUs" element={<AboutUs />} />
-                  <Route path="/Activities" element={<Activities />} />
-                  <Route path="/Showcase" element={<Showcase />} />
-                  <Route path="/Contact" element={<Contact />} />
-                  <Route path="/Events" element={<Events />} />
-                  <Route path="/GetInvolved" element={<GetInvolved />} />
-                  <Route path="/RoomHire" element={<RoomHire />} />
-                  {/* <Route path="/LogIn" element={<LogIn />} /> */}
-                  <Route path="/Editor" element={<Editor />} />
-                  <Route path="/EditorLogin" element={<EditorLogin />} />
-                  <Route path="/Timetable" element={<EventsTimetable />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/AboutUs" element={<AboutUs />} />
+                    <Route path="/Activities" element={<Activities />} />
+                    <Route path="/Showcase" element={<Showcase />} />
+                    <Route path="/Contact" element={<Contact />} />
+                    <Route path="/Events" element={<Events />} />
+                    <Route path="/GetInvolved" element={<GetInvolved />} />
+                    <Route path="/RoomHire" element={<RoomHire />} />
+                    {/* <Route path="/LogIn" element={<LogIn />} /> */}
+                    <Route path="/Editor" element={<Editor />} />
+                    <Route path="/EditorLogin" element={<EditorLogin />} />
+                    <Route path="/Timetable" element={<EventsTimetable />} />
+                    <Route path="/UserTimetable" element={<UserEventsTimetable />} />
 
                   {/* Membership */}
                   <Route path="/login" element={<Login />}></Route>
