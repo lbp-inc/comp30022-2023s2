@@ -16,7 +16,7 @@ function useLoadContentFromDatabase(ref, pageKey) {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get(`http://localhost:4000/api/load/${pageKey}`);
+          const response = await axios.get(`http://localhost:8000/api/load/${pageKey}`);
           if (response.data.success) {
             const { html, css } = response.data;
   
@@ -81,7 +81,55 @@ function Showcase() {
                     <h1>Showcase</h1>
                 </div>
 
-            <div className='enjoy'>Please enjoy this collection that showcases the groups and courses we offer at LBP. </div>
+            <div className='enjoy1'><h1>The Indigenous and Multicultural Garden project – Longbeach Place</h1>
+            <div className='enjoy2'>The Indigenous and Multicultural Garden in consultation with Edible Eden Garden Design,
+            City of Kingston and Carrum Indigenous Nursery to design and develop this amazing garden
+            full of edible plants for the community to enjoy!</div>
+            </div>
+            
+            <div className='section2'>
+                <div className='enjoyText'>
+                    <p>Our launch on Monday 28 November 2022 featured an official "Turning of the Sod"
+                    ceremony and workshops that showed how to make delicious Indigenous teas and
+                    explained their health benefits. We also learnt how to plant and enjoy a sensory garden.</p>
+
+                    <p>LBP recently had 25 people attend a very informative Coastal Foraging workshop where
+                    uses of plants are identified from natural curing skin ailments, quenching thirst and a plant
+                    soap. Part of the amazing day was also spent in the afternoon experimenting with
+                    flavoured toffees, chocolates and truffles using indigenous plants. Great feedback and fun
+                    and laughter was had.</p>
+                    </div>
+                <div className='enjoyPic'>
+                    <Swiper
+                        modules={[Navigation, Autoplay]}
+                        spaceBetween={10}
+                        slidesPerView={1}
+                        loop={true}
+                        navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}
+                        autoplay={{
+                            delay: 3500,
+                            disableOnInteraction: false,
+                        }}
+                    >
+
+                    {slides.map((slide, index) => (
+                        <SwiperSlide key={index}>
+                            <img src={slide.image} alt={slide.text}/>
+                        </SwiperSlide>
+                    ))}
+
+                    <div className="swiper-button-prev"><FontAwesomeIcon icon={faCircleLeft} color='#fff'></FontAwesomeIcon></div>
+                    <div className="swiper-button-next"><FontAwesomeIcon icon={faCircleRight} color='#fff'></FontAwesomeIcon></div>
+                    </Swiper>
+                </div>
+
+            </div>
+
+            <div className='enjoy'> LBP also delivered a weaving, indigenous pharmacy and pampering workshops with Eco silk
+            dyeing and bush survival workshops coming up that are already booked out.</div>
+
+            <div className='enjoy'> The showcase garden is open during office hours for people to take a self-guided tour. All
+            plants are signed and coded for their uses. </div>
 
             <div className='gallery'>
                 <h1>Gallery</h1>

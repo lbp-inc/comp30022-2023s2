@@ -7,7 +7,7 @@ function SocialMedia() {
             <a href="https://www.facebook.com/people/Longbeach-Place-Inc/100070987424590/" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-facebook-square"></i>
             </a>
-            <a href="https://www.instagram.com/longbeachplace/?hl=en" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/longbeachplacechelsea/?hl=en" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-instagram"></i>
             </a>
         </div>

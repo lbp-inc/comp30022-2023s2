@@ -9,9 +9,8 @@ import MicrosoftApplicationsImage from '../image/NewImage/Microsoft Applications
 import WalkAndTalkImage from '../image/NewImage/Walk and Talk.jpg';
 import XeroImage from '../image/NewImage/Xero.jpg';
 
-
 function useLoadContentFromDatabase(ref, pageKey) {
-    const backendUrl  = 'http://localhost:5000';
+    const backendUrl  = 'http://localhost:8000';
 
     useEffect(() => {
       const fetchData = async () => {
@@ -142,7 +141,7 @@ function Activities() {
         <div id="content-only">
             <div className='activitiesPageContainer'>
                 <div className='activitiesbanner'>
-                    <h1>Activities</h1>
+                    <h1 className='activitiesname'>Activities</h1>
                 </div>
 
                 <div className='categoryContainer'>

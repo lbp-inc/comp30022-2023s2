@@ -8,13 +8,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleRight } from '@fortawesome/free-solid-svg-icons';
 import { faCircleLeft } from '@fortawesome/free-solid-svg-icons';
 
-import swiperImage1 from '../image/whatsNew.webp';
-import swiperImage2 from '../image/whatsNew.webp';
-import swiperImage3 from '../image/whatsNew.webp';
+import swiperImage1 from '../image/All Abil Comms - Website.jpg';
+import swiperImage2 from '../image/NewImage/Art.png';
+import swiperImage3 from '../image/Website Pic - EAL.jpg';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
+
 
 //Swiper.use([Autoplay]);
 //SwiperCore.use([Navigation]);
@@ -22,9 +23,24 @@ import 'swiper/css/autoplay';
 function MainContent() {
 
     const slides = [
-        { image: swiperImage1, text: 'Text for image 1' },
-        { image: swiperImage2, text: 'Text for image 2' },
-        { image: swiperImage3, text: 'Text for image 3' },
+        { 
+            image: swiperImage1, 
+            text: 'Improve reading, writing and numeracy skills for everyday life! \nClasses include the practice of money recognition, measuring and weighing skills. Classes also focus on writing, vocabulary and word recognition skills.',
+            time: 'Thursdays 10:30am',
+            fee: ''
+        },
+        { 
+            image: swiperImage2, 
+            text: 'Come and join others in our relaxed environment as we explore visual arts across a range of mediums. Every fortnight you\'ll paint still life with watercolours or acrylics, learn to sketch and enjoy a chat and a cuppa, then take home your masterpieces! Learn about colours, form and perspective and let you creativity go wild.' ,
+            time: '',
+            fee: ''
+        },
+        { 
+            image: swiperImage3, 
+            text: 'Friendly and supportive English classes designed using blended learning to develop communication skills for everyday life or the workplace. Classes include the practice of reading, writing, speaking and listening.',
+            time: 'Monday 9:30 am Friday 10:30 am',
+            fee: '$14 per session non-residents'
+        },
     ];
    
     return (
@@ -50,15 +66,15 @@ function MainContent() {
                         <div className="background-container">
                             
                             <div className="split-container">
-                                
-                                <div className="text-part">
-                                    {slide.text}
-                                </div>
-
                                 <div className="image-part">
                                     <img src={slide.image} alt={slide.text}/>
                                 </div>
-
+                                
+                                <div className="text-part">
+                                    <p>{slide.text}</p>
+                                    <p>{slide.time}</p>
+                                    <p>{slide.fee}</p>
+                                </div>
                             </div>
 
                         </div>

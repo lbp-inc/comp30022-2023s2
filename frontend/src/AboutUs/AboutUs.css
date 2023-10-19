@@ -112,7 +112,7 @@ body {
 
 .governanceCommitteeText{
     width: 50%;
-    padding: 20px 5% 100px;
+    padding: 20px 5% 50px;
     color: rgb(80, 80, 80);
     font-size: 22px;
 }
@@ -123,13 +123,29 @@ body {
 }
 .governanceCommitteePic {
     width: 50%;
-    background-image: url('../image/event.webp');
+    background-image: url('../image/Committee.jpg');
     background-size: cover;
-    min-height: 500px;
+    min-height: 280px;
+    max-width: 600px;
 }
 
-.members p{
-    margin: 0em;
+.membersContainer {
+    display: block;
+    padding: 50px 2% 0px;
+}
+.membersTitile {
+    text-align: center;
+    color: #15ac9f;
+    font-size: 50px;
+}
+.membersContainer li {
+    list-style-type: none; 
+    padding: 30px 20px;
+    margin-top: 20px;
+    background-color: aliceblue;
+    border-radius: 10px;
+    color: rgb(80, 80, 80);
+    font-size: 20px;
 }
 
 /* MEDIA QUERIES */

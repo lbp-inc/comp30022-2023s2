@@ -22,7 +22,7 @@ import ContactPage from '../Contact/Contact';
 import LogIn from '../LogIn/Login';
 
 const saveToDatabase = async (html, css, page) => {
-  const backendUrl = 'http://localhost:5000';
+  const backendUrl = 'http://localhost:8000';
 
   try {
     const response = await axios.post(`${backendUrl}/api/users/save-content`, {
@@ -53,7 +53,7 @@ const EditorFuction = () => {
   const currentPageRef = useRef("");
 
   const loadPageContentFromServer = async (pageKey) => {
-    const backendUrl = 'http://localhost:5000';
+    const backendUrl = 'http://localhost:8000';
     try {
       const response = await axios.get(`${backendUrl}/api/users/load-content/${pageKey}`);
       if (response.data.success) {

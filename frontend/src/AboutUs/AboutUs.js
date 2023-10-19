@@ -5,7 +5,7 @@ import './AboutUs.css';
 import axios from 'axios';
 
 function useLoadContentFromDatabase(ref, pageKey) {
-  const backendUrl  = 'http://localhost:5000';
+  const backendUrl  = 'http://localhost:8000';
 
   useEffect(() => {
     const fetchData = async () => {
@@ -140,17 +140,47 @@ function AboutUs() {
                             The Governance Committee members are not involved in administration but focus on the 
                             governance of the organisation. The Governance Committee work with the Manager to 
                             manage the organisation.</p>
-                        
-                        <a id="members"> </a>
-                        <div className='members'>
-                            <h3>Members:</h3>
-                            <p>President - Penny Garrett</p>
-                            <p>Vice President - Janine Chalmers</p>
-                            <p>Treasurer - Albert Olenski</p>
-                            <p>Secretary - Jane Court</p>
-                            <p>General members - Chris Ewin, Rojer Leiberman, Sandra Wearne and Anna Wonnenberg</p>
-                        </div>
                     </div>
+                </div>
+
+                <a id="members"> </a>
+                <div className='membersContainer'>
+                    <p className='membersTitile'>Members</p>
+                    <ul>
+                        <li>
+                            <h2>Chris Ewin - President</h2>
+                            <p>Chris has completed a PhD in Computer Science,He is currently an Associate Lecturer in Computing Information Systems at the University of Melbourne and runs an IT business, Enhance Computer Services. He is also a volunteer facilitator at the Chelsea PC Support Group, which he has helped coordinate for over 20 years. Chris joined the Governance Committee in mid-2018.</p>
+                        </li>
+                        <li>
+                            <h2>Penny Garrett - Vice President</h2>
+                            <p>Penny Garrett is a local resident to Chelsea, moving here to raise her 3 young boys in this wonderful community! Penny brings with her a wealth of experience leading large teams across ANZ and international, from large multi-national corporations to Education and Public Sector. Passionate about training, social welfare and strong governance, she has a degree in Psychology and a Masters in Business Administration (MBA). Penny is energised and committed to supporting LBP in achieving their strategic and growth-based objectives.</p>
+                        </li>
+                        <li>
+                            <h2>Anne Wonneberger - Secretary/Treasurer</h2>
+                            <p>As a student in France in the 1980's Anne volunteered in the creation and development of one of the first radio FM stations, interviewing local people and providing free advertising for community events and opportunities. Having worked in a consulting firm, she developed expertise in publishing, leading to managerial roles in a group of 60+ magazines, including "Elle". After moving with her family to Australia, Anne unsuccessfully followed the challenging process of validating her overseas qualifications (Scientific Master). Since settling in Kingston, Anne has volunteered and/or worked for four community organisations, using her life experience to help others less fortunate, and learning from an amazing diversity of people their personal stories and challenges. In 2019, she was invited to contribute to activities at Longbeach PLACE and was elected to the Committee.</p>
+                        </li>
+                        <li>
+                            <h2>Albert Olenski - General Member</h2>
+                            <p>Albert comes from primarily a financial services background, namely wealth management and Capital markets. As part of these roles, he was involved not only in the technical aspects but also stakeholder management and client Communication. He has also been involved with several not-for-profit organisations throughout his career.</p>
+                        </li>
+                        <li>
+                            <h2>Jane Court-Secretary</h2>
+                            <p>Jane Court (nee Woodhead) is a near-lifetime Chelsea resident, born Chelsea Bush Nursing Hospital, schooled at Bonbeach State and High Schools, and lives on land once owned by her Great Grandparents in Edithvale. Jane volunteered, taught,and worked at the Chelsea Neighbourhood House on Broadway and through the move to Longbeach PLACE on Chelsea Road. She then worked in Training and Assessment, and staff development at Chisholm and studied post-graduate degrees in adult learning. She loves her dogs, sons, SciFi and theatre.On retirement, she was thrilled to join the Longbeach Governance Committee to give back io the community that gave so much to her.</p>
+                        </li>
+                        <li>
+                            <h2>Rojer Liberman - General Member</h2>
+                            <p>Rojer moved to Chelsea in 2001 and started the Chelsea PC Support Group on the first Saturday of May 2002, located in Broadway Chelsea. Rojer has previously been in business for over 20 years and is an active participant in the Chelsea community.</p>
+                        </li>
+                        <li>
+                            <h2>Janine Chalmers - General Member</h2>
+                            <p>Janine has lived and raised her family within the City of Kingston most of her life. She recently retired from 27 years in business and previously had over 25 years as a nurse and midwife throughout Melbourne. Over the years, Janine has enjoyed contributing to the local community in several organisations throughout the area. She discovered Longbeach Place through attending a course and joined the Governance committee in November 2022.</p>
+                            <p>Janine is passionate about bringing out the best in people and believes that Longbeach Place can make an even bigger impact in our local community,Utilising her background in the caring professions of nursing, combined with an extensive business background, Janine is eager and excited to see Longbeach Place flourish as a local centre, having a positive impact in the local community.</p>
+                        </li>
+                        <li>
+                            <h2>Sandra Wearne - General Member</h2>
+                            <p>Born and raised in Edithvale, Sandra worked in her parents' hairdressing and tobacconist shop, before marrying and moving to Seaford. After raising 3 children and teaching swimming for 10 years,Sandra worked as a rep for various Smallgoods companies. Now retired, Sandra and her husband live at the Lifestyle Village, Chelsea Heights, where she was Social Club President for 4 years. Sandra joined Longbeach Place 17 years ago and is a member of the computer club. She looks forward to contributing as a member of the Governance Committee.</p>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

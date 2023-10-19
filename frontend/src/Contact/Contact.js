@@ -15,7 +15,7 @@ import emailjs from 'emailjs-com';
 const defaultTheme = createTheme();
 
 function useLoadContentFromDatabase(ref, pageKey) {
-    const backendUrl  = 'http://localhost:5000';
+    const backendUrl  = 'http://localhost:8000';
 
     useEffect(() => {
       const fetchData = async () => {
