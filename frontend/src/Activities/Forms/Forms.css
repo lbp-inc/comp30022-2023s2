@@ -1,0 +1,19 @@
+.body_details {
+    margin: 10px;
+    padding: 0;
+}
+
+.top-banner {
+    margin: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-body {
+    margin: 5px 10px;
+}
+
+.color-heading {
+    color: #3b9da6;
+    background-color: white;
+}

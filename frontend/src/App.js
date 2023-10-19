@@ -29,6 +29,8 @@ import PersonalInfoContent from "./Membership/views/PersonalInfo/personal-info-c
 import EmailVerification from "./Membership/views/Register/email-Verification";
 import EventsTimetable from './TimeTable/EventsTimetable';
 import TimeTable from './Membership/views/Timetable/timetable';
+import FeeForServiceForm from "./Activities/Forms/FeeForService";
+import ACFEForm from "./Activities/Forms/ACFE_Form";
 
 
 function App() {
@@ -36,35 +38,39 @@ function App() {
       <BrowserRouter>
           <div className="App">
               <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/AboutUs" element={<AboutUs />} />
-                    <Route path="/Activities" element={<Activities />} />
-                    <Route path="/Showcase" element={<Showcase />} />
-                    <Route path="/Contact" element={<Contact />} />
-                    <Route path="/Events" element={<Events />} />
-                    <Route path="/GetInvolved" element={<GetInvolved />} />
-                    <Route path="/RoomHire" element={<RoomHire />} />
-                    {/* <Route path="/LogIn" element={<LogIn />} /> */}
-                    <Route path="/Editor" element={<Editor />} />
-                    <Route path="/EditorLogin" element={<EditorLogin />} />
-                    <Route path="/Timetable" element={<EventsTimetable />} />
+                  <Route path="/" element={<Home />} />
+                  <Route path="/AboutUs" element={<AboutUs />} />
+                  <Route path="/Activities" element={<Activities />} />
+                  <Route path="/Showcase" element={<Showcase />} />
+                  <Route path="/Contact" element={<Contact />} />
+                  <Route path="/Events" element={<Events />} />
+                  <Route path="/GetInvolved" element={<GetInvolved />} />
+                  <Route path="/RoomHire" element={<RoomHire />} />
+                  {/* <Route path="/LogIn" element={<LogIn />} /> */}
+                  <Route path="/Editor" element={<Editor />} />
+                  <Route path="/EditorLogin" element={<EditorLogin />} />
+                  <Route path="/Timetable" element={<EventsTimetable />} />
 
-                    {/* Membership */}
-                    <Route path="/login" element={<Login />}></Route>
-                    <Route path="/register" element={<Register />}></Route>
-                    <Route path="/forgot-password" element={<ForgotPassword />}></Route>
-                    <Route path="/reset-password/:username/:token" element={<ResetPassword />}></Route>
-                    <Route path="/personal-info" element={<PersonalInfo />}></Route>
-                    <Route path="/admin-personal-info" element={<AdminPersonalInfo />}></Route>
-                    <Route path="/my-booking" element={<MyBooking />}></Route>
-                    <Route path="/notifications" element={<Notifications />}></Route>
-                    <Route path="/admin-notification" element={<AdminNotification />}></Route>
-                    <Route path="/content" element={<Content />}></Route>
-                    <Route path="/register-jump" element={<RegisterJump />}></Route>
-                    <Route path="/reset-jump" element={<ResetJump />}></Route>
-                    <Route path="/personal-info-content" element={<PersonalInfoContent />}></Route>
-                    <Route path="/email-verification" element={<EmailVerification/>}></Route>
-                    <Route path="/admin-timetable" element={<TimeTable/>}></Route>
+                  {/* Membership */}
+                  <Route path="/login" element={<Login />}></Route>
+                  <Route path="/register" element={<Register />}></Route>
+                  <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+                  <Route path="/reset-password/:username/:token" element={<ResetPassword />}></Route>
+                  <Route path="/personal-info" element={<PersonalInfo />}></Route>
+                  <Route path="/admin-personal-info" element={<AdminPersonalInfo />}></Route>
+                  <Route path="/my-booking" element={<MyBooking />}></Route>
+                  <Route path="/notifications" element={<Notifications />}></Route>
+                  <Route path="/admin-notification" element={<AdminNotification />}></Route>
+                  <Route path="/content" element={<Content />}></Route>
+                  <Route path="/register-jump" element={<RegisterJump />}></Route>
+                  <Route path="/reset-jump" element={<ResetJump />}></Route>
+                  <Route path="/personal-info-content" element={<PersonalInfoContent />}></Route>
+                  <Route path="/email-verification" element={<EmailVerification/>}></Route>
+                  <Route path="/admin-timetable" element={<TimeTable/>}></Route>
+
+
+                  <Route path="/acfe_form" element={<ACFEForm />} />
+                  <Route path="/fee_for_service_form" element={<FeeForServiceForm />} />
               </Routes>
           </div>
       </BrowserRouter>  

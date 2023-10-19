@@ -66,7 +66,7 @@ function Home() {
     <div>
     <div ref={HomeRef} id="Home">
     <div id="content-only">    
-      <div className="Home"> 
+      <div className="Home">
         <UserMenu />
         <TitleLogo />
         <SocialMedia />
