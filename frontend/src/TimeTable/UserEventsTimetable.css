@@ -1,0 +1,12 @@
+.rowB {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    top: 100px;
+}
+  
+  
+.App-Timetable {
+    width: 100%;
+    height: 0;
+}
