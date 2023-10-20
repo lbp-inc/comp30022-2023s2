@@ -6,8 +6,9 @@ const transactionSchema = mongoose.Schema(
         // Possible values: cash at counter, card at counter, card online, etc.
         payment_method: { type: String, required: true },
 
-        // This associate transaction with a member, however can be empty if
+        // Records who **made** the payment, however can be empty if
         // the transaction is handled manually (say by a staff member)
+        // or the payment is made by a guest member (without an account)
         member_id: mongoose.Types.ObjectId,
 
         amount: { type: Number, required: true },
