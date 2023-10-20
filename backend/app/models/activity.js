@@ -1,37 +1,61 @@
-// app/models/activityModel.js
-
 import mongoose from "mongoose";
 
+// This describes an activity (can be course or event)
 const activitySchema = mongoose.Schema(
   {
+      // Title of activity
     name: {
       type: String,
       required: true
     },
+
+      // A short description, will be shown in "all activities" page
+      subtitle: {
+        type: String,
+          required: true
+      },
+
+      // Possible values: { course | event }
     activity_type: {
       type: String,
       required: true
     },
+
+      // Category labels, used for filtering
       labels: [String],
+
+      // A resource URI pointing to an image
     image: {
       type: String,
-      required: true
     },
+
+      // A longer description, will be shown in details page
     description: {
       type: String,
       required: true
     },
+
+      // Time and duration of the activity
     time: Date,
     duration: {
       type: Number,
       required: true
     },
-    address: {
+
+      // Location of the activity
+    location: {
       type: String,
       required: true
     },
+
+      // Cost of the activity, default to be 0 for free activity
     cost: Number,
-    users: [mongoose.Types.ObjectId],
+
+      // Max capacity of an activity, default to be no limit
+    max_capacity: Number,
+
+      // List of bookings, used to calculate availability
+    bookings: [mongoose.Types.ObjectId],
   },
   {
     timestamps: true,
