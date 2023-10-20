@@ -1,17 +1,18 @@
-// app/models/courseModel.js
+// app/models/activityModel.js
 
 import mongoose from "mongoose";
 
-const courseSchema = mongoose.Schema(
+const activitySchema = mongoose.Schema(
   {
     name: {
       type: String,
       required: true
     },
-    type: {
+    activity_type: {
       type: String,
       required: true
     },
+      labels: [String],
     image: {
       type: String,
       required: true
@@ -37,6 +38,6 @@ const courseSchema = mongoose.Schema(
   }
 );
 
-const Course = mongoose.model("Course", courseSchema);
+const Activity = mongoose.model("Activity", activitySchema);
 
-export default Course;
+export default Activity;
