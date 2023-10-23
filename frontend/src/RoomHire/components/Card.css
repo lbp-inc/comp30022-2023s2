@@ -1,0 +1,112 @@
+/* styles.css (or your CSS file) */
+.card-container {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+border: 30vh solid transparent;
+background-color: rgb(230, 237, 237);
+width: 20%; 
+margin: auto;
+padding: 20px;
+}
+
+.rh-card-group {
+display: flex;
+}
+
+.rh-card {
+border: 5px solid transparent !important; 
+border-radius: 20px !important; 
+width: 50% !important;
+margin: 10px !important;
+background-color: #FFFFFF !important;
+font-family: 'SF FONT bold' ;  
+}
+
+.card-image {
+max-width: 100%;
+max-height: 300px;
+text-align: center;
+align-items: center;
+height: 500px;
+object-fit: cover; 
+border-radius: 10px;
+}
+
+.card-text {
+text-align: center;
+font-size: 20px;
+margin-bottom: 90px;
+}
+
+.card-title {
+width: 100%;
+text-align: center;
+margin: 0 auto; /* Center horizontally */
+font-size: 30px;
+}
+
+.card-content {
+width: 100%;
+text-align: center;
+margin: 0 auto;
+padding: 0 20px; /* Add padding for spacing */
+}
+
+.card .card-btns {
+margin-top: 20px;
+margin-bottom: 20px;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+}
+
+.hero-btns {
+display: flex;
+justify-content: flex-end;
+align-items: center;
+flex-direction: column;
+}
+
+.hero-btns .btn {
+margin: 6px;
+}
+
+.btns{
+    background-color: #3b9da6 !important;
+    color: white !important;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px !important;
+}
+
+@media screen and (max-width: 1100px) {
+.rh-card-group {
+    justify-content: center !important; /* Center cards on smaller screens */
+    flex-direction: column !important;
+}
+
+.rh-card {
+    flex-basis: calc(50% - 20px) !important; /* Two cards per row on smaller screens */
+    width: 300px !important; /* Cards take full width */
+    margin: 5px 0 !important; /* Adjust spacing */
+}
+.card-title {
+    font-size: 1.5rem;
+}
+
+.card-image {
+    width: 300px;
+    height: 150vh;
+    object-fit: cover;
+}
+
+
+
+}
+  

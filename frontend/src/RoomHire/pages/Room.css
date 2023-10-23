@@ -1,0 +1,136 @@
+.room-head{
+    height: 200px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    object-fit: contain;
+    background-color: #3b9da6;
+    margin-top: 100px;
+    margin-bottom: 30px;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: row; /* Make the children align horizontally */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  background-color: #edf6ff;
+  padding: 30px;
+  width: 1500px;
+  margin: 0 auto;
+  border-radius: 80px;
+}
+
+.room-img {
+    width: 30%;
+    border-radius: 20px;
+}
+
+.room-head > h1{
+    font-size: 4em;
+    color: #ffaa48;
+}
+
+.room-subheading {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.img-title {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    font-size: 20px;
+    align-items: left;
+    justify-content: left;
+    padding-left: 290px;
+    padding-right: 100px;
+}
+
+.room-body{
+    font-size: 20px;
+    padding: 50px;
+    white-space: pre-wrap;
+    max-width: 700px;
+    align-items: right;
+    justify-content: left;
+    text-align: left;
+}
+
+.room-info{
+    font-size: 18px;
+    line-height: 20px;
+    white-space: pre-wrap;
+    max-width: 1000px;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    margin: 50px auto;
+}
+
+.room-timetable{
+    margin: 10px auto;
+    width: 1000px;
+    height: auto;
+    border: 5px solid transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 100px;
+}
+
+.room-timetable > h1{
+    font-size: 2.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #B2E5E4;
+    height: 15vh;
+    margin-top: auto;
+}
+
+@media screen and (min-width: 320px) and (max-width: 1300px) {
+
+    .room-head{
+        max-width: 1300px;
+    }
+
+    .room-head > h1{
+        font-size: 3em;
+    }
+
+    .info-container {
+        display: flex;
+        flex-direction: column;
+        max-width: 70%;
+    }
+
+    .room-img {
+        width: 100%;
+        text-align: center;
+        align-items: center;
+        object-fit: cover; /* Maintain aspect ratio and cover container */
+        border-radius: 30px;
+    }
+
+    .room-body{
+        font-size: 15px;
+    }
+
+    .room-info{
+        font-size: 15px;
+        max-width: 80%;
+    }
+
+    .room-timetable{
+        margin: 10px auto;
+        width: 90%;
+        height: auto;
+        border: transparent;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        font-family: Arial, sans-serif;  
+        margin-bottom: 30px;
+    }
+    
+}

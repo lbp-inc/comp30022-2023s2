@@ -1,0 +1,22 @@
+.chosen-date{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar-button{
+    display: flex;
+    background-color: #15ac9f !important;
+    margin: 20px !important;
+    color: white !important;
+}
+
+.disabled-date {
+    color: rgb(138, 7, 7) !important; /* Change this to your desired color */
+    cursor: not-allowed;
+    background-color: #15ac9f;
+}
+
+.react-calendar__tile--now.disabled-date {
+    cursor: initial;
+}
