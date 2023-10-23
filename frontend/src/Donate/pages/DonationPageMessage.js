@@ -5,6 +5,7 @@ import './DonationPageMessage.css'
 import 'font-awesome/css/font-awesome.min.css';
 import { useEffect } from 'react';
 import axios from 'axios';
+import Layout from '../../Layout';
 
 
 const checkmarkIconClass = 'custom-checkmark-icon';
@@ -44,6 +45,7 @@ function DonationPageMessage() {
 
   return (
     <>
+    <Layout>
     <div className='thanks-message'>
       {loading ? (
         <h1>Loading...</h1>
@@ -64,7 +66,7 @@ function DonationPageMessage() {
         </>
       )}
     </div>
-
+    </Layout>
     </>
   )
 }
