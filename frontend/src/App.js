@@ -28,6 +28,16 @@ import ResetJump from "./Membership/views/jump/reset-jump";
 import PersonalInfoContent from "./Membership/views/PersonalInfo/personal-info-content";
 import EmailVerification from "./Membership/views/Register/email-Verification";
 
+import RoomHireForm from './RoomHire/components/RoomHireForm';
+import Room1and2 from './RoomHire/pages/Room1and2';
+import Room3 from './RoomHire/pages/Room3';
+import Room4 from './RoomHire/pages/Room4';
+import Room5 from './RoomHire/pages/Room5';
+import Room6 from './RoomHire/pages/Room6';
+import RoomBookingSucceed from './RoomHire/components/RoomBookingSucceed';
+import Donate from './Donate/pages/Donate';
+import DonateForm from './Donate/components/DonateForm';
+
 function App() {
   return (
       <BrowserRouter>
@@ -60,6 +70,21 @@ function App() {
                     <Route path="/reset-jump" element={<ResetJump />}></Route>
                     <Route path="/personal-info-content" element={<PersonalInfoContent />}></Route>
                     <Route path="/email-verification" element={<EmailVerification/>}></Route>
+
+
+                    {/* Room Booking */}
+                    <Route path="/RoomHire" element={<RoomHire />} />
+                    <Route path="/RoomHireForm" element={<RoomHireForm />} />
+                    <Route path="/Room1and2" element={<Room1and2 />} />
+                    <Route path="/Room3" element={<Room3 />} />
+                    <Route path="/Room4" element={<Room4 />} />
+                    <Route path="/Room5" element={<Room5 />} />
+                    <Route path="/Room6" element={<Room6 />} />
+                    <Route path='/RoomBookingSucceed' element={<RoomBookingSucceed/>}/>
+
+                    {/* Donate */}
+                    <Route path='/Donate' element={<Donate/>} />
+                    <Route path="/DonateForm" element={<DonateForm />} />
               </Routes>
           </div>
       </BrowserRouter>  

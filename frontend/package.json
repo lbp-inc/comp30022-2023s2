@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
+    "@coreui/react": "^4.10.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fortawesome/fontawesome": "^1.1.8",
@@ -16,6 +17,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "airwallex-payment-elements": "^1.9.0",
     "animate.css": "^4.1.1",
     "antd": "^5.8.6",
     "axios": "^1.5.0",
@@ -31,6 +33,7 @@
     "moment": "^2.29.4",
     "mongoose": "^7.5.2",
     "react": "^18.2.0",
+    "react-calendar": "^4.6.1",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
@@ -38,6 +41,7 @@
     "react-responsive": "^9.0.2",
     "react-router-dom": "^6.16.0",
     "react-scripts": "^5.0.1",
+    "react-signature-canvas": "^1.0.6",
     "responsive": "^2.0.0",
     "serve": "^14.2.1",
     "styled-components": "^5.3.11",
@@ -45,8 +49,7 @@
     "swiper": "^10.2.0",
     "uuid": "^9.0.1",
     "web-vitals": "^2.1.4",
-    "zxcvbn": "^4.4.2",
-	"airwallex-payment-elements": "^1.9.0"
+    "zxcvbn": "^4.4.2"
   },
   "scripts": {
     "start": "react-scripts start",
