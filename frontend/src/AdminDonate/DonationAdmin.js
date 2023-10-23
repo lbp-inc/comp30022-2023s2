@@ -4,6 +4,7 @@ import './DonationAdmin.css'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Button } from '@mui/material';
+import Layout from '../Layout';
 
 function DonationAdmin() {
 
@@ -196,6 +197,7 @@ function DonationAdmin() {
 
   return (
     <>
+      <Layout>
       <div className='admin-head'>
         <h1>Donation</h1>
       </div>
@@ -249,6 +251,7 @@ function DonationAdmin() {
           </table>
         </div>
       </div>
+      </Layout>
     </>
   );
 }

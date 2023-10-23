@@ -18,6 +18,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import emitter from './eventBus';
 import { RoomTimetable } from './RoomTimetable';
+import Layout from '../Layout';
 
 function RoomBookingAdmin() {
 
@@ -142,6 +143,7 @@ function RoomBookingAdmin() {
 
     <>
 
+    <Layout>
     <div className='roombooking-head'> 
         <h1>Room Booking</h1>
     </div>
@@ -352,7 +354,7 @@ function RoomBookingAdmin() {
       <h2>List of Rejected Requests</h2>
        <DeclineList>{rejectedRequest}</DeclineList>
     </div>
-
+    </Layout>
     </>
     
     )
