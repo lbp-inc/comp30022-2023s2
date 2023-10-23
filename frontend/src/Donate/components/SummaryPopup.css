@@ -1,0 +1,37 @@
+.summary-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  ul {
+    text-align: left;
+    color: black;
+  }
+  
+  .summary-popup ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .summary-popup li {
+    margin-bottom: 10px;
+  }
+  
+  .summary-popup button {
+    background-color: #009da8;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .summary-popup button:hover {
+    background-color: #00737b;
+  }
+  

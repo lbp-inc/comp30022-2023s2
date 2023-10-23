@@ -37,6 +37,10 @@ import Room6 from './RoomHire/pages/Room6';
 import RoomBookingSucceed from './RoomHire/components/RoomBookingSucceed';
 import Donate from './Donate/pages/Donate';
 import DonateForm from './Donate/components/DonateForm';
+import RoomBookingAdmin from './AdminRoomBooking/RoomBookingAdmin';
+import DonationAdmin from './AdminDonate/DonationAdmin';
+import DonationPageMessage from './Donate/pages/DonationPageMessage';
+
 
 function App() {
   return (
@@ -81,10 +85,15 @@ function App() {
                     <Route path="/Room5" element={<Room5 />} />
                     <Route path="/Room6" element={<Room6 />} />
                     <Route path='/RoomBookingSucceed' element={<RoomBookingSucceed/>}/>
-
+                    {/* Room Booking Admin*/}
+                    <Route path='/RoomBookingAdmin' element={<RoomBookingAdmin/>}/>
                     {/* Donate */}
                     <Route path='/Donate' element={<Donate/>} />
                     <Route path="/DonateForm" element={<DonateForm />} />
+                    <Route path='/DonationPageMessage' element={<DonationPageMessage/>}/>
+                    {/* Donate Admin */}
+                    <Route path='/DonationAdmin' element={<DonationAdmin/>}/>
+                    
               </Routes>
           </div>
       </BrowserRouter>  

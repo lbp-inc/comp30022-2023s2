@@ -1,0 +1,7 @@
+.donate-form{
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: aliceblue;
+}

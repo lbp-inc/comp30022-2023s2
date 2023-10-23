@@ -46,6 +46,7 @@ function Navbar() {
             <Link to="/Events">EVENTS</Link>
             <Link to="/Getinvolved">GET INVOLVED</Link>
             <Link to="/RoomHire">ROOM HIRE</Link>
+            <Link to="/Donate">DONATE</Link>
             <Link to="/Contact">CONTACT</Link>
           </div>
           <table>
@@ -79,6 +80,7 @@ function Navbar() {
                       <td><Link to="/Events">EVENTS</Link></td>
                       <td><Link to="/Getinvolved">GETINVOLVED</Link></td>
                       <td><Link to="/RoomHire">ROOMHIRE</Link></td>
+                      <td><Link to="/Donate">DONATE</Link></td>
                       <td><Link to="/Contact">CONTACT</Link></td>
                   </tr>
           </table>

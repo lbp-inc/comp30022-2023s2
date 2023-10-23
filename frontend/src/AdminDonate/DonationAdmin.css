@@ -1,0 +1,136 @@
+.admin-head{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    object-fit: contain;
+    background-color: #3b9da6;
+    margin-bottom: 30px;
+    width: 100%;
+  }
+  
+  .admin-head h1 {
+    font-size: 70px;
+    font-family: 'SF FONT bold', Arial, sans-serif;
+    color: #ffaa48;
+  }
+  
+  .donate-list-section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 100px;
+  }
+  
+  .donate-list-section h2{
+    display: flex;
+    font-family: 'SF FONT bold', Arial, sans-serif;
+    align-items: center;
+  }
+  
+  .donate-table {
+      margin-top: 20px;
+      display: flex;
+      overflow-y: auto;
+      max-height: 50vh;
+      border: 1px solid #ccc;
+    }
+    
+    .donate-table th,
+    .donate-table td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-family: sans-serif;
+      text-align: left;
+      box-sizing: border-box;
+    }
+    
+    .donate-table table th {
+      background-color: #009da8;
+      font-family: 'SF FONT bold', Arial, sans-serif;
+      color: #fff;
+    }
+  
+    .filter-section {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      margin-left: 10%;
+    }
+    
+    .filter-section label {
+      font-family: 'SF FONT bold', Arial, sans-serif;
+      margin-right: 10px;
+    }
+    
+    .filter-section input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      font-family: sans-serif;
+      font-size: 14px;
+      margin: 10px;
+    }
+    
+    .filter-section input[type='month'] {
+      width: 10%; /* Adjust the width as needed */
+    }
+  
+    .react-datepicker__day.has-donation {
+      border-bottom: 2px solid #ffaa48;
+    }
+  
+    .filter-reset-btn{
+      background-color: #009da8 !important;
+      color: white !important;
+    }
+  
+    .table-head{
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    
+    
+    
+    /* Responsive styling */
+    @media screen and (max-width: 1300px) {
+  
+  
+      .donate-table{
+        max-width: 80%;
+        overflow-x: auto;
+      }
+  
+      .donate-table th,
+      .donate-table td {
+        font-size: 14px;
+        padding: 8px;
+      }
+  
+      .filter-section{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 5%;
+      }
+  
+      .filter-reset-btn{
+        background-color: transparent !important;
+        color: #009da8 !important;
+      }
+  
+      .filter-section label {
+        margin-right: 0px;
+      }
+  
+      .filter-section input[type='month'] {
+        width: 50%; /* Adjust the width as needed */
+      }
+      
+  
+  
+    }

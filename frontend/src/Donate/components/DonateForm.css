@@ -1,0 +1,95 @@
+/* Background styling */
+.background-something {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #009da8, #07f2ff, #fffc60);
+  font-family: 'Quicksand', sans-serif; /* Custom font */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Main container */
+.donate-form-container {
+  background-color: #fff; /* White background */
+  color: #009da8; /* Font color */
+  padding: 15px;
+  font-family: 'SF FONT bold';  
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  width: 40%; /* Adjust the width as needed */
+  margin: 0 auto; /* Center the form horizontally */
+}
+
+/* Form styling */
+form {
+  padding: 30px;
+  margin: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 60%;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.donate-button {
+  width: 40%;
+  color: #025c61 !important;
+  background-color: white !important;
+}
+
+donate-button:hover {
+  background-color: #025c61;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .donate-form-container {
+    padding: 10px;
+    width: 80%;
+  }
+  
+  /* Form styling */
+  form {
+    margin: 5px;
+  }
+}
+
+@media (min-width:768px) and (max-width: 912px) {
+  .donate-form-container {
+    padding: 10px;
+    width: 60%;
+  }
+  
+  /* Form styling */
+  form {
+    margin: 5px;
+  }
+}
