@@ -164,7 +164,7 @@ function RoomHireForm() {
                             <input
                                 type="text"
                                 name="eventDate"
-                                value={new Date(inputs.eventDate).toDateString()}
+                                value={new Date(localStorage.getItem("selectedDate")).toDateString()}
                                 readOnly
                                 required
                             />
