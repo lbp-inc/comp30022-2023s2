@@ -419,4 +419,18 @@ form {
       width: 25%;
     }
   }
+
+  @media (max-width:425px) {
+    form {
+      background-color: #009da8;
+      color: rgb(255, 255, 255);
+      width: 90%;
+      text-align: center;
+      line-height: 3;
+    }
+
+    .sigCanvas{
+      width: 100%;
+    }
+  }
   
