@@ -25,7 +25,7 @@ function DonationPageMessage() {
             id: idParam
           };
 
-        axios.post('http://127.0.0.1:3001/donations/update', postData)
+        axios.post('http://localhost:3001/api/donations/update', postData)
         .then(response => {
             // Handle the success response here
             if (response.status == "SUCCEEDED") {
