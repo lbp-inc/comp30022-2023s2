@@ -137,4 +137,4 @@ async function initDb(req, res) {
     res.send(`Database has been initialised. (${numDeleted} record${numDeleted > 1 ? "s were" : " was"} removed.)`).status(200);
 }
 
-export { getActivities, getActivity, addActivity, initDb, getDangerToken, dangerToken };
+export { getActivities, getActivity, addActivity, initDb, getDangerToken };
