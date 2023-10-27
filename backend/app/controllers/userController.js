@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 const JWT_SECRET = "liTq9vasHanieW0Sb8ClegPSs6dZV05xHLKSiEZhPUC4KPSurj0pmJJs66L8biTNSvTxM11rUacxXX0P23clrB8vmC7i0e0RMVc";
 
 import Message from "../models/messageModel.js";
-import Course from "../models/courseModel.js";
+import Course from "../models/activity.js";
 
 /**
  * @async

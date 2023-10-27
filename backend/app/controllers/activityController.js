@@ -1,18 +1,18 @@
-import Course from "../models/courseModel.js"
+import Activity from "../models/activity.js"
 import mongoose from "mongoose";
 
 // Get all courses from database and return as json
 async function getActivities(req, res) {
-    res.send(await Course.find()).status(200);
+    res.send(await Activity.find()).status(200);
 }
 
 // Get a specific course by id
 async function getActivity(req, res) {
     try {
         let query = {_id: new mongoose.Types.ObjectId(req.params.id)};
-        let result = await Course.find(query);
+        let result = await Activity.find(query);
 
-        if (!result) res.send("Course not found").status(404);
+        if (!result) res.send("Activity not found").status(404);
         else res.send(result).status(200);
     }
     catch (e) {
@@ -25,7 +25,7 @@ async function getActivity(req, res) {
 
 async function addActivity(req, res) {
     console.log(req.body);
-    let newCourse = new Course({
+    let activity = new Activity({
         name: req.body.name,
         type: req.body.type,
         image: req.body.image,
@@ -36,13 +36,13 @@ async function addActivity(req, res) {
         cost: req.body.cost,
         users: req.body.users,
     });
-    let result = await newCourse.save();
+    let result = await activity.save();
     res.send(result).status(204);
 }
 
 async function initDb(req, res) {
     console.log("Hahahaha database has been cleaned!");
-    let result = await Course.deleteMany();
+    let result = await Activity.deleteMany();
     res.send(result).status(200);
 }
 
