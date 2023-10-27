@@ -2,12 +2,12 @@ import Course from "../models/courseModel.js"
 import mongoose from "mongoose";
 
 // Get all courses from database and return as json
-async function getCourses(req, res) {
+async function getActivities(req, res) {
     res.send(await Course.find()).status(200);
 }
 
 // Get a specific course by id
-async function getCourse(req, res) {
+async function getActivity(req, res) {
     try {
         let query = {_id: new mongoose.Types.ObjectId(req.params.id)};
         let result = await Course.find(query);
@@ -23,7 +23,7 @@ async function getCourse(req, res) {
 
 }
 
-async function addCourse(req, res) {
+async function addActivity(req, res) {
     console.log(req.body);
     let newCourse = new Course({
         name: req.body.name,
@@ -46,4 +46,4 @@ async function initDb(req, res) {
     res.send(result).status(200);
 }
 
-export { getCourses, getCourse, addCourse, initDb };
+export { getActivities, getActivity, addActivity, initDb };
