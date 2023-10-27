@@ -4,6 +4,7 @@ From: Event detail page
 Jump to: Success page / Cancel page / Fail page
 */
 import React, { useState } from 'react';
+import SignatureCanvas from 'react-signature-canvas'
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Accordion from 'react-bootstrap/Accordion';
@@ -205,7 +206,8 @@ const FeeForServiceForm = () => {
 
                     {/* Signature */}
                     <FloatingLabel controlId="FFS.Signature" label="Signature">
-                        <Form.Control type="signature" placeholder="" />
+                        <SignatureCanvas penColor='blue'
+                                         canvasProps={{width: 500, height: 200, className: 'sigCanvas'}} />
                     </FloatingLabel>
                     
                     <Form.Text id="PaymentNotice" muted>
