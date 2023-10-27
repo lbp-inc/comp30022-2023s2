@@ -43,7 +43,7 @@ app.use(cors());
 // Registering users related API routes.
 app.use("/api/users", userRoutes);
 app.use("/api/events", eventRoutes);
-app.use("/api/activitiess", activitiesRoutes);
+app.use("/api/activities", activitiesRoutes);
 
 // Default route - sanity check route.
 app.get("/", (req, res) => res.send("Server is ready"));
