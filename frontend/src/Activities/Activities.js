@@ -137,7 +137,7 @@ function Activities() {
                         Close
                     </Button>
                     <Button variant="primary" >
-                        Next >
+                        Next &gt;
                     </Button>
                 </Modal.Footer>
             </Modal>
