@@ -86,7 +86,7 @@ const AdminPersonalInfo = () => {
                         <List className="personal-info-list">
                           <VirtualList
                             data={filteredData}
-                            height={isDesktop ? 550 : 450}
+                            height={isDesktop ? 530 : 430}
                             itemHeight={47}
                             itemKey={(item) => item.email}
                           >

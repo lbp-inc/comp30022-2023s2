@@ -66,7 +66,7 @@ function App() {
                   <Route path="/content/:username" element={<PersonalInfoContent />}></Route>
                   <Route path="/register-jump" element={<RegisterJump />}></Route>
                   <Route path="/reset-jump" element={<ResetJump />}></Route>
-                  <Route path="/notification-content" element={<NotificationContent />}></Route>
+                  <Route path="/notification-content/:notification" element={<NotificationContent />}></Route>
                   <Route path="/email-verification" element={<EmailVerification/>}></Route>
                   <Route path="/admin-timetable" element={<TimeTable/>}></Route>
 

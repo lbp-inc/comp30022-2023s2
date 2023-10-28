@@ -61,22 +61,29 @@ const AdminNotification = () => {
     const onFinish = async (values) => {
       console.log(values);
       try {
+        if (values["isEmail"] === "on") {
+          values["isEmail"] = true
+        } else {
+          values["isEmail"] = false
+        }
+  
         const dataToSend = {
             subject: values["subject"],
             text: values["text"],
             isEmail: values["isEmail"],
-            recipients: values["recipients"],
+            groups: values["recipients"],
             token: localStorage.getItem('token'), // username
-            // auth_token: localStorage.getItem('auth_token'), // If it is admin 
         };
+  
         console.log(dataToSend);
         // Send notification values to backend for sending notification
         const response = await fetch("http://localhost:8000/api/users/send-message", {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                Accept:'application/json',
-                'Access-Control-Allow-Origin':'*',
+              'Content-Type': 'application/json',
+              Accept:'application/json',
+              'Access-Control-Allow-Origin':'*',
+              'Authorization': localStorage.getItem('token'),
             },
             body: JSON.stringify(dataToSend),
         });
