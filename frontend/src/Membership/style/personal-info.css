@@ -190,11 +190,11 @@
     }
 }
 
-/* .avatar {
+.avatar {
     display: flex;
     justify-content: center;
     align-items: center;
-} */
+}
 
 .save-button {
     background-color: #368771;
