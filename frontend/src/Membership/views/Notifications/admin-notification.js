@@ -132,7 +132,7 @@ const AdminNotification = () => {
           {contextHolder}
             <div className="membership-card">
               {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>}
-                <Card className="content">
+                <Card className="membership-content-main">
                   <Form
                     name="admin-notification"
                     onFinish={onFinish}

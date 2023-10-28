@@ -71,7 +71,7 @@ const Notifications = () => {
                             }}
                             renderItem={(item) => (
                                 <List.Item>
-                                    <Link to='/content'>{item}</Link>
+                                    <Link to='/notification-content'>{item}</Link>
                                 </List.Item>
                             )}
                         />
