@@ -43,6 +43,7 @@ const userSchema = mongoose.Schema(
     emailVerificationCode: {
       type: String,
     },
+    messages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Notification" }],
   },
   {
     timestamps: true,

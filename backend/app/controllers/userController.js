@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 import asyncHandler from "express-async-handler";
 import UserModel from "../models/userModel.js";
 
@@ -5,8 +7,8 @@ import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
 const JWT_SECRET = "liTq9vasHanieW0Sb8ClegPSs6dZV05xHLKSiEZhPUC4KPSurj0pmJJs66L8biTNSvTxM11rUacxXX0P23clrB8vmC7i0e0RMVc";
 
-import Message from "../models/messageModel.js";
 import Course from "../models/courseModel.js";
+import Notification from "../models/notificationModel.js";
 
 /**
  * @async
@@ -17,7 +19,7 @@ import Course from "../models/courseModel.js";
  * @returns {Promise<void>}
  */
 const authUser = asyncHandler(async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, remember } = req.body;
   const usernameOrEmail = username;
   try {
     // find user
@@ -29,11 +31,19 @@ const authUser = asyncHandler(async (req, res) => {
         res.status(201).json({ message: "Email has not verified" });
       } else {
         if (await userModel.matchPassword(password)) {
-          const token = jwt.sign({ _id: userModel._id }, JWT_SECRET);
-          const auth_token = jwt.sign({ role: userModel.role }, JWT_SECRET);
+          if (remember) {
+            const token = jwt.sign({ _id: userModel._id }, JWT_SECRET, { expiresIn: "14d" });
+            const auth_token = jwt.sign({ role: userModel.role }, JWT_SECRET, { expiresIn: "14d" });
+            res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "strict" });
+            res.status(200).json({ message: "Login successful", data: { token, auth_token, role: userModel.role } });
+          } else {
+            const token = jwt.sign({ _id: userModel._id }, JWT_SECRET, { expiresIn: "2h" });
+            const auth_token = jwt.sign({ role: userModel.role }, JWT_SECRET, { expiresIn: "2h" });
+            res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "strict" });
+            res.status(200).json({ message: "Login successful", data: { token, auth_token, role: userModel.role } });
+          }
+
           //const token = jwt.sign({_id: userModel._id}, JWT_SECRECT);
-          res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "strict" });
-          res.status(200).json({ message: "Login successful", data: { token, auth_token, role: userModel.role } });
         } else {
           res.status(401).json({ message: "Unauthorized - Invalid credentials" });
         }
@@ -400,8 +410,8 @@ const getUserGroups = asyncHandler(async (req, res) => {
  * @returns {Promise<void>}
  */
 const getUserListByGroup = asyncHandler(async (req, res) => {
-  const { groups } = req.body;
-  const courses = await Course.find({ course_name: { $in: groups } });
+  const { groupNames } = req.body;
+  const courses = await Course.find({ course_name: { $in: groupNames } });
   if (!courses) {
     res.status(404);
     throw new Error("Course not found");
@@ -434,72 +444,85 @@ const getUserListByGroup = asyncHandler(async (req, res) => {
  * @returns {Promise<void>}
  */
 const sendMessage = asyncHandler(async (req, res) => {
-  const { subject, text, isEmail, recipients, token } = req.body;
-  const decoded = jwt.verify(token, JWT_SECRET);
-  const userModel = await UserModel.findOne({ username: decoded.username });
-  // if (!userModel || userModel.role !== "admin") {
-  //   res.status(403).json({ error: "Admin permission required!" });
-  // }
+  const { subject, text, isEmail, groups, token } = req.body;
 
-  // get the list of users from all the courses
-  const courses = await Course.find({ course_name: { $in: recipients } });
-  if (!courses) {
-    res.status(404);
-    throw new Error("Course not found");
-  }
+  let recipients = [];
+  for (let i = 0; i < groups.length; i++) {
+    const course = await Course.findOne({ course_name: groups[i] });
+    if (!course) {
+      return res.status(404).json({ message: "Course not found" });
+    }
 
-  let userList = [];
-  courses.forEach((course) => {
+    let userList = [];
     course.user_list.forEach((username) => {
       if (!userList.includes(username)) {
         userList.push(username);
       }
     });
-  });
 
-  const users = await UserModel.find({ username: { $in: userList } }, { username: 1, email: 1, _id: 0 });
-  if (!users) {
-    res.status(404);
-    throw new Error("User not found");
+    const userModel = await UserModel.find({ username: { $in: userList } }, { username: 1, email: 1, _id: 0 });
+    if (!userModel) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Only add the user to recipients array if they're not already included
+    userModel.forEach((user) => {
+      if (!recipients.some((recipient) => recipient.email === user.email)) {
+        recipients.push(user);
+      }
+    });
   }
 
-  // save the message to the database
-  const message = await Message.create({
+  // Save the message to the database
+  const notification = await Notification.create({
     title: subject,
     content: text,
-    group_list: recipients,
-    user_list: users,
     isEmail: isEmail,
+    user_list: recipients.map((user) => ({
+      username: user.username,
+      email: user.email,
+      isRead: false,
+    })),
   });
 
-  if (message) {
-    res.status(201).json(message);
+  if (notification) {
+    // Add the new message to each recipient's list of messages
+    recipients.forEach(async (recipient) => {
+      await UserModel.updateOne({ username: recipient.username }, { $push: { messages: notification._id } });
+    });
+
+    // Send email to all recipients if isEmail flag is set
+    if (isEmail) {
+      var transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "rui487165@gmail.com",
+          pass: "rtdbgkyvylaziyzw",
+        },
+      });
+
+      var mailOptions = {
+        from: "rui487165@gmail.com",
+        subject: subject,
+        text: text,
+      };
+
+      recipients.forEach((recipient) => {
+        mailOptions.to = recipient.email;
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log("Email sent: " + info.response);
+          }
+        });
+      });
+    }
+    res.status(201).json(notification);
   } else {
     res.status(500);
     throw new Error("Error sending the message");
   }
-});
-
-/**
- * @async
- * @function getUnreadMsgNum
- * @description Get number of unread messages for a user
- * @param {object} req - Express request object
- * @param {object} res - Express response object
- * @returns {Promise<void>}
- */
-const getUnreadMsgNum = asyncHandler(async (req, res) => {
-  const user = req.user;
-  const messages = await Message.find({ "user_list.username": user.username });
-  let unreadNum = 0;
-  messages.forEach((msg) => {
-    msg.user_list
-      .filter((u) => u.username == user.username && !u.isRead)
-      .forEach((u) => {
-        unreadNum++;
-      });
-  });
-  res.json({ unreadNum });
 });
 
 /**
@@ -511,16 +534,131 @@ const getUnreadMsgNum = asyncHandler(async (req, res) => {
  * @returns {Promise<void>}
  */
 const getMsgList = asyncHandler(async (req, res) => {
-  const user = req.user;
-  const messages = await Message.find({ "user_list.username": user.username });
-  const msgsForUser = messages.map((msg) => {
-    return {
-      title: msg.title,
-      content: msg.content,
-      isRead: msg.user_list.find((u) => u.username == user.username).isRead,
-    };
-  });
-  res.json(msgsForUser);
+  const token = req.headers.authorization;
+
+  if (!token) return res.status(403).json({ error: "No token provided" });
+
+  try {
+    const verified = jwt.verify(token, JWT_SECRET);
+
+    const user = await UserModel.findById(verified._id).populate("messages", "-user_list");
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    return res.status(200).json(user.messages);
+  } catch (error) {
+    console.error(error); // Log the error to console
+
+    if (error instanceof jwt.JsonWebTokenError) {
+      return res.status(401).json({ error: "Invalid token" });
+    }
+
+    return res.status(500).json({ error: error.message }); // Return detailed error message
+  }
 });
 
-export { authUser, registerUser, logoutUser, getUserProfile, updateUserProfile, forgetPassword, resetPassword, emailVerify, getUserGroups, getUserListByGroup, sendMessage, getUnreadMsgNum, getMsgList, getrole, emailCodeMatch };
+/**
+ * @async
+ * @function getSingleMsg
+ * @description Fetch a single message by its ID
+ * @param {object} req - Express request object, should contain the message ID in the route parameters
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
+const getSingleMsg = asyncHandler(async (req, res) => {
+  try {
+    const msgId = req.params.msg_id;
+
+    if (!mongoose.Types.ObjectId.isValid(msgId)) {
+      return res.status(400).json({ error: "Invalid message ID" });
+    }
+
+    const message = await Notification.findById(msgId);
+
+    if (!message) {
+      return res.status(404).json({ error: "Message not found" });
+    }
+
+    return res.status(200).json(message);
+  } catch (error) {
+    console.error(error); // Log the error to console
+    return res.status(500).json({ error: error.message }); // Return detailed error message
+  }
+});
+
+/**
+ * @async
+ * @function getUsers
+ * @description Get registration infomation of all users
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
+const getUsers = asyncHandler(async (req, res) => {
+  const token = req.body.token;
+  try {
+    const verified = jwt.verify(token, JWT_SECRET);
+    const userModel = await UserModel.findOne({ _id: verified._id });
+
+    if (userModel && userModel.role === "admin") {
+      const allUsers = await UserModel.find({}, "username email");
+      const userList = allUsers.map((user) => ({ username: user.username, email: user.email }));
+      res.status(200).json({
+        message: "All users",
+        data: userList,
+      });
+    } else {
+      res.status(403).json({ message: "Permission Denied" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "System error, please try again" });
+  }
+});
+
+/**
+ * @async
+ * @function getUserInfo
+ * @description Get the profile of an user, requires jwt token in request body, using email or username for accessing the profile
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
+const getUserInfo = asyncHandler(async (req, res) => {
+  const token = req.body.token;
+  const { username } = req.body;
+
+  try {
+    const verified = jwt.verify(token, JWT_SECRET);
+    const userModel = await UserModel.findOne({ _id: verified._id });
+
+    if (userModel && userModel.role === "admin") {
+      const userInfo = await UserModel.findOne({ username });
+      if (userInfo) {
+        res.status(200).json({
+          message: "User Information",
+          data: {
+            username: userInfo.username,
+            name: userInfo.name,
+            gender: userInfo.gender,
+            birthday: userInfo.birthday,
+            email: userInfo.email,
+            phone: userInfo.phone,
+          },
+          role: userInfo.role,
+        });
+      } else {
+        res.status(404).json({ message: "User Not Found" });
+      }
+    } else {
+      res.status(403).json({ message: "Permission Denied" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "System error, please try again" });
+  }
+});
+
+export { authUser, registerUser, logoutUser, getUserProfile, updateUserProfile, forgetPassword, resetPassword, emailVerify, getUserGroups, getUserListByGroup, sendMessage, getMsgList, getrole, emailCodeMatch, getSingleMsg, getUsers, getUserInfo };
