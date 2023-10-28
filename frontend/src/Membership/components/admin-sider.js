@@ -31,6 +31,10 @@ const AdminSider = () => {
                     console.log("Fetch role successful")
                     console.log(responseData["role"])
                     console.log(role)
+                } else if (response.status===500) {
+                    console.log("Login token out of time")
+                    window.location.href = "/login";
+                    localStorage.setItem('outOftime', "true")
                 } else {
                     // Fetch failed
                     console.log("Fetch role failed")
