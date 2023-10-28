@@ -1,12 +1,13 @@
 import { Card, Form, Input, Button, Checkbox, message} from 'antd'
 import '../../style/login.css'
 import { Link } from 'react-router-dom';
-import {enUS} from '../../locales/en-us'
-
+import { useTranslation } from 'react-i18next';
 import Layout from '../../../Layout';
 
 // This component provides a login interface
 const Login = () => {
+    const { t } = useTranslation();
+
     const [messageApi, contextHolder] = message.useMessage();
 
     // Send login request to backend
@@ -58,26 +59,14 @@ const Login = () => {
         }
     };
 
-    // const errorUsername = () => {
-    //     messageApi.open({
-    //       type: 'error',
-    //       content: enUS.alert_message.username_not_exist,
-    //     });
-    // };
+
     const errorLogin = () => {
         messageApi.open({
           type: 'error',
-          content: enUS.alert_message.login_alert,
+          content: t('alert_message_login_alert'),
         });
     };
 
-    // const errorPassword = () => {
-    //     messageApi.open({
-    //       type: 'error',
-    //       content: enUS.alert_message.password_incorrect,
-    //     });
-    // };
-    
 
     return (
         <Layout>
@@ -97,39 +86,39 @@ const Login = () => {
                     {/* Username form*/}
                     <Form.Item
                         name="username"
-                        label={enUS.form_label.username}
+                        label={t('form_label_username')}
                         rules={[
                             {
                             required: true,
-                            message: enUS.form_message.username,
+                            message: t('form_message_username'),
                             },
                         ]}
                     >
-                        <Input size="large" placeholder={enUS.input_placeholder.username}/>
+                        <Input size="large" placeholder={t('input_placeholder_username')}/>
                     </Form.Item>
                      
                     {/* Password form*/}
                     <Form.Item
                         name="password"
-                        label={enUS.form_label.password}
+                        label={t('form_label_password')}
                         rules={[
                             {
                             required: true,
-                            message: enUS.form_message.password,
+                            message: t('form_message_password'),
                             },
                         ]}
                     >
-                        <Input.Password size="large" placeholder={enUS.input_placeholder.password} autoComplete="password"/>
+                        <Input.Password size="large" placeholder={t('input_placeholder_password')} autoComplete="password"/>
                     </Form.Item>
                     
                     {/* Remember me and Forgot password*/}
                     <Form.Item>
                         <Form.Item name="remember" valuePropName="checked" noStyle>
-                            <Checkbox>{enUS.general.remember_me}</Checkbox>
+                            <Checkbox>{t('general_remember_me')}</Checkbox>
                         </Form.Item>
 
                         <a className="login-form-forgot" href="/forgot-password">
-                            {enUS.link.forgot_password}
+                            {t('link_forgot_password')}
                         </a>
                     </Form.Item>
                     
@@ -137,7 +126,7 @@ const Login = () => {
                     <Form.Item>
                         {/* <Link to="/personal-info"> */}
                             <Button type="primary" htmlType="submit" size="large" block className="button">
-                                {enUS.buttons.login}
+                                {t('button_login')}
                             </Button>
                         {/* </Link> */}
                     </Form.Item>
@@ -146,7 +135,7 @@ const Login = () => {
                     <Form.Item>
                         <Link to="/register">
                             <Button type="primary" htmlType="submit" size="large" block className="button">
-                                {enUS.buttons.register}
+                                {t('button_register')}
                             </Button>
                         </Link>
                     </Form.Item>

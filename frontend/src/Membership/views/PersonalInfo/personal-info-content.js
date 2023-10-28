@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import AdminSider from "../../components/admin-sider"
 import { Button, Card } from 'antd';
-import { enUS } from "../../locales/en-us";
+import { useTranslation } from 'react-i18next';
 import AdminDrawerSider from "../../components/admin-drawer-sider";
 import { useMediaQuery } from 'react-responsive';
 
@@ -9,6 +9,8 @@ import Layout from '../../../Layout';
 
 const PersonalInfoContent = () => {
     const isDesktop = useMediaQuery({ minWidth: 768 });
+
+    const { t } = useTranslation();
     
     return (
         <Layout>
@@ -18,7 +20,7 @@ const PersonalInfoContent = () => {
                 {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>}
                 <Card className="membership-content-main">
                     <Card className="list-container">
-                        <Link to='/admin-personal-info'><Button>{enUS.buttons.back}</Button></Link>
+                        <Link to='/admin-personal-info'><Button>{t('button_back')}</Button></Link>
                     </Card>
                 </Card>
             </div>
