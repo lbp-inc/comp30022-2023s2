@@ -109,7 +109,7 @@ const PersonalInfo = () => {
             <div className="membership-card">
                 {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>}
 
-                <Card className="content">
+                <Card className="membership-content-main">
                     <div className="personal-content">
                         <div className="avatar">
                             <Avatar size={64} icon={<UserOutlined />}/>

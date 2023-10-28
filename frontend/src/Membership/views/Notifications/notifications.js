@@ -32,7 +32,7 @@ const Notifications = () => {
         <div className="membership">
             <div className="membership-card">
             {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>}
-                <Card className="content">
+                <Card className="membership-content-main">
                     <Card className="list-container">
                         <List
                             dataSource={data}

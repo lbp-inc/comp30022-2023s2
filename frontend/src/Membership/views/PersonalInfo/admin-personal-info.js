@@ -117,7 +117,7 @@ const AdminPersonalInfo = () => {
             <div className="membership-card">
               {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>}
             
-                <Card className="content">
+                <Card className="membership-content-main">
                     <Space
                     style={{
                     width: '100%',
