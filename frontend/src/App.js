@@ -63,7 +63,7 @@ function App() {
                   <Route path="/my-booking" element={<MyBooking />}></Route>
                   <Route path="/notifications" element={<Notifications />}></Route>
                   <Route path="/admin-notification" element={<AdminNotification />}></Route>
-                  <Route path="/content" element={<Content />}></Route>
+                  <Route path="/content/:username" element={<Content />}></Route>
                   <Route path="/register-jump" element={<RegisterJump />}></Route>
                   <Route path="/reset-jump" element={<ResetJump />}></Route>
                   <Route path="/personal-info-content" element={<PersonalInfoContent />}></Route>

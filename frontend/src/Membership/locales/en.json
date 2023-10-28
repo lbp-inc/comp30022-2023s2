@@ -80,6 +80,9 @@
     "alert_message_error_email": "Email verified fail! Please check your verification code again.",
     "alert_message_success_email": "Email verified successfully.",
     "alert_message_network_error": "Internal Server Error, please try again later.",
+    "alert_message_notification_success": "Notification sent successfully",
+    "alert_message_notification_unauthorized": "Unauthorized user",
+    "alert_message_notification_failed": "Notification failed to send",
 
     "message_update_s": "Personal information updated successfully",
 

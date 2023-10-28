@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import AdminSider from "../../components/admin-sider"
 import AdminDrawerSider from "../../components/admin-drawer-sider";
-
+import { useEffect } from "react";
 import Layout from '../../../Layout';
 
 // Test data
@@ -25,6 +25,35 @@ const data = [
 // This component will display all notifications
 const Notifications = () => {
     const isDesktop = useMediaQuery({ minWidth: 768 });
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+    
+        const fetchUserNotifications = async () => {
+          try {
+            // Send a request to obtain user notifications
+            const response = await fetch("http://localhost:8000/api/users/get-msg-list", {
+              method: "GET",
+              headers: {
+                'Authorization': token,
+              },
+            });
+            const UserNotifications = await response.json();
+            console.log(UserNotifications);
+            if (response.ok) {
+              // Fetch user notifications
+    
+              console.log("Fetch user notifications successful");
+            } else {
+              // Fetch failed
+              console.log("Fetch user notifications failed");
+            }
+          } catch (error) {
+            console.error("Fetch user notifications error:", error);
+          }
+        };
+        fetchUserNotifications();
+    }, []);
 
     return (
         <Layout>

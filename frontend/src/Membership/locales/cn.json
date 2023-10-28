@@ -80,6 +80,9 @@
     "alert_message_error_email": "邮箱验证失败，请确认你的验证码是否正确",
     "alert_message_success_email": "邮箱验证成功",
     "alert_message_network_error": "网络错误，请稍后重试",
+    "alert_message_notification_success": "通知发送成功",
+    "alert_message_notification_unauthorized": "权限不足",
+    "alert_message_notification_failed": "通知发送失败",
 
     "message_update_s": "个人信息更新成功",
 
