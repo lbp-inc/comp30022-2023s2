@@ -15,7 +15,7 @@ const TimeTable = () => {
         <div className="membership">
             <div className="membership-card">
                 {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>}
-                <Card className="content">
+                <Card className="membership-content-main">
                     <EventsTimetable />
                 </Card>
             </div>
