@@ -76,7 +76,7 @@ const NotificationContent = () => {
                             <div class="text-date">{transDate(notification_content['createdAt'])}</div>
                             <TextArea
                                 className="textarea"
-                                rows={isDesktop ? 22 : 18}
+                                rows={isDesktop ? 21 : 16}
                                 style = {{resize: "none", marginBottom: "10px"} }
                                 readOnly
                                 value={notification_content['content']}
