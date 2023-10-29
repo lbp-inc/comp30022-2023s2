@@ -168,7 +168,7 @@ const AdminNotification = () => {
                     <Form.Item
                       name="text"
                     >
-                      <TextArea rows={15} style = {{resize: "none"}}/> 
+                      <TextArea rows={isDesktop ? 18 : 14} style = {{resize: "none"}}/> 
                     </Form.Item>
 
                     <Form.Item

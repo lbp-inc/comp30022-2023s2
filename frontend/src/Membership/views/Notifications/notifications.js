@@ -28,7 +28,7 @@ const Notifications = () => {
           console.log(UserNotifications);
           if (response.ok) {
             // Fetch user notifications
-            setNotificationList(UserNotifications)
+            setNotificationList(UserNotifications.reverse())
             console.log("Fetch user notifications successful");
           } else {
             // Fetch failed
@@ -54,6 +54,14 @@ const Notifications = () => {
       return `${year}-${month}-${day}`;
     }
 
+    const checkPageSize = () => {
+      if (isDesktop) {
+        return 10;
+      } else {
+        return 8;
+      }
+    }
+
     return (
         <Layout>
         <div className="loginSection">
@@ -66,7 +74,7 @@ const Notifications = () => {
                         // dataSource={data}
                         dataSource={notificationList}
                         pagination={{
-                          pageSize: 9,
+                          pageSize: checkPageSize(),
                         }}
                         renderItem={(item) => (
                           <List.Item>
