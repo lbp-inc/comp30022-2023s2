@@ -25,7 +25,7 @@ const Notifications = () => {
             },
           });
           const UserNotifications = await response.json();
-          console.log(UserNotifications);
+          // console.log(UserNotifications);
           if (response.ok) {
             // Fetch user notifications
             setNotificationList(UserNotifications.reverse())

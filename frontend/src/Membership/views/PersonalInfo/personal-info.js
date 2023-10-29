@@ -66,7 +66,7 @@ const PersonalInfo = () => {
     }, []);
 
     const onFinish = async (values) => {
-        console.log(values)
+        // console.log(values)
         try {
             const dataToSend = {
                 token: localStorage.getItem('token'),

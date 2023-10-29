@@ -43,7 +43,7 @@ const ResetPassword = () => {
         token: token,
         password: values["new-password"],
       };
-      console.log(payload);
+      // console.log(payload);
       // Send form values to backend for reset password
       const response = await fetch("http://localhost:8000/api/users/reset-password", {
         method: "POST",

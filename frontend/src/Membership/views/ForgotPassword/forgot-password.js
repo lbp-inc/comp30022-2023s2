@@ -14,7 +14,7 @@ const ForgotPassword = () => {
   // Link backend request to send password reset email
   const getVerificationCode = async () => {
     const email = form.getFieldValue("email");
-    console.log(email);
+    // console.log(email);
     try {
       // Send a request to the backend to send a reset password link to the user's email
       const response = await fetch("http://localhost:8000/api/users/forget-password", {

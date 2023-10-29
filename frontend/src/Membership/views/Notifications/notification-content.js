@@ -33,7 +33,7 @@ const NotificationContent = () => {
               },
             });
             const responseData = await response.json();
-            console.log(responseData);
+            // console.log(responseData);
             if (response.status === 200) {
               // Fetch user's notification successful
               setNotification(responseData);
