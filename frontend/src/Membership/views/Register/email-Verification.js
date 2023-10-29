@@ -17,7 +17,7 @@ const EmailVerification = () => {
     // Link backend to request sending a verification email
     const getVerificationCode = async () => {
         const email = form.getFieldValue("email")
-        console.log(email)
+        // console.log(email)
         try {
             // Send a request to the backend to send an verification code email to the user's email
             const response = await fetch("http://localhost:8000/api/users/verify-email", {
@@ -53,7 +53,7 @@ const EmailVerification = () => {
     const sendVerificationCode = async (values) => {
         // const email = form.getFieldValue("email")
         // console.log(email)
-        console.log(values)
+        // console.log(values)
         try {
             // Send a request to the backend to send an email verification link to the user's email
             const response = await fetch("http://localhost:8000/api/users/match_code", {

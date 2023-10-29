@@ -28,10 +28,10 @@ const Login = () => {
             const responseData = await response.json();
     
             if (response.status===200) {
-                console.log(responseData)
-                console.log(responseData.data["token"])
-                console.log(responseData.data["auth_token"])
-                console.log(responseData.data["role"])
+                // console.log(responseData)
+                // console.log(responseData.data["token"])
+                // console.log(responseData.data["auth_token"])
+                // console.log(responseData.data["role"])
                 // localStorage.setItem('token', responseData.data);
                 localStorage.setItem('token', responseData.data["token"]);
                 localStorage.setItem('auth_token', responseData.data["auth_token"]);

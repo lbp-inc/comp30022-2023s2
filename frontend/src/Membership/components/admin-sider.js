@@ -29,8 +29,8 @@ const AdminSider = () => {
                     // Fetch successful
                     setRole(responseData["role"])
                     console.log("Fetch role successful")
-                    console.log(responseData["role"])
-                    console.log(role)
+                    // console.log(responseData["role"])
+                    // console.log(role)
                 } else if (response.status===500) {
                     console.log("Login token out of time")
                     window.location.href = "/login";

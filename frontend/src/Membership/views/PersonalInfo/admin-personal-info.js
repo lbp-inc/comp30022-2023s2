@@ -45,8 +45,8 @@ const AdminPersonalInfo = () => {
             body: JSON.stringify({ token: localStorage.getItem("token") }),
           });
           const UserList = await response.json();
-          console.log(UserList);
-          console.log(UserList["data"]);
+          // console.log(UserList);
+          // console.log(UserList["data"]);
           if (response.ok) {
             // Fetch all user list successful
             setuserList(UserList["data"])

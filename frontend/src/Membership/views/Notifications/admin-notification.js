@@ -37,7 +37,7 @@ const AdminNotification = () => {
             },
           });
           const UserGroup = await response.json();
-          console.log(UserGroup);
+          // console.log(UserGroup);
           if (response.ok) {
             // Fetch user groups successful
             SetUserGroupOption(UserGroup)
@@ -59,7 +59,7 @@ const AdminNotification = () => {
     })) : [];
 
     const onFinish = async (values) => {
-      console.log(values);
+      // console.log(values);
       try {
         if (values["isEmail"] === "on") {
           values["isEmail"] = true
@@ -75,7 +75,7 @@ const AdminNotification = () => {
             token: localStorage.getItem('token'), // username
         };
   
-        console.log(dataToSend);
+        // console.log(dataToSend);
         // Send notification values to backend for sending notification
         const response = await fetch("http://localhost:8000/api/users/send-message", {
             method: 'POST',
@@ -168,7 +168,7 @@ const AdminNotification = () => {
                     <Form.Item
                       name="text"
                     >
-                      <TextArea rows={15} style = {{resize: "none"}}/> 
+                      <TextArea rows={isDesktop ? 18 : 14} style = {{resize: "none"}}/> 
                     </Form.Item>
 
                     <Form.Item

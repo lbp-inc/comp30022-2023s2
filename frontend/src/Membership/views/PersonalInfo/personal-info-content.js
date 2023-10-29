@@ -43,7 +43,7 @@ const PersonalInfoContent = () => {
               // Fetch user info successful
               setUserInfo(responseData["data"]);
               setLoading(false);
-              console.log(responseData["data"]);
+            //   console.log(responseData["data"]);
               console.log("Fetch user info successful");
             } else if (response.status === 404) {
                 console.log("User Not Found");

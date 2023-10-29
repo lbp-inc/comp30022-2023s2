@@ -133,6 +133,14 @@ const MyBooking = () => {
       }
   ];
 
+  const checkPageSize = () => {
+    if (isDesktop) {
+      return 9;
+    } else {
+      return 7;
+    }
+  }
+
   return (
     <Layout>
       <div className="loginSection">
@@ -146,7 +154,7 @@ const MyBooking = () => {
                       columns={isDesktop ? columns : columnsSmall}
                       dataSource={data}
                       pagination={{
-                          pageSize: 7,
+                          pageSize: checkPageSize(),
                       }} 
                   />
               </Card>
