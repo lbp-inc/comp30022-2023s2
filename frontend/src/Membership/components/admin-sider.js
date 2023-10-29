@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import { Card , Button, Space} from 'antd'
-import { enUS } from '../locales/en-us';
+import { useTranslation } from 'react-i18next';
 import "../style/admin-sider.css"
 import { useState, useEffect } from 'react';
+// import LanguageSelector from "../locales/change"
 
 // This component will display the menu in large screen sizes (Admin version)
 const AdminSider = () => {
+    const { t } = useTranslation();
     const [role, setRole] = useState();
 
     useEffect(() => {
@@ -29,6 +31,10 @@ const AdminSider = () => {
                     console.log("Fetch role successful")
                     console.log(responseData["role"])
                     console.log(role)
+                } else if (response.status===500) {
+                    console.log("Login token out of time")
+                    window.location.href = "/login";
+                    localStorage.setItem('outOftime', "true")
                 } else {
                     // Fetch failed
                     console.log("Fetch role failed")
@@ -43,39 +49,40 @@ const AdminSider = () => {
 
     return (
         <Card className="sider">
+            {/* <LanguageSelector /> */}
                 <Space
                     className="admin-button-space"
                     direction="vertical"
                     size="large"
                 >   
                     <Link to='/personal-info'>
-                        <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.personal_info}</Button>
+                        <Button type="text" shape="round" size="large" block className="sider-button">{t('button_personal_info')}</Button>
                     </Link>
                     <Link to='/my-booking'>
-                        <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.booking}</Button>
+                        <Button type="text" shape="round" size="large" block className="sider-button">{t('button_booking')}</Button>
                     </Link>
                     <Link to='/notifications'>
-                        <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.notification}</Button>
+                        <Button type="text" shape="round" size="large" block className="sider-button">{t('button_notification')}</Button>
                     </Link>
 
                     {role === 'admin' 
                        ?<><Link to='/admin-personal-info'>
-                            <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.view_personal_info}</Button>
+                            <Button type="text" shape="round" size="large" block className="sider-button">{t('button_view_personal_info')}</Button>
                         </Link>
                         <Link to='/admin-notification'>
-                            <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.edit_notification}</Button>
+                            <Button type="text" shape="round" size="large" block className="sider-button">{t('button_edit_notification')}</Button>
                         </Link>
                         <Link to='/admin-timetable'>
-                            <Button type="text" shape="round" size="large" block className="sider-button">TimeTable</Button>
+                            <Button type="text" shape="round" size="large" block className="sider-button">{t('button_timetable')}</Button>
                         </Link>
                         <Link to='/Editor'>
-                            <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.admin}</Button>
+                            <Button type="text" shape="round" size="large" block className="sider-button">{t('button_admin')}</Button>
                         </Link>
                         </> 
                        :(role === 'tutor' 
                        ?<>
                         {/* <Link to=''> */}
-                            <Button type="text" shape="round" size="large" block className="sider-button">{enUS.buttons.tutor}</Button>
+                            <Button type="text" shape="round" size="large" block className="sider-button">{t('button_tutor')}</Button>
                         {/* </Link> */}
                         </> : null)}
                     

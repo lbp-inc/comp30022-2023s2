@@ -40,7 +40,9 @@
     "sweetalert2": "^11.7.28",
     "swiper": "^10.2.0",
     "uuid": "^9.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "i18next": "^23.5.1",
+    "react-i18next": "^13.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

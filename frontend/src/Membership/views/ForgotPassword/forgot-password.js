@@ -1,12 +1,12 @@
 import { Card, Form, Input, Button, message } from "antd";
 import "../../style/forgot-password.css";
-import { enUS } from "../../locales/en-us";
-
+import { useTranslation } from 'react-i18next';
 import Layout from "../../../Layout";
 
 // This component will allow users to enter their registered
 // email address and send a password reset link to their email address.
 const ForgotPassword = () => {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
 
   const [messageApi, contextHolder] = message.useMessage();
@@ -47,14 +47,14 @@ const ForgotPassword = () => {
   const errorEmail = () => {
     messageApi.open({
       type: "error",
-      content: enUS.alert_message.email_not_exist,
+      content: t('alert_message_email_not_exist'),
     });
   };
 
   const successEmail = () => {
     messageApi.open({
       type: "success",
-      content: enUS.alert_message.verification_email,
+      content: t('alert_message_verification_code_sent'),
     });
   };
 
@@ -68,15 +68,15 @@ const ForgotPassword = () => {
               {/* Enter email form */}
               <Form.Item
                 name="email"
-                label={enUS.form_label.email}
+                label={t('form_label_email')}
                 rules={[
                   {
                     type: "email",
-                    message: enUS.form_message.email_not_valid,
+                    message: t('form_message_email_not_valid'),
                   },
                   {
                     required: true,
-                    message: enUS.form_message.email,
+                    message: t('form_message_email'),
                   },
                 ]}
               >
@@ -86,7 +86,7 @@ const ForgotPassword = () => {
               {/* Send button */}
               <Form.Item>
                 <Button htmlType="submit" size="large" type="primary" block className="reset-Password">
-                  {enUS.buttons.reset}
+                  {t('button_reset')}
                 </Button>
               </Form.Item>
             </Form>
