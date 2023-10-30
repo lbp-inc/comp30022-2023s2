@@ -11,6 +11,7 @@ import yaml from "js-yaml";
 import { notFound, errorHandler } from "./app/utils/errorHandler.js";
 import roomHireRoutes from "./app/controllers/roomHireController.js";
 import donationsRoutes from "./app/controllers/donationsController.mjs";
+import roomHireRoutes from "./app/controllers/roomHireController.js";
 
 import donationsTestRoutes from "./Tests/donationsTestSupport.mjs";
 
@@ -39,6 +40,7 @@ app.use(cors());
 app.use("/api/users", userRoutes);
 app.use("/api/roomHire", roomHireRoutes);
 app.use("/api/donations", donationsRoutes);
+app.use('/api/roomHire', roomHireRoutes);
 app.use("/staging/__donationsTestRoutes", donationsTestRoutes);
 
 if (process.env.NODE_ENV === "production") {

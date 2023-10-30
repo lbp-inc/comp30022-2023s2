@@ -1,17 +1,14 @@
 import express from "express";
-import RoomHire from "../models/roomHireModel.js";
-import { InvalidBookingEmailError, InvalidBookingNameError, InvalidBookingPhoneError, InvalidDateError, InvalidRoomNameError, InvalidStatusError } from "../exceptions/roomHireExceptions.mjs";
+import axios from 'axios';
+import RoomHireModel from "../models/roomHireModel";
+import { ObjectId } from 'mongodb';
 
-
-const router = express.Router();
 
 // ########################### GET ENDPOINTS ###########################
 
 async function getRoomHire(query) {
     // Connect to the MongoDB cluster and collections
-    const roomHireCollection = client.db('it_project').collection('room_hires');
-    const roomCollection = client.db('it_project').collection('rooms');
-
+    const roomHireCollection = RoomHireModel;
 
     // Search for room hire object and manually join on room table
     const roomHire = await roomHireCollection.findOne(query);
@@ -38,30 +35,43 @@ router.get("/", async (req, res) => {
     }
 });
 
+
 async function getAllRoomHires(date) {
+
+    /// FORMAT REQUIRED BY FRONT END
+    // {
+    //     name: "Andy",
+    //     room: "3",
+    //     eventDate: "15-09-2023",
+    //     eventHours: "2",
+    //     status: "pending"
+    //   },
+
+
     // Connect to the MongoDB cluster and collections
-    const roomHireCollection = client.db('it_project').collection('room_hires');
-    const roomCollection = client.db('it_project').collection('rooms');
+    const roomHireCollection = RoomHireModel;
     var roomHires;
+    var roomHiresParsed;
 
     // Search for room hire object and manually join on room table
     if (date != null) {
         roomHires = await roomHireCollection.find({ startTime: { $gte: date } }).toArray();
     }
     else {
-        // if no date specified, date is now (all future bookings)
-        roomHires = await roomHireCollection.find({ startTime: { $gte: new Date() } }).toArray();
+        // if no date specified get all bookings of all time
+        roomHires = await roomHireCollection.find({}).toArray();
+        // roomHiresParsed = parseRoomHiresForFrontend(roomHires);
+
     }
-    const rooms = await roomCollection.find().toArray();
 
     if (roomHires) {
-        console.log('Found item:', roomHires);
+        console.log('Found items:', roomHires);
     } else {
-        console.log('Item not found');
+        console.log('No items found');
     }
-    roomHires.forEach(roomHire => {
-        roomHire.room = rooms.find(room => room._id == roomHire.room);
-    });
+    // roomHires.forEach(roomHire => {
+    //     roomHire.room = rooms.find(room => room._id == roomHire.room);
+    // });
     return roomHires;
 
 }
@@ -76,8 +86,6 @@ router.get("/all", async (req, res) => {
         res.status(400).send(error);
     }
 });
-
-
 
 // ########################### POST ENDPOINTS ###########################
 
@@ -101,19 +109,16 @@ function validateRoomHire(roomHire) {
         // end time is not a future date
         throw new InvalidDateError("End time is not a future date");
     }
-    if (!roomHire.bookingName) {
+    if (!roomHire.fullName) {
         throw new InvalidBookingNameError("Booking name is required");
     }
-    if (!roomHire.bookingEmail) {
+    if (!roomHire.email) {
         throw new InvalidBookingEmailError("Booking email is required");
     }
-    if (!roomHire.bookingPhone) {
+    if (!roomHire.phoneNumber) {
         throw new InvalidBookingPhoneError("Booking phone is required");
     }
-    if (!roomHire.status) {
-        throw new InvalidStatusError("Status is required");
-    }
-    if (new Date(roomHire.startTime) > new Date(roomHire.endTime)) {
+    if (new Date(roomHire.eventStartTime) > new Date(roomHire.eventEndTime)) {
         throw new InvalidDateError("Start time is after end time");
     }
 
@@ -121,16 +126,66 @@ function validateRoomHire(roomHire) {
 }
 
 
+function formatDate(eventDate, startTime, endTime, dtFormat) {
+    // combine date and make into proper format
+    // const timezone = 'Etc/UTC'; 
+    const timezone = 'Australia/Sydney'; // Set Australian timezone
+    const startString = eventDate + " " + startTime;
+    const endString = eventDate + " " + endTime;
+    const startFormatted = DateTime.fromFormat(startString, dtFormat, { zone: timezone }).toJSDate();
+    const endFormatted = DateTime.fromFormat(endString, dtFormat, { zone: timezone }).toJSDate();
+    // Calculate the duration in milliseconds
+    const durationMillis = endFormatted - startFormatted;
+
+    // Convert milliseconds into hours and minutes
+    const durationHours = Math.floor(durationMillis / (1000 * 60 * 60));
+
+    console.log(startFormatted)
+    console.log(endFormatted)
+    return [startFormatted, endFormatted, durationHours];
+}
+
+function parseExtraDates(extraDates, starTime, endTime) {
+    const format = 'dd/MM/yyyy HH:mm'
+    // remove spaces and split into dates, map into proper format
+    const extraDatesList = extraDates.replace(/ /g, '').split(',').map(
+        date => formatDate(date, starTime, endTime, format)
+    )
+    return extraDatesList;
+}
+
 async function postRoomHire(roomHire) {
     // Connect to the MongoDB cluster and collections
-    const roomHireCollection = client.db('it_project').collection('room_hires');
-    const roomCollection = client.db('it_project').collection('rooms');
-
+    const roomHireCollection = RoomHireModel;
     // Get object id of room
-    const id = await roomCollection.findOne({ roomName: roomHire.roomName });
-    roomHire.room = id._id;
+    roomHire.room = roomHire.chosenRoom;
 
+    // Delete room name from object
     delete roomHire.roomName
+    // Set status to pending
+    // Possible status options are pending, approved, rejected
+    roomHire.status = "pending";
+    // combine date and time and make into proper format
+    [roomHire.startTime, roomHire.endTime, roomHire.duration] = formatDate(roomHire.eventDate, roomHire.eventStartTime, roomHire.eventEndTime, 'EEE MMM dd yyyy HH:mm');
+
+    // if extra dates are specified, parse them and make more room hire objects
+    if (roomHire.eventDateExtra != 'N/A') {
+        const extraDates = parseExtraDates(roomHire.eventDateExtra, roomHire.eventStartTime, roomHire.eventEndTime);
+        // delete extra dates from object
+        delete roomHire.eventDateExtra
+        // insert extra dates into database
+        const extraRoomHires = extraDates.map(date => {
+            const extraRoomHire = { ...roomHire };
+            extraRoomHire.startTime = date[0];
+            extraRoomHire.endTime = date[1];
+            extraRoomHire.duration = date[2];
+            validateRoomHire(extraRoomHire);
+            return extraRoomHire;
+        })
+        const result = await roomHireCollection.insertMany(extraRoomHires);
+        console.log(`New listings created`);
+    }
+
 
     // Validate room hire object
     validateRoomHire(roomHire);
@@ -144,15 +199,16 @@ async function postRoomHire(roomHire) {
 router.post("/", async (req, res) => {
     // Validate input
     try {
-        validateRoomHire(req.body);
+        console.log(req.body)
+        console.log("hello")
         let results = await postRoomHire(req.body);
         res.status(200).send(results);
     } catch (error) {
+        console.log(error)
         res.status(422).send(error.toString());
         return;
     }
 });
-
 
 
 // ########################### PUT ENDPOINTS ###########################
@@ -160,8 +216,7 @@ router.post("/", async (req, res) => {
 
 async function updateRoomHire(roomHireID, roomHire) {
     // Connect to the MongoDB cluster and collections
-    const roomHireCollection = client.db('it_project').collection('room_hires');
-    const roomCollection = client.db('it_project').collection('rooms');
+    const roomHireCollection = RoomHireModel;
 
     const modifyVals = (previousOnj, newObj) => {
         // only updates vals that need to be updated
@@ -200,11 +255,12 @@ router.put("/", async (req, res) => {
     }
 });
 
+
 async function changeStatus(roomHireID, status) {
     // Change status of room hire object
 
     // Connect to the MongoDB cluster and collections
-    const roomHireCollection = client.db('it_project').collection('room_hires');
+    const roomHireCollection = RoomHireModel;
     console.log(roomHireID, status)
     // Update a single document
     const result = await roomHireCollection.updateOne(
@@ -226,13 +282,11 @@ router.put('/changeStatus', async (req, res) => {
 });
 
 
-
-
 // ########################### DELETE ENDPOINTS ###########################
 
 async function deleteRoomHire(roomHireID) {
     // Connect to the MongoDB cluster and collections
-    const roomHireCollection = client.db('it_project').collection('room_hires');
+    const roomHireCollection = RoomHireModel;
 
     // Delete a single document
     const result = await roomHireCollection.deleteOne({ _id: new ObjectId(roomHireID) });
@@ -253,17 +307,5 @@ router.delete("/", async (req, res) => {
 });
 
 
-
-// For testing purposes, example room hire object:
-// {
-//     "roomName": "breakfast_room",
-//     "startTime": "2021-05-01T09:00:00.000Z",
-//     "endTime": "2021-05-01T10:00:00.000Z",
-//     "bookingName" : "frank reynolds",
-//     "bookingEmail" : "frankreynolds@paddyspub.com",
-//     "bookingPhone" : "01234567890",
-//     "bookingReason" : "breakfast meeting",
-//     "status": "-1"
-// }
-
 export default router;
+
