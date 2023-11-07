@@ -130,16 +130,16 @@ const FeeForServiceForm = () => {
                         <Accordion.Item eventKey="2">
                             <Accordion.Header>Membership, Member's Code of Conduct &#38; Volunteering</Accordion.Header>
                             <Accordion.Body>
-                                <h3>Membership Fees</h3>
+                            <h4> <u> Membership Fees </u> </h4>
                                 <p>
-                                    The Governance Committee has decided not to charge a membership fee for 2023. Usually, it is a Governance Committee policy that all participants pay an annual membership fee of $10.00 upon their first enrolment for the calendar year (Jan pt -Dec 3l5t) with an option of applying for a voting membership. Annual Membership Fee is non-refundable. Membership Fee will be reviewed for 2024. 
+                                    <b>The Governance Committee has decided not to charge a membership fee for 2023.</b> Usually, it is a Governance Committee policy that all participants pay an annual membership fee of $10.00 upon their first enrolment for the calendar year (Jan pt -Dec 3l5t) with an option of applying for a voting membership. Annual Membership Fee is non-refundable. <b>Membership Fee will be reviewed for 2024.</b> 
                                 </p>
                                 <Form.Check
                                     type={'checkbox'}
-                                    id={`FFS.votingApplication`}
+                                    id={`FFS.wishVoting`}
                                     label={`I wish to apply for voting membership. (Information is available at reception)`}
                                 /> <br></br>
-                                <h3>Volunteering</h3>
+                                <h4> <u> Voluntering </u> </h4>
                                 <Accordion defaultActiveKey="">
                                     <Card>
                                         <Card.Header>
@@ -173,7 +173,7 @@ const FeeForServiceForm = () => {
                                         </Accordion.Collapse>
                                     </Card>
                                 </Accordion><br></br>
-                                <h3> Member's Code of Conduct </h3>
+                                <h4> <u> Member's Code of Conduct </u> </h4>
                                 <h5> Each Participant has the right to </h5>
                                 <ul>
                                     <li>Be shown respect by others</li>
