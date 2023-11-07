@@ -99,7 +99,7 @@ const ACFEForm = () => {
                             <FloatingLabel controlId="ACFE.cardType" label="Card Type (e.g. PPS/NS/DSP)">
                                 <Form.Control type="cardType" placeholder="NS" />
                             </FloatingLabel><br></br>
-                            <FloatingLabel controlId="ACFE.expiry" label="Expiry Date">
+                            <FloatingLabel controlId="ACFE.expiryDate" label="Expiry Date">
                                 <Form.Control type="date" />
                             </FloatingLabel>
                             </Accordion.Body>
@@ -107,8 +107,225 @@ const ACFEForm = () => {
 
                         {/* Citizen Check Accordion */}
                         <Accordion.Item eventKey="1">
-                            {/* TODO: */}
+                            <Accordion.Header>AUS Citizen Check</Accordion.Header>
+                            <Accordion.Body>
+                                <Form.Label>
+                                To be eligible for an ACFE funded course at Longbeach PLACE, you must tick one of the following boxes and provide evidence 
+                                <br/>(otherwise fee for service costs will apply)
+                                </Form.Label> <br /><br />
+                                <h5> RULES FOR GOVERNMENT FUNDING </h5>
+                                <i>
+                                To be eligible for an ACFE funded course at Longbeach PLACE, you must tick one of the following boxes and provide evidence 
+                                <br/>(otherwise fee for service costs will apply)
+                                </i> <br /><br />
+                                <Form.Check
+                                    type={'radio'}
+                                    name={'ResidentialType'}
+                                    id={`ACFE.isCitizen`}
+                                    label={`I am an Australian Citizen*`}
+                                />
+                                <Form.Check
+                                    type={'radio'}
+                                    name={'ResidentialType'}
+                                    id={`ACFE.isPR`}
+                                    label={`I am an Australian Permanent resident* (holder of a permanent Visa)`}
+                                />
+                                <Form.Check
+                                    type={'radio'}
+                                    name={'ResidentialType'}
+                                    id={`ACFE.isVisaHolder`}
+                                    label={`I am  the holder of a special category visa* (sub class 444, New Zealand Citizen)`}
+                                />
+                                <Form.Check
+                                    type={'radio'}
+                                    name={'ResidentialType'}
+                                    id={`ACFE.isETAS`}
+                                    label={`I am an East Timorese Asylum Seeker*`}
+                                /><br />
+                                <b> *Please provide one of the following accepted forms of evidence: </b><br />
+                                <Form.Check
+                                    inline
+                                    type={'radio'}
+                                    name={'ResidentialProveType'}
+                                    id={`ACFE.hasMedicare`}
+                                    label={`Green Medicare Card `}
+                                />
+                                <Form.Check
+                                    inline
+                                    type={'radio'}
+                                    name={'ResidentialProveType'}
+                                    id={`ACFE.hasVisa`}
+                                    label={`Visa details`}
+                                />
+                                <Form.Check
+                                    inline
+                                    type={'radio'}
+                                    name={'ResidentialProveType'}
+                                    id={`ACFE.hasCitizenship`}
+                                    label={`Citizenship letter`}
+                                />
+                                <Form.Control controlId="ACFE.proveFile" type="file" size="sm" />
+                                </Accordion.Body>
+                            </Accordion.Item>
+
+                            {/* Language Background Accordion */}
+                            <Accordion.Item eventKey="2">
+                                <Accordion.Header>Language Background</Accordion.Header>
+                                <Accordion.Body>
+                                <FloatingLabel controlId="ACFE.bornCountry" label="What country were you born in?">
+                                    <Form.Control type="contry" placeholder="Australia" />
+                                </FloatingLabel><br></br>
+                                <FloatingLabel controlId="ACFE.homeLanguage" label="What Language do you speak at home?">
+                                    <Form.Control type="contry" placeholder="English" />
+                                </FloatingLabel><br></br>
+                                <Form.Label> How well do you speak English? </Form.Label><br />
+                                <Form.Check
+                                    inline
+                                    type={'radio'}
+                                    name={'EnglishWellness'}
+                                    id={`ACFE.langWellness`}
+                                    label={`Very well`}
+                                />
+                                <Form.Check
+                                    inline
+                                    type={'radio'}
+                                    name={'EnglishWellness'}
+                                    id={`ACFE.langWellness`}
+                                    label={`Well`}
+                                />
+                                <Form.Check
+                                    inline
+                                    type={'radio'}
+                                    name={'EnglishWellness'}
+                                    id={`ACFE.langWellness`}
+                                    label={`Not well`}
+                                />
+                                <Form.Check
+                                    inline
+                                    type={'radio'}
+                                    name={'EnglishWellness'}
+                                    id={`ACFE.langWellness`}
+                                    label={`What is English?`}
+                                /><br/><br/>
+                                <b> Do you have any difficulty with the English Language? </b><br />
+                                <Form.Check
+                                    inline
+                                    type={'radio'}
+                                    name={'EnglishDiff'}
+                                    id={`ACFE.diffEnglish`}
+                                    label={`Yes`}
+                                />
+                                <Form.Check
+                                    inline
+                                    type={'radio'}
+                                    name={'EnglishDiff'}
+                                    id={`ACFE.diffEnglish`}
+                                    label={`No`}
+                                /><br/>
+                                <Form.Text muted>
+                                    <i> (If appropriate place tick relevant box to identify where you have difficulty) </i>
+                                </Form.Text><br/>
+                                <Form.Check
+                                    inline
+                                    type={'radio'}
+                                    name={'EnglishDiffAspect'}
+                                    id={`ACFE.diffAspect`}
+                                    label={`Reading`}
+                                />
+                                <Form.Check
+                                    inline
+                                    type={'radio'}
+                                    name={'EnglishDiffAspect'}
+                                    id={`ACFE.diffAspect`}
+                                    label={`Speaking`}
+                                />
+                                <Form.Check
+                                    inline
+                                    type={'radio'}
+                                    name={'EnglishDiffAspect'}
+                                    id={`ACFE.diffAspect`}
+                                    label={`Writing`}
+                                /><br/><br/>
+                                <Form.Group>
+                                    <Form.Label> Are you of Aboriginal origin?   </Form.Label>
+                                    <Form.Check
+                                        inline
+                                        type={'radio'}
+                                        name={'isAboriginal'}
+                                        id={`ACFE.isAboriginal`}
+                                        label={`Yes`}
+                                    />
+                                    <Form.Check
+                                        inline
+                                        type={'radio'}
+                                        name={'isAboriginal'}
+                                        id={`ACFE.isAboriginal`}
+                                        label={`No`}
+                                    /><br/>
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label> Are you a Torres Strait Islander?   </Form.Label>
+                                    <Form.Check
+                                        inline
+                                        type={'radio'}
+                                        name={'isIslander'}
+                                        id={`ACFE.isIslander`}
+                                        label={`Yes`}
+                                    />
+                                    <Form.Check
+                                        inline
+                                        type={'radio'}
+                                        name={'isIslander'}
+                                        id={`ACFE.isIslander`}
+                                        label={`No`}
+                                    />
+                                </Form.Group>
+                            </Accordion.Body>
                         </Accordion.Item>
+
+                        {/* Student Support Accordion */}
+                        <Accordion.Item eventKey="3">
+                            <Accordion.Header>Student Support</Accordion.Header>
+                            <Accordion.Body>
+                            </Accordion.Body>
+                        </Accordion.Item>
+
+                        {/* Victoria Student Number Accordion */}
+                        <Accordion.Item eventKey="4">
+                            <Accordion.Header>Student Number</Accordion.Header>
+                            <Accordion.Body>
+                            </Accordion.Body>
+                        </Accordion.Item>
+
+                        {/* Previous Education Accordion */}
+                        <Accordion.Item eventKey="5">
+                            <Accordion.Header>Previous Education</Accordion.Header>
+                            <Accordion.Body>
+                            </Accordion.Body>
+                        </Accordion.Item>
+
+                        {/* Details of Employment Accordion */}
+                        <Accordion.Item eventKey="6">
+                            <Accordion.Header>Employment Details</Accordion.Header>
+                            <Accordion.Body>
+                            </Accordion.Body>
+                        </Accordion.Item>
+
+
+                        {/* Study Reason and Information Accordion */}
+                        <Accordion.Item eventKey="7">
+                            <Accordion.Header>Further Informations</Accordion.Header>
+                            <Accordion.Body>
+                            </Accordion.Body>
+                        </Accordion.Item>
+
+                        {/* Terms of Enrolment and Privacy Statement Accordion */}
+                        <Accordion.Item eventKey="8">
+                            <Accordion.Header> Terms & Statements </Accordion.Header>
+                            <Accordion.Body>
+                            </Accordion.Body>
+                        </Accordion.Item>
+
                     </Accordion>
                 </Form>
             </div>

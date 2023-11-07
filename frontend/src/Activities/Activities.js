@@ -7,6 +7,7 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import FeeForServiceForm from "./Forms/FeeForService";
+import ACFEForm from './Forms/ACFE_Form';
 
 function useLoadContentFromDatabase(ref, pageKey) {
     const backendUrl  = 'http://localhost:8000';
@@ -127,11 +128,11 @@ function Activities() {
             </div>
         </div>
         </div>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={"True"} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Book Now</Modal.Title>
                 </Modal.Header>
-                <Modal.Body><FeeForServiceForm/></Modal.Body>
+                <Modal.Body><ACFEForm/></Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
