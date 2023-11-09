@@ -1,0 +1,187 @@
+.roombooking-head{
+    margin: 0;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    object-fit: contain;
+    background-color: #3b9da6;
+    margin-bottom: 30px;
+    width: 100%;
+    margin-top: 100px;
+}
+
+.roombooking-head h1 {
+    font-size: 70px;
+    font-family: 'SF FONT bold', Arial, sans-serif;
+    color: #ffaa48;
+}
+
+.table-container{
+    width: 80% !important;
+    position: relative;
+    background-color: #8ac1c6;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    margin: 0 auto;
+    overflow-y: auto;
+    height: auto !important;
+    display: flex;
+}
+
+.table-container::-webkit-scrollbar {
+    width: 8px; /* Width of the scroll bar */
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background-color: rgb(193, 193, 193); /* Color of the thumb */
+    border-radius: 4px; /* Rounded corners for the thumb */
+}
+  
+.table-container::-webkit-scrollbar-track {
+    background-color: #ceddec; /* Color of the track */
+    border-radius: 4px;
+}
+
+
+.table-header{
+    position: sticky;
+    background-color:#3b9da6;
+    top: 0;
+    z-index: 1;
+    padding-top: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-cell{
+    width: 16.7%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-cell h3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.table-cell-head{
+    position: sticky;
+    width: 16.7%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.table-cell-head h3{
+    position: sticky;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: normal;
+}
+.accept-button{
+
+    background-color: rgb(47, 183, 47) !important;
+    margin-bottom: 20px !important;
+
+}
+
+.decline-button{
+
+    background-color: rgb(206, 67, 67) !important;
+
+}
+
+.more-button{
+    margin: 0 auto;
+}
+
+.info-button{
+    margin: 0 auto;
+}
+
+.admin-timetable{
+    margin: 20px auto;
+    width: 80%;
+    border-radius: 20px;
+    border: 5px solid transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: Arial, sans-serif;  
+    margin-top: 100px;
+}
+
+
+.accept-container{
+
+    width: 80%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    color: green;
+}
+
+.accept-container h2{
+    margin-top: 100px;
+}
+
+
+.reject-container{
+
+    color: rgb(173, 27, 27);
+    width: 80%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+    
+}
+
+.reject-container h2{
+    margin-top: 100px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 1300px) {
+    .roombooking-head{
+        width: 100% !important;
+    }
+
+    .roombooking-head > h1{
+        font-size: 3em;
+    }
+
+    .table-container{
+        width: 90% !important;
+        height: 70vh;
+    }
+
+    .list-container{
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+    }
+
+    .accept-container,
+    .reject-container{
+        width: 90%;
+    }
+
+    
+    
+}
