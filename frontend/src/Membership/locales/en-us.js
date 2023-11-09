@@ -15,6 +15,8 @@ const enUS = {
     save: "Save",
     go_login: "Go to LogIn",
     admin: "Admin",
+    tutor: "Tutor",
+    captcha: "Get captcha",
   },
 
   link: {
@@ -64,15 +66,20 @@ const enUS = {
     email: "Please input your Email !",
     agreement: "You should accept agreement",
     verify: "Please enter the verification code, it has been sent to your email",
+    code: "Please input the captcha you got!",
   },
 
   form_tooltip: {
     username: "This is used to log in.",
+    passowrd: "The password should contain uppercase and lowercase letters, numbers, and special symbols (e.g., !, ., @, #, $, %), and its length must be greater than 8 characters.",
+    email: "Please enter your email address and click the Get captcha button to get the verification code.",
   },
 
   alert_message: {
+    login_alert: "Invalid username or password.",
+    ue_exist: "Username and email already exist.",
     username_exist: "Username already exists.",
-    username_space: "Username should not contain any space",
+    username_space: "Username should not contain space !",
     email_exist: "Email has been registered.",
     verification_code_sent: "Password reset link has been sent to your email",
     verification_email: "Email verification email has been sent successfully",
@@ -80,24 +87,34 @@ const enUS = {
     username_not_exist: "Username does not exist",
     email_not_exist: "Email does not exist",
     password_incorrect: "Incorrect password",
+    password_invalid: "↖ See tip, password is invalid !",
     out_of_time: "This link has timed out, please resend the request.",
+    error_code: "Email is incorrect !",
+    success_code: "Verification code has been sent to your email.",
+    error_email: "Email verified fail! Please check your verification code again.",
+    success_email: "Email verified successfully.",
+    network_error: "Internal Server Error, please try again later.",
+  },
+
+  message: {
+    update_s: "Personal information updated successfully",
   },
 
   input_placeholder: {
-    username: "Please enter username",
+    username: "Please enter username or email",
     password: "Please enter password",
   },
 
   jump: {
     register_success: "You have registered successfully",
-    reset_success: "You successfully reset your password",
+    reset_success: "You have successfully reset your password.",
   },
 
   password_strength: {
     weak: "Weak Password, unacceptable.",
     medium: "Medium Password",
     strong: "Strong password, acceptable.",
-  }
+  },
 };
 
 module.exports = {

@@ -10,11 +10,6 @@
         height: 540px;
     }
 
-    .register-container-alert {
-        width: 90%;
-        height: 540px;
-    }
-
     .progress {
         margin-top: -15px;
         margin-bottom: 5px;
@@ -30,11 +25,6 @@
         height: 370px;
     }
 
-    .register-container-alert {
-        width: 440px;
-        height: 410px;
-    }
-
     .progress {
         margin-top: -15px;
         margin-bottom: 5px;
@@ -47,12 +37,7 @@
 @media screen and (min-width: 992px) {
     .register-container {
         width: 440px;
-        height: 400px;
-    }
-
-    .register-container-alert {
-        width: 440px;
-        height: 410px;
+        height: 370px;
     }
 
     .progress {

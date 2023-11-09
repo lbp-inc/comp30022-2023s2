@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import MembershipSider from "../../components/membership-sider"
 import { Button, Card } from 'antd';
 import { enUS } from "../../locales/en-us";
-import DrawerSider from "../../components/drawer-sider";
 import { useMediaQuery } from 'react-responsive';
+import AdminSider from "../../components/admin-sider"
+import AdminDrawerSider from "../../components/admin-drawer-sider";
 
 import Layout from '../../../Layout';
 
@@ -16,7 +16,7 @@ const Content = () => {
         <div className="loginSection">
         <div className="membership">
             <div className="membership-card">
-                {isDesktop ? <MembershipSider /> : <DrawerSider className="drawersider"/>};
+                {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>}
                 <Card className="content">
                     <Card className="list-container">
                         <Link to='/notifications'><Button>{enUS.buttons.back}</Button></Link>

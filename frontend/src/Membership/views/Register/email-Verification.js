@@ -1,34 +1,24 @@
-import { Card, Form, Input, Button, Alert } from "antd"
+import { Card, Form, Input, Button, message, Row, Col } from "antd"
 import '../../style/forgot-password.css'
 import { enUS } from "../../locales/en-us";
-import { useState } from 'react';
 
 import Layout from '../../../Layout';
 
 
 // This component will allow users to enter their registered 
-// email address and send a password reset link to their email address.
+// email address and send a varification email to their email address.
 const EmailVerification = () => {
     const [form] = Form.useForm();
 
-    // Defines whether verification information is sent
-    const [isVerificationCodeSent, setIsVerificationCodeSent] = useState(false);
-    
-    // Defines whether email is exist
-    const [isEmailExist, setIsEmailExist] = useState(false);
+    const [messageApi, contextHolder] = message.useMessage();
 
-    // Modify isEmailExist status
-    const onEmailChange = () => {
-        setIsEmailExist(false);
-    }
-
-    // Link backend request to send email verification email
+    // Link backend to request sending a verification email
     const getVerificationCode = async () => {
         const email = form.getFieldValue("email")
         console.log(email)
         try {
-            // Send a request to the backend to send an email verification link to the user's email
-            const response = await fetch("http://localhost:5000/api/users/verify-email", {
+            // Send a request to the backend to send an verification code email to the user's email
+            const response = await fetch("http://localhost:8000/api/users/verify-email", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -40,29 +30,104 @@ const EmailVerification = () => {
 
             if (response.status === 200) {
                 // Sent successfully
-                console.log("Password reset link sent successfully");
-                setIsVerificationCodeSent(true);
+                console.log("Verification code sent successfully");
+                successCode()
             } else if (response.status === 211) {
                 // Email not found
-                setIsEmailExist(true)
-                console.log("User not found");
+                errorCode()
+                console.log("Email not found");
             } else {
                 const errorData = await response.json();
                 console.error('Error:', errorData.message);
+                networkError()
             }
         } catch (error) {
             console.error('Request error:', error);
+            networkError()
         }     
     }
+
+    // Link backend request to send email verification email
+    const sendVerificationCode = async (values) => {
+        // const email = form.getFieldValue("email")
+        // console.log(email)
+        console.log(values)
+        try {
+            // Send a request to the backend to send an email verification link to the user's email
+            const response = await fetch("http://localhost:8000/api/users/match_code", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+                body: JSON.stringify(values),
+            });
+
+            if (response.status === 200) {
+                // Email verified successfully
+                console.log("Email verified successfully");
+                successEmail()
+                window.location.href = "/register-jump";    
+            } else if (response.status === 211) {
+                // Email verified fail!
+                errorEmail()
+                console.log("Email verified fail!");
+            } else {
+                const errorData = await response.json();
+                console.error('Error:', errorData.message);
+                networkError()
+            }
+        } catch (error) {
+            console.error('Email verified error:', error);
+            networkError()
+        }     
+    }
+
+    const errorEmail = () => {
+        messageApi.open({
+          type: 'error',
+          content: enUS.alert_message.error_email,
+        });
+    };
+
+    const successEmail = () => {
+        messageApi.open({
+          type: 'success',
+          content: enUS.alert_message.success_email,
+        });
+    };
+
+    const errorCode = () => {
+        messageApi.open({
+          type: 'error',
+          content: enUS.alert_message.error_code,
+        });
+    };
+
+    const successCode = () => {
+        messageApi.open({
+          type: 'success',
+          content: enUS.alert_message.success_code,
+        });
+    };
+
+    const networkError = () => {
+        messageApi.open({
+          type: 'success',
+          content: enUS.alert_message.network_error,
+        });
+    };
 
     return (
         <Layout>
         <div className="loginSection">
         <div className="forgot-password-form">
-            <Card className="forgot-password-container">
+            {contextHolder}
+            <Card className="email-verification-container">
                 <Form
                     name="forgot-password"
-                    onFinish={getVerificationCode}
+                    onFinish={sendVerificationCode}
                     labelCol={{ span: 4 }}
                     form={form}
                 >   
@@ -70,6 +135,7 @@ const EmailVerification = () => {
                     <Form.Item
                         name="email"
                         label={enUS.form_label.email}
+                        tooltip={enUS.form_tooltip.email}
                         rules={[
                         {
                             type: 'email',
@@ -81,13 +147,30 @@ const EmailVerification = () => {
                         },
                         ]}
                     >
-                        <Input onChange={onEmailChange}/>
+                        <Input/>
                     </Form.Item>
 
-                    {/* Alert message */}
-                    {isEmailExist && (
-                        <Alert message={enUS.alert_message.email_not_exist} type="error" showIcon className="alert"/>
-                    )}
+                    <Form.Item label="Captcha">
+                        <Row gutter={8}>
+                        <Col span={12}>
+                            <Form.Item
+                            name="code"
+                            noStyle
+                            rules={[
+                                {
+                                required: true,
+                                message: enUS.form_message.code,
+                                },
+                            ]}
+                            >
+                            <Input />
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Button onClick={getVerificationCode}>{enUS.buttons.captcha}</Button>
+                        </Col>
+                        </Row>
+                    </Form.Item>
                     
                     {/* Send button */}
                     <Form.Item >
@@ -95,11 +178,6 @@ const EmailVerification = () => {
                             {enUS.buttons.verify_email}
                         </Button>
                     </Form.Item>
-                    
-                    {/* Alert message */}
-                    {isVerificationCodeSent && (
-                        <Alert message={enUS.alert_message.verification_email} type="success" showIcon className="alert"/>
-                    )}
                 </Form>
             </Card>
         </div>

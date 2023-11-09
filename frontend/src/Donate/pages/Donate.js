@@ -18,12 +18,6 @@ function Donate() {
         Donations can be anything such as stationary, art supplies, musical instruments the choice is yours. Every little bit helps. To donate please contact this address: {'\n'}
         15 Chelsea Road Chelsea Victoria 3196                Tel: 03 9776 1386                                                                      Email: reception@longbeachplace.org.au
         </div>
-        <div className='hero-container'>
-          <h1>Donate now</h1>
-        </div>
-        <div className='donate-form'>
-          <DonateForm></DonateForm>
-        </div>
         </Layout>
     </>
   )

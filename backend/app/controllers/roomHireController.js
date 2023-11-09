@@ -1,8 +1,10 @@
 import express from "express";
 import axios from 'axios';
-import RoomHireModel from "../models/roomHireModel";
+import RoomHireModel from "../models/roomHireModel.js";
 import { ObjectId } from 'mongodb';
 
+
+const router = express.Router();
 
 // ########################### GET ENDPOINTS ###########################
 

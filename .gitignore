@@ -132,6 +132,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+
 **/.DS_Store
 **/__pycache__
 venv_name
