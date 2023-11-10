@@ -128,7 +128,7 @@ function Activities() {
             </div>
         </div>
         </div>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={'True'} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Book Now</Modal.Title>
                 </Modal.Header>

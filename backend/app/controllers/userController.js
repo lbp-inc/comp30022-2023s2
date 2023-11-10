@@ -7,9 +7,8 @@ import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
 const JWT_SECRET = "liTq9vasHanieW0Sb8ClegPSs6dZV05xHLKSiEZhPUC4KPSurj0pmJJs66L8biTNSvTxM11rUacxXX0P23clrB8vmC7i0e0RMVc";
 
-import Course from "../models/courseModel.js";
+import Activity from "../models/activity.js";
 import Notification from "../models/notificationModel.js";
-import Message from "../models/messageModel.js";
 
 /**
  * @async
@@ -392,10 +391,10 @@ const emailCodeMatch = asyncHandler(async (req, res) => {
  * @returns {Promise<void>}
  */
 const getUserGroups = asyncHandler(async (req, res) => {
-  const courses = await Course.find({});
-  if (courses) {
-    let courseNames = courses.map((course) => course.course_name);
-    res.json(courseNames);
+  const activities = await Activity.find({});
+  if (activities) {
+    let activityNames = activities.map((activity) => activity.name);
+    res.json(activityNames);
   } else {
     res.status(404);
     throw new Error("Courses not found");
@@ -412,7 +411,7 @@ const getUserGroups = asyncHandler(async (req, res) => {
  */
 const getUserListByGroup = asyncHandler(async (req, res) => {
   const { groupNames } = req.body;
-  const courses = await Course.find({ course_name: { $in: groupNames } });
+  const courses = await Activity.find({ name: { $in: groupNames } });
   if (!courses) {
     res.status(404);
     throw new Error("Course not found");
@@ -449,7 +448,7 @@ const sendMessage = asyncHandler(async (req, res) => {
 
   let recipients = [];
   for (let i = 0; i < groups.length; i++) {
-    const course = await Course.findOne({ course_name: groups[i] });
+    const course = await Activity.findOne({ name: groups[i] });
     if (!course) {
       return res.status(404).json({ message: "Course not found" });
     }
