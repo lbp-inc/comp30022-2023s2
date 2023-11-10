@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import FeeForServiceForm from "./Forms/FeeForService";
 import ACFEForm from './Forms/ACFE_Form';
+import ActivityDetails from "./ActivityDetails";
 
 function useLoadContentFromDatabase(ref, pageKey) {
     const backendUrl  = 'http://localhost:8000';
@@ -76,8 +77,12 @@ function Activities() {
     const routeChange = (path) => navigate(path);
 
     const [show, setShow] = useState(false);
+    const [shownActivity, setShownActivity] = useState();
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const showDetails = (activity) => {
+        setShownActivity(activity);
+        setShow(true);
+    };
 
 
     return (
@@ -119,7 +124,7 @@ function Activities() {
                                 <p>{activity.time}</p>
                                 <p>{activity.duration}</p>
                                 <p>${activity.cost}</p>
-                                <button onClick={handleShow}>Book Now</button> {/*() => routeChange("/fee_for_service_form")*/}
+                                <button onClick={() => showDetails(activity)}>Learn More...</button> {/*() => routeChange("/fee_for_service_form")*/}
                             </li>
                         ))}
                     </ul>
@@ -128,11 +133,11 @@ function Activities() {
             </div>
         </div>
         </div>
-            <Modal show={'True'} onHide={handleClose}>
+            <Modal show={show} fullscreen="lg-down" size="lg" onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Book Now</Modal.Title>
+                    <Modal.Title></Modal.Title>
                 </Modal.Header>
-                <Modal.Body><ACFEForm/></Modal.Body>
+                <Modal.Body><ActivityDetails activity={shownActivity}/></Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close

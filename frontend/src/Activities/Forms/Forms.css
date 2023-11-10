@@ -17,3 +17,8 @@
     color: #3b9da6;
     background-color: white;
 }
+
+.form-scrollable {
+    max-height: 100vh;
+    overflow-y: scroll;
+}
