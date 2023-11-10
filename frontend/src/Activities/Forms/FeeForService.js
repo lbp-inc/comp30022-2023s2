@@ -211,7 +211,7 @@ const FeeForServiceForm = () => {
                                                         inline
                                                         name = 'volunteerAgreement'
                                                         type={'radio'}
-                                                        id={`FFS.volunteerAgreement`}
+                                                        id={`FFS.volunteerAgreementY`}
                                                         label={`Yes I do`}
                                                         onChange={() => inputChange('volunteeringAgreement', true)}
                                                     />
@@ -219,7 +219,7 @@ const FeeForServiceForm = () => {
                                                         inline
                                                         name = 'volunteerAgreement'
                                                         type={'radio'}
-                                                        id={`FFS.volunteerAgreement`}
+                                                        id={`FFS.volunteerAgreementN`}
                                                         label={`No I don't`}
                                                         onChange={() => inputChange('volunteeringAgreement', false)}
                                                     />
