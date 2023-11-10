@@ -35,7 +35,7 @@ const FeeForServiceForm = () => {
         ecRelationship: '',
         ecPhone: '',
         wishVote: '',
-        volunteeringAggreement: null,
+        volunteeringAgreement: null,
         mcAgreement: '',
         signature: ''                       // store as data URL (base64 png)
     });
@@ -190,7 +190,7 @@ const FeeForServiceForm = () => {
                                     label={`I wish to apply for voting membership. (Information is available at reception)`}
                                     onChange={(e) => inputChange('wishVote', e.target.checked)}
                                 /> <br></br>
-                                <h4> <u> Voluntering </u> </h4>
+                                <h4> <u> Volunteering </u> </h4>
                                 <Accordion defaultActiveKey="">
                                     <Card>
                                         <Card.Header>
@@ -211,17 +211,17 @@ const FeeForServiceForm = () => {
                                                         inline
                                                         name = 'volunteerAgreement'
                                                         type={'radio'}
-                                                        id={`FFS.volunteerAggrement`}
+                                                        id={`FFS.volunteerAgreement`}
                                                         label={`Yes I do`}
-                                                        onChange={() => inputChange('volunteeringAggreement', true)}
+                                                        onChange={() => inputChange('volunteeringAgreement', true)}
                                                     />
                                                     <Form.Check
                                                         inline
                                                         name = 'volunteerAgreement'
                                                         type={'radio'}
-                                                        id={`FFS.volunteerAggrement`}
+                                                        id={`FFS.volunteerAgreement`}
                                                         label={`No I don't`}
-                                                        onChange={() => inputChange('volunteeringAggreement', false)}
+                                                        onChange={() => inputChange('volunteeringAgreement', false)}
                                                     />
                                                 </Form.Group>
                                             </Card.Body>
@@ -252,7 +252,7 @@ const FeeForServiceForm = () => {
                                 </ul>
                                 <Form.Check
                                     type={'checkbox'}
-                                    id={`FFS.MCCAggrement`}
+                                    id={`FFS.MCCAgrement`}
                                     label={`I have read and agree to abide by the Member's Code.`}
                                     onChange={(e) => inputChange('mcAgreement', e.target.checked)}
                                 /><br/>
