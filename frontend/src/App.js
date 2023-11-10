@@ -32,10 +32,11 @@ import UserEventsTimetable from './TimeTable/UserEventsTimetable';
 import TimeTable from './Membership/views/Timetable/timetable';
 import FeeForServiceForm from "./Activities/Forms/FeeForService";
 import ACFEForm from "./Activities/Forms/ACFE_Form";
+import TestFormUI from "./Activities/Forms/TestFormUI";
 
 
 function App() {
-  return (
+    return (
       <BrowserRouter>
           <div className="App">
               <Routes>
@@ -70,9 +71,8 @@ function App() {
                   <Route path="/email-verification" element={<EmailVerification/>}></Route>
                   <Route path="/admin-timetable" element={<TimeTable/>}></Route>
 
-
-                  <Route path="/acfe_form" element={<ACFEForm />} />
-                  <Route path="/fee_for_service_form" element={<FeeForServiceForm />} />
+                  {/* Booking System */}
+                  <Route path="/form" element={<TestFormUI/>} />
               </Routes>
           </div>
       </BrowserRouter>  
