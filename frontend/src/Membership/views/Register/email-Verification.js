@@ -1,6 +1,6 @@
 import { Card, Form, Input, Button, message, Row, Col } from "antd"
 import '../../style/forgot-password.css'
-import { enUS } from "../../locales/en-us";
+import { useTranslation } from 'react-i18next';
 
 import Layout from '../../../Layout';
 
@@ -8,6 +8,8 @@ import Layout from '../../../Layout';
 // This component will allow users to enter their registered 
 // email address and send a varification email to their email address.
 const EmailVerification = () => {
+    const { t } = useTranslation();
+
     const [form] = Form.useForm();
 
     const [messageApi, contextHolder] = message.useMessage();
@@ -15,7 +17,7 @@ const EmailVerification = () => {
     // Link backend to request sending a verification email
     const getVerificationCode = async () => {
         const email = form.getFieldValue("email")
-        console.log(email)
+        // console.log(email)
         try {
             // Send a request to the backend to send an verification code email to the user's email
             const response = await fetch("http://localhost:8000/api/users/verify-email", {
@@ -51,7 +53,7 @@ const EmailVerification = () => {
     const sendVerificationCode = async (values) => {
         // const email = form.getFieldValue("email")
         // console.log(email)
-        console.log(values)
+        // console.log(values)
         try {
             // Send a request to the backend to send an email verification link to the user's email
             const response = await fetch("http://localhost:8000/api/users/match_code", {
@@ -87,35 +89,35 @@ const EmailVerification = () => {
     const errorEmail = () => {
         messageApi.open({
           type: 'error',
-          content: enUS.alert_message.error_email,
+          content: t('alert_message_error_email'),
         });
     };
 
     const successEmail = () => {
         messageApi.open({
           type: 'success',
-          content: enUS.alert_message.success_email,
+          content: t('alert_message_success_email'),
         });
     };
 
     const errorCode = () => {
         messageApi.open({
           type: 'error',
-          content: enUS.alert_message.error_code,
+          content: t('alert_message_error_code'),
         });
     };
 
     const successCode = () => {
         messageApi.open({
           type: 'success',
-          content: enUS.alert_message.success_code,
+          content: t('alert_message_success_code'),
         });
     };
 
     const networkError = () => {
         messageApi.open({
           type: 'success',
-          content: enUS.alert_message.network_error,
+          content: t('alert_message_network_error'),
         });
     };
 
@@ -134,23 +136,23 @@ const EmailVerification = () => {
                     {/* Enter email form */}
                     <Form.Item
                         name="email"
-                        label={enUS.form_label.email}
-                        tooltip={enUS.form_tooltip.email}
+                        label={t('form_label_email')}
+                        tooltip={t('form_tooltip_email')}
                         rules={[
                         {
                             type: 'email',
-                            message: enUS.form_message.email_not_valid,
+                            message: t('form_message_email_not_valid'),
                         },
                         {
                             required: true,
-                            message: enUS.form_message.email,
+                            message: t('form_message_email'),
                         },
                         ]}
                     >
                         <Input/>
                     </Form.Item>
 
-                    <Form.Item label="Captcha">
+                    <Form.Item label={t('form_label_captcha')}>
                         <Row gutter={8}>
                         <Col span={12}>
                             <Form.Item
@@ -159,7 +161,7 @@ const EmailVerification = () => {
                             rules={[
                                 {
                                 required: true,
-                                message: enUS.form_message.code,
+                                message: t('form_message_code'),
                                 },
                             ]}
                             >
@@ -167,7 +169,7 @@ const EmailVerification = () => {
                             </Form.Item>
                         </Col>
                         <Col span={12}>
-                            <Button onClick={getVerificationCode}>{enUS.buttons.captcha}</Button>
+                            <Button onClick={getVerificationCode}>{t('button_captcha')}</Button>
                         </Col>
                         </Row>
                     </Form.Item>
@@ -175,7 +177,7 @@ const EmailVerification = () => {
                     {/* Send button */}
                     <Form.Item >
                         <Button htmlType="submit" size="large" type="primary" block className="reset-Password">
-                            {enUS.buttons.verify_email}
+                            {t('button_verify_email')}
                         </Button>
                     </Form.Item>
                 </Form>

@@ -1,14 +1,15 @@
 import { Card, Form, Input, Button, message } from "antd";
 import "../../style/forgot-password.css";
-import { enUS } from "../../locales/en-us";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-
+import { useTranslation } from 'react-i18next';
 import Layout from "../../../Layout";
 
 // This component will display a password reset form
 // where the user can enter a new password
 const ResetPassword = () => {
+  const { t } = useTranslation();
+
   // Get name and token from url
   const { username, token } = useParams();
 
@@ -42,7 +43,7 @@ const ResetPassword = () => {
         token: token,
         password: values["new-password"],
       };
-      console.log(payload);
+      // console.log(payload);
       // Send form values to backend for reset password
       const response = await fetch("http://localhost:8000/api/users/reset-password", {
         method: "POST",
@@ -75,7 +76,7 @@ const ResetPassword = () => {
   const errorOutOfTime = () => {
     messageApi.open({
       type: "error",
-      content: enUS.alert_message.out_of_time,
+      content: t('alert_message_out_of_time'),
     });
   };
 
@@ -89,17 +90,17 @@ const ResetPassword = () => {
               {/* Enter new password form */}
               <Form.Item
                 name="new-password"
-                label={enUS.form_label.new_password}
-                tooltip={enUS.form_tooltip.passowrd}
+                label={t('form_label_new_password')}
+                tooltip={t('form_tooltip_passowrd')}
                 rules={[
                   {
                     required: true,
-                    message: enUS.form_message.new_password,
+                    message: t('form_message_new_password'),
                   },
                 ]}
                 hasFeedback
                 validateStatus={isPasswordValid ? "success" : "error"}
-                help={isPasswordValid ? "" : enUS.alert_message.password_invalid}
+                help={isPasswordValid ? "" : t('alert_message_password_invalid')}
               >
                 <Input.Password onChange={handlePasswordChange} autoComplete="new-password" />
               </Form.Item>
@@ -107,13 +108,13 @@ const ResetPassword = () => {
               {/* Enter confirm new password form */}
               <Form.Item
                 name="confirm"
-                label={enUS.form_label.confirm_password}
+                label={t('form_label_confirm_password')}
                 dependencies={["new-password"]}
                 hasFeedback
                 rules={[
                   {
                     required: true,
-                    message: enUS.form_message.new_password_confirm,
+                    message: t('form_message_new_password_confirm'),
                   },
 
                   // Check if the 'confirm password' is empty or 'confirm password' is the same as 'password'
@@ -122,7 +123,7 @@ const ResetPassword = () => {
                       if (!value || getFieldValue("new-password") === value) {
                         return Promise.resolve();
                       }
-                      return Promise.reject(new Error(enUS.form_message.password_not_match));
+                      return Promise.reject(new Error(t('form_message_password_not_match')));
                     },
                   }),
                 ]}
@@ -134,7 +135,7 @@ const ResetPassword = () => {
               <Form.Item>
                 {/* <Link to="/reset-jump"> */}
                 <Button type="primary" disabled={!isPasswordValid} htmlType="submit" size="large" block className="reset-Password">
-                  {enUS.buttons.reset}
+                  {t('button_reset')}
                 </Button>
                 {/* </Link> */}
               </Form.Item>

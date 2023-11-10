@@ -8,64 +8,15 @@ import React, { useState, useEffect } from "react";
 
 import Layout from "../../../Layout";
 
-// const logout = [
-//   {
-//     key: '1',
-//     label: (
-//       <Link to='/login'>
-//         <div>
-//           Log In
-//         </div>
-//       </Link>
-//     ),
-//   },
-// ];
+import LanguageSelector from '../../locales/change';
+import { useTranslation } from 'react-i18next';
 
-// const login = [
-//   {
-//     key: '1',
-//     label: (
-//       <Link to='/personal-info'>
-//         <div>
-//           Personal Info
-//         </div>
-//       </Link>
-//     ),
-//   },
-//   {
-//     key: '2',
-//     label: (
-//       <Link to='/my-booking'>
-//         <div>
-//           My Booking
-//         </div>
-//       </Link>
-//     ),
-//   },
-//   {
-//     key: '3',
-//     label: (
-//       <Link to='/notifications'>
-//         <div>
-//           Notification
-//         </div>
-//       </Link>
-//     ),
-//   },
-//   {
-//     key: '4',
-//     label: (
-//       <Link to='/'>
-//         <div>
-//           Sign out
-//         </div>
-//       </Link>
-//     ),
-//   },
-// ];
+
 
 // This component returns the layout of the web page
 const MembershipLayout = () => {
+  const { t } = useTranslation();
+
   const [messageApi, contextHolder] = message.useMessage();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -98,7 +49,7 @@ const MembershipLayout = () => {
       key: "1",
       label: (
         <Link to="/login">
-          <div>Log In</div>
+          <div>{t('button_login')}</div>
         </Link>
       ),
     },
@@ -110,7 +61,7 @@ const MembershipLayout = () => {
       key: "1",
       label: (
         <Link to="/personal-info">
-          <div>Personal Info</div>
+          <div>{t('button_personal_info')}</div>
         </Link>
       ),
     },
@@ -118,7 +69,7 @@ const MembershipLayout = () => {
       key: "2",
       label: (
         <Link to="/my-booking">
-          <div>My Booking</div>
+          <div>{t('button_booking')}</div>
         </Link>
       ),
     },
@@ -126,7 +77,7 @@ const MembershipLayout = () => {
       key: "3",
       label: (
         <Link to="/notifications">
-          <div>Notification</div>
+          <div>{t('button_notification')}</div>
         </Link>
       ),
     },
@@ -134,7 +85,7 @@ const MembershipLayout = () => {
       key: "4",
       label: (
         <Link to="/">
-          <div>Sign out</div>
+          <div>{t('sign_out')}</div>
         </Link>
       ),
     },
@@ -149,6 +100,7 @@ const MembershipLayout = () => {
             {/* <div className="header-top">
           <div className="web-logo"></div>
           <h1 className="web-name">{enUS.page_name.home_page}</h1> */}
+            <LanguageSelector />
             <div className="login-button-form">
               {/* <Dropdown menu={{items: login,onClick}} placement="bottomRight"> */}
               <Dropdown menu={{ items: isLoggedIn ? login : signout, onClick }} placement="bottomRight">

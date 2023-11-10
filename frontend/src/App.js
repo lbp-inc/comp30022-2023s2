@@ -22,10 +22,10 @@ import AdminPersonalInfo from "./Membership/views/PersonalInfo/admin-personal-in
 import MyBooking from "./Membership/views/MyBooking/my-booking";
 import Notifications from "./Membership/views/Notifications/notifications";
 import AdminNotification from "./Membership/views/Notifications/admin-notification";
-import Content from "./Membership/views/Notifications/content";
+import PersonalInfoContent from "./Membership/views/PersonalInfo/personal-info-content";
 import RegisterJump from "./Membership/views/jump/register-jump";
 import ResetJump from "./Membership/views/jump/reset-jump";
-import PersonalInfoContent from "./Membership/views/PersonalInfo/personal-info-content";
+import NotificationContent from "./Membership/views/Notifications/notification-content";
 import EmailVerification from "./Membership/views/Register/email-Verification";
 import EventsTimetable from './TimeTable/EventsTimetable';
 import UserEventsTimetable from './TimeTable/UserEventsTimetable';
@@ -63,10 +63,10 @@ function App() {
                   <Route path="/my-booking" element={<MyBooking />}></Route>
                   <Route path="/notifications" element={<Notifications />}></Route>
                   <Route path="/admin-notification" element={<AdminNotification />}></Route>
-                  <Route path="/content" element={<Content />}></Route>
+                  <Route path="/content/:username" element={<PersonalInfoContent />}></Route>
                   <Route path="/register-jump" element={<RegisterJump />}></Route>
                   <Route path="/reset-jump" element={<ResetJump />}></Route>
-                  <Route path="/personal-info-content" element={<PersonalInfoContent />}></Route>
+                  <Route path="/notification-content/:notification" element={<NotificationContent />}></Route>
                   <Route path="/email-verification" element={<EmailVerification/>}></Route>
                   <Route path="/admin-timetable" element={<TimeTable/>}></Route>
 

@@ -1,7 +1,7 @@
 import "../../style/personal-info.css"
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Card, Form, Input, DatePicker, Button } from 'antd';
-import { enUS } from "../../locales/en-us";
+import { useTranslation } from 'react-i18next';
 import { useMediaQuery } from 'react-responsive';
 import { useState, useEffect } from "react";
 import moment from 'moment';
@@ -15,6 +15,8 @@ const { Option } = Select;
 
 // This component will display the member's personal information
 const PersonalInfo = () => {
+    const { t } = useTranslation();
+    
     // Check monitor size
     const isDesktop = useMediaQuery({ minWidth: 768 });
 
@@ -27,7 +29,7 @@ const PersonalInfo = () => {
     const saveSuccess = () => {
         messageApi.open({
           type: 'success',
-          content: enUS.message.update_s,
+          content: t('message_update_s'),
         });
     };
  
@@ -64,7 +66,7 @@ const PersonalInfo = () => {
     }, []);
 
     const onFinish = async (values) => {
-        console.log(values)
+        // console.log(values)
         try {
             const dataToSend = {
                 token: localStorage.getItem('token'),
@@ -109,7 +111,7 @@ const PersonalInfo = () => {
             <div className="membership-card">
                 {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>}
 
-                <Card className="content">
+                <Card className="membership-content-main">
                     <div className="personal-content">
                         <div className="avatar">
                             <Avatar size={64} icon={<UserOutlined />}/>
@@ -126,7 +128,7 @@ const PersonalInfo = () => {
                                     <Form.Item 
                                         className="form-item left-align"
                                         name="name"
-                                        label={enUS.form_label.name}
+                                        label= {t('form_label_name')}
                                         initialValue={userInfo.name}
                                         // onChange={handleNameChange}
                                     >
@@ -137,7 +139,7 @@ const PersonalInfo = () => {
                                     <Form.Item
                                         className="form-item left-align"
                                         name="gender"
-                                        label={enUS.form_label.gender}
+                                        label={t('form_label_gender')}
                                         initialValue={userInfo.gender}
                                         // onChange={handleGenderChange}
                                     >
@@ -187,7 +189,7 @@ const PersonalInfo = () => {
                                     <Form.Item
                                         className="form-item left-align"
                                         name="birthday"
-                                        label={enUS.form_label.birthday}
+                                        label={t('form_label_birthday')}
                                         initialValue={userInfo.birthday ? moment(userInfo.birthday) : null}
                                         // onChange={handleBirthdayChange}
                                     >
@@ -198,7 +200,7 @@ const PersonalInfo = () => {
                                     <Form.Item
                                         className="form-item left-align"
                                         name="email"
-                                        label={enUS.form_label.email}
+                                        label={t('form_label_email')}
                                         initialValue={userInfo.email}
                                         // onChange={handleEmailChange}
                                     >
@@ -209,7 +211,7 @@ const PersonalInfo = () => {
                                     <Form.Item 
                                         className="form-item left-align"
                                         name="phone"
-                                        label={enUS.form_label.phone}
+                                        label={t('form_label_phone')}
                                         initialValue={userInfo.phone}
                                         // onChange={handlePhoneChange}
                                     >
@@ -220,7 +222,7 @@ const PersonalInfo = () => {
                                         className="form-item left-align"
                                         label=" " colon={false}
                                     >
-                                        <Button type="primary" htmlType="submit" className="save-button">{enUS.buttons.save}</Button>
+                                        <Button type="primary" htmlType="submit" className="save-button">{t('button_save')}</Button>
                                     </Form.Item>
                                 </Form>
                             )}

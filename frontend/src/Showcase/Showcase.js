@@ -10,13 +10,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleRight } from '@fortawesome/free-solid-svg-icons';
 import { faCircleLeft } from '@fortawesome/free-solid-svg-icons';
 
-import slideImage from '../image/event.webp';
+import gardenNews from '../image/gardennews.jpg';
+import garden1 from '../image/NewImage/garden.webp';
+import garden2 from '../image/NewImage/garden2.webp';
+import garden3 from '../image/NewImage/garden3.jpg';
+
+import gallery1 from '../image/NewImage/g2.jpg';
+import gallery2 from '../image/NewImage/g5.webp';
+import gallery3 from '../image/NewImage/g22.jpg';
+import gallery4 from '../image/NewImage/h.webp';
+import gallery5 from '../image/NewImage/music.jpg';
+import gallery6 from '../image/NewImage/Peacock craft.jpg';
+
 
 function useLoadContentFromDatabase(ref, pageKey) {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get(`http://localhost:8000/api/load/${pageKey}`);
+          const response = await axios.get(`http://localhost:4000/api/load/${pageKey}`);
           if (response.data.success) {
             const { html, css } = response.data;
   
@@ -63,13 +74,20 @@ function Showcase() {
     const Showcaseref = useRef(null);
     useLoadContentFromDatabase(Showcaseref, 'Showcase');
 
-    const slides = [
-        { image: slideImage, text: 'Image 1' },
-        { image: slideImage, text: 'Image 2' },
-        { image: slideImage, text: 'Image 3' },
-        { image: slideImage, text: 'Image 4' },
-        { image: slideImage, text: 'Image 5' },
-        { image: slideImage, text: 'Image 6' },
+    const gardenSlides = [
+        { image: gardenNews, text: 'garden news' },
+        { image: garden1, text: 'garden 1' },
+        { image: garden2, text: 'garden 2' },
+        { image: garden3, text: 'garden 3' },
+    ];
+
+    const gallerySlides = [
+        { image: gallery1, text: 'Image 1' },
+        { image: gallery2, text: 'Image 2' },
+        { image: gallery3, text: 'Image 3' },
+        { image: gallery4, text: 'Image 4' },
+        { image: gallery5, text: 'Image 5' },
+        { image: gallery6, text: 'Image 6' },
     ];
 
     return (
@@ -112,7 +130,7 @@ function Showcase() {
                         }}
                     >
 
-                    {slides.map((slide, index) => (
+                    {gardenSlides.map((slide, index) => (
                         <SwiperSlide key={index}>
                             <img src={slide.image} alt={slide.text}/>
                         </SwiperSlide>
@@ -146,7 +164,7 @@ function Showcase() {
                         }}
                     >
 
-                    {slides.map((slide, index) => (
+                    {gallerySlides.map((slide, index) => (
                         <SwiperSlide key={index}>
                             <img src={slide.image} alt={slide.text}/>
                         </SwiperSlide>
@@ -170,7 +188,7 @@ function Showcase() {
                         }}
                     >
 
-                    {slides.map((slide, index) => (
+                    {gallerySlides.map((slide, index) => (
                         <SwiperSlide key={index}>
                             <img src={slide.image} alt={slide.text}/>
                         </SwiperSlide>

@@ -40,9 +40,6 @@ const BottomPart = () => {
             </Popup>
           </Marker>
         </MapContainer>
-        <Link to="/EditorLogin">
-          <FontAwesomeIcon icon={faScrewdriverWrench} className="editFeature" />
-        </Link>
       </div>
     </div>
   );
