@@ -8,7 +8,7 @@ By Team 107
 | `name`          | `String`       | yes      | Title of activity                                                 |                                    |
 | `subtitle`      | `String`       | yes      | A short description, will be shown in "all activities" page       |                                    |
 | `activity_type` | `String`       | yes      | Type of activity                                                  | course \| event                    |
-| `labels`        | `List<String>` | no       | Category labels, used for filtering                               |                                    |
+| `labels`        | `[String]` | no       | Category labels, used for filtering                               |                                    |
 | `image`         | `String`       | no       | A resource URI pointing to an image (please put in public folder) | /res/courses/Falls and Balance.jpg |
 | `description`   | `String`       | no       | A longer description, will be shown in "details" page             |                                    |
 | `time`          | `Date`         | yes      | Time of the activity                                              |                                    |
