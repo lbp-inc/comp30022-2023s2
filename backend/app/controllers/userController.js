@@ -9,7 +9,7 @@ const JWT_SECRET = "liTq9vasHanieW0Sb8ClegPSs6dZV05xHLKSiEZhPUC4KPSurj0pmJJs66L8
 
 import Course from "../models/courseModel.js";
 import Notification from "../models/notificationModel.js";
-import Message from "../models/messageModel.js";
+// import Message from "../models/messageModel.js";
 
 /**
  * @async
