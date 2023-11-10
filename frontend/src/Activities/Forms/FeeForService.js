@@ -14,8 +14,46 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import './Forms.css';
+import Button from 'react-bootstrap/esm/Button';
 
 const FeeForServiceForm = () => {
+
+    /* Form output fields structure */
+    const [formData, setFormData] = useState({
+        prefix: '',
+        gender: '',
+        firstName: '',
+        surname: '',
+        dob: '',
+        phone: '',
+        email: '',
+        subscribeForBrochure: false,
+        address: '',
+        suburb: '',
+        postcode: '',
+        ecName: '',
+        ecRelationship: '',
+        ecPhone: '',
+        wishVote: '',
+        volunteeringAggreement: null,
+        mcAgreement: '',
+        signature: '', // Not sure about its datatype
+    });
+
+    /* Keep track of input change for fields */
+    const inputChange = (field, value) => {
+        setFormData({
+            ...formData,
+            [field]: value,
+        });
+    };
+
+    /* Submit the form */
+    const submitForm = (form) => {
+        form.preventDefault();
+        // Send it to Activity API
+        window.alert(formData.subscribeForBrochure);  // Test
+    };
     
     function CustomToggle({ children, eventKey }) {
         const [isChecked, setIsChecked] = useState(false);
@@ -45,7 +83,7 @@ const FeeForServiceForm = () => {
                     <h1>Fee-For-Service Form</h1>
                 </div>
 
-                <Form>
+                <Form onSubmit={submitForm}>
                     {/* Form main body */}
                     <Accordion defaultActiveKey="0">
 
@@ -56,7 +94,7 @@ const FeeForServiceForm = () => {
                             <Row>
                                 <Col>
                                     <Form.Label>Prefix</Form.Label>
-                                    <Form.Select aria-label="Default select example">
+                                    <Form.Select aria-label="Default select example" onChange={(e) => inputChange('prefix', e.target.value)}>
                                         <option>Select...</option>
                                         <option value="Mr">Mr</option>
                                         <option value="Mrs">Mrs</option>
@@ -68,7 +106,7 @@ const FeeForServiceForm = () => {
                                 </Col>
                                 <Col>
                                     <Form.Label>Gender</Form.Label>
-                                    <Form.Select aria-label="Default select example">
+                                    <Form.Select aria-label="Default select example"  onChange={(e) => inputChange('gender', e.target.value)}>
                                         <option>Select...</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
@@ -78,34 +116,35 @@ const FeeForServiceForm = () => {
                             </Row>
 
                             <Form.Label></Form.Label>
-                            <FloatingLabel controlId="FFS.fname" label="First Name">
+                            <FloatingLabel controlId="FFS.fname" label="First Name" onChange={(e) => inputChange('firstName', e.target.value)}>
                                 <Form.Control type="name" placeholder="March" />
                             </FloatingLabel><br></br>
-                            <FloatingLabel controlId="FFS.sname" label="Surname">
+                            <FloatingLabel controlId="FFS.sname" label="Surname" onChange={(e) => inputChange('suename', e.target.value)}>
                                 <Form.Control type="name" placeholder="Seven" />
                             </FloatingLabel><br></br>
-                            <FloatingLabel controlId="FFS.dob" label="Date of Birth">
+                            <FloatingLabel controlId="FFS.dob" label="Date of Birth" onChange={(e) => inputChange('dob', e.target.value)}>
                                 <Form.Control type="date" placeholder="Seven" />
                             </FloatingLabel><br></br>
-                            <FloatingLabel controlId="FFS.phoneNumber" label="Phone Number">
+                            <FloatingLabel controlId="FFS.phoneNumber" label="Phone Number" onChange={(e) => inputChange('phone', e.target.value)}>
                                 <Form.Control type="phone" placeholder="0412345678" />
                             </FloatingLabel><br></br>
-                            <FloatingLabel controlId="FFS.email" label="Email Address">
+                            <FloatingLabel controlId="FFS.email" label="Email Address" onChange={(e) => inputChange('email', e.target.value)}>
                                 <Form.Control type="email" placeholder="iLoveCos@starrail.me" />
                             </FloatingLabel>
                             <Form.Check
                                 type="switch"
-                                id="custom-switch"
+                                id="FFS.subscribeForBrochure"
                                 label="Subscribe for next Brochure? (Also available on our website!)"
+                                onChange={(e) => inputChange('subscribeForBrochure', e.target.checked)}
                             /><br></br>
                             <FloatingLabel controlId="FFS.address" label="Address">
-                                <Form.Control type="address" placeholder="15 Chelsea Rd" />
+                                <Form.Control type="address" placeholder="15 Chelsea Rd" onChange={(e) => inputChange('address', e.target.value)} />
                             </FloatingLabel><br></br>
                             <FloatingLabel controlId="FFS.suburb" label="Suburb">
-                                <Form.Control type="suburb" placeholder="Chelsea" />
+                                <Form.Control type="suburb" placeholder="Chelsea" onChange={(e) => inputChange('suburb', e.target.value)} />
                             </FloatingLabel><br></br>
                             <FloatingLabel controlId="FFS.postcode" label="Post Code">
-                                <Form.Control type="postcode" placeholder="3196" />
+                                <Form.Control type="postcode" placeholder="3196" onChange={(e) => inputChange('postcode', e.target.value)} />
                             </FloatingLabel>
                             </Accordion.Body>
                         </Accordion.Item>
@@ -115,13 +154,13 @@ const FeeForServiceForm = () => {
                             <Accordion.Header>Emergency Contact</Accordion.Header>
                             <Accordion.Body>
                                 <FloatingLabel controlId="FFS.ECname" label="Emergency Contact Name">
-                                    <Form.Control type="name" placeholder="Pom-Pom" />
+                                    <Form.Control type="name" placeholder="Pom-Pom" onChange={(e) => inputChange('ecName', e.target.value)} />
                                 </FloatingLabel><br></br>
                                 <FloatingLabel controlId="FFS.ECrelationship" label="Relationship to you">
-                                    <Form.Control type="relationship" placeholder="" />
+                                    <Form.Control type="relationship" placeholder="Star Train Conductor" onChange={(e) => inputChange('ecRelationship', e.target.value)} />
                                 </FloatingLabel><br></br>
                                 <FloatingLabel controlId="FFS.ECphoneNumber" label="Phone Number">
-                                    <Form.Control type="phone" placeholder="0412345678" />
+                                    <Form.Control type="phone" placeholder="0412345678" onChange={(e) => inputChange('ecPhone', e.target.value)} />
                                 </FloatingLabel>
                             </Accordion.Body>
                         </Accordion.Item>
@@ -138,6 +177,7 @@ const FeeForServiceForm = () => {
                                     type={'checkbox'}
                                     id={`FFS.wishVoting`}
                                     label={`I wish to apply for voting membership. (Information is available at reception)`}
+                                    onChange={(e) => inputChange('wishVote', e.target.value)}
                                 /> <br></br>
                                 <h4> <u> Voluntering </u> </h4>
                                 <Accordion defaultActiveKey="">
@@ -155,20 +195,24 @@ const FeeForServiceForm = () => {
                                                 <p>
                                                     Allow photographs/videos of me to be taken, or any of the written work that is completed as part of my classes at Longbeach PLACE, to be used for display on TV screens, web pages or brochures/posters, video/audio, newsletters, newspaper articles or Annual Reports. 
                                                 </p>
-                                                <Form.Check
-                                                    inline
-                                                    name = 'volunteerAgreement'
-                                                    type={'radio'}
-                                                    id={`FFS.volunteerAggrement`}
-                                                    label={`Yes I do`}
-                                                />
-                                                <Form.Check
-                                                    inline
-                                                    name = 'volunteerAgreement'
-                                                    type={'radio'}
-                                                    id={`FFS.volunteerAggrement`}
-                                                    label={`No I don't`}
-                                                />
+                                                <Form.Group>
+                                                    <Form.Check
+                                                        inline
+                                                        name = 'volunteerAgreement'
+                                                        type={'radio'}
+                                                        id={`FFS.volunteerAggrement`}
+                                                        label={`Yes I do`}
+                                                        onChange={() => inputChange('volunteeringAggreement', true)}
+                                                    />
+                                                    <Form.Check
+                                                        inline
+                                                        name = 'volunteerAgreement'
+                                                        type={'radio'}
+                                                        id={`FFS.volunteerAggrement`}
+                                                        label={`No I don't`}
+                                                        onChange={() => inputChange('volunteeringAggreement', false)}
+                                                    />
+                                                </Form.Group>
                                             </Card.Body>
                                         </Accordion.Collapse>
                                     </Card>
@@ -199,6 +243,7 @@ const FeeForServiceForm = () => {
                                     type={'checkbox'}
                                     id={`FFS.MCCAggrement`}
                                     label={`I have read and agree to abide by the Member's Code.`}
+                                    onChange={(e) => inputChange('mcAgreement', e.target.value)}
                                 />
                             </Accordion.Body>
                         </Accordion.Item>
@@ -213,6 +258,8 @@ const FeeForServiceForm = () => {
                     <Form.Text id="PaymentNotice" muted>
                         This registration may require a payment for few dollars.<br></br>
                     </Form.Text>
+                    {/* Submit Button */}
+                    <Button type="submit">Test Output!</Button>
                 </Form>
             </div>
         </>

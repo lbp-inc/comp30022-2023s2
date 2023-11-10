@@ -292,54 +292,56 @@ const ACFEForm = () => {
                                 <Form.Text muted>
                                     <i> You may tick none or multiple </i>
                                 </Form.Text><br/>
-                                <Form.Check
-                                    inline
-                                    type={'checkbox'}
-                                    id={`ACFE.disVision`}
-                                    label={`Vision`}
-                                />
-                                <Form.Check
-                                    inline
-                                    type={'checkbox'}
-                                    id={`ACFE.disHear`}
-                                    label={`Hearing/Deaf`}
-                                />
-                                <Form.Check
-                                    inline
-                                    type={'checkbox'}
-                                    id={`ACFE.disIntell`}
-                                    label={`Intellectual`}
-                                />
-                                <Form.Check
-                                    inline
-                                    type={'checkbox'}
-                                    id={`ACFE.disBrain`}
-                                    label={`Acquired Brain Impairment`}
-                                />
-                                <Form.Check
-                                    inline
-                                    type={'checkbox'}
-                                    id={`ACFE.disMental`}
-                                    label={`Mental Illness`}
-                                />
-                                <Form.Check
-                                    inline
-                                    type={'checkbox'}
-                                    id={`ACFE.disLearn`}
-                                    label={`Learning`}
-                                />
-                                <Form.Check
-                                    inline
-                                    type={'checkbox'}
-                                    id={`ACFE.disPhysical`}
-                                    label={`Physical`}
-                                />
-                                <Form.Check
-                                    inline
-                                    type={'checkbox'}
-                                    id={`ACFE.disMed`}
-                                    label={`Medical Condition`}
-                                /> <br/>
+                                <Form.Group>
+                                    <Form.Check
+                                        inline
+                                        type={'checkbox'}
+                                        id={`ACFE.disVision`}
+                                        label={`Vision`}
+                                    />
+                                    <Form.Check
+                                        inline
+                                        type={'checkbox'}
+                                        id={`ACFE.disHear`}
+                                        label={`Hearing/Deaf`}
+                                    />
+                                    <Form.Check
+                                        inline
+                                        type={'checkbox'}
+                                        id={`ACFE.disIntell`}
+                                        label={`Intellectual`}
+                                    />
+                                    <Form.Check
+                                        inline
+                                        type={'checkbox'}
+                                        id={`ACFE.disBrain`}
+                                        label={`Acquired Brain Impairment`}
+                                    />
+                                    <Form.Check
+                                        inline
+                                        type={'checkbox'}
+                                        id={`ACFE.disMental`}
+                                        label={`Mental Illness`}
+                                    />
+                                    <Form.Check
+                                        inline
+                                        type={'checkbox'}
+                                        id={`ACFE.disLearn`}
+                                        label={`Learning`}
+                                    />
+                                    <Form.Check
+                                        inline
+                                        type={'checkbox'}
+                                        id={`ACFE.disPhysical`}
+                                        label={`Physical`}
+                                    />
+                                    <Form.Check
+                                        inline
+                                        type={'checkbox'}
+                                        id={`ACFE.disMed`}
+                                        label={`Medical Condition`}
+                                    /> <br/>
+                                </Form.Group>
                                 <Form.Group>
                                     <Form.Label> Do you have a condition that may affect your participation in class?  </Form.Label>
                                     <Form.Check
