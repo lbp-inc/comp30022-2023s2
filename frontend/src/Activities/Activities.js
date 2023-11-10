@@ -7,6 +7,7 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import FeeForServiceForm from "./Forms/FeeForService";
+import ACFEForm from './Forms/ACFE_Form';
 
 function useLoadContentFromDatabase(ref, pageKey) {
     const backendUrl  = 'http://localhost:8000';
@@ -50,19 +51,19 @@ function Activities() {
         {id: 5, name: 'English'}
     ];
 
-    const [courses, setCourses] = useState([]);
+    const [activities, setActivities] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch('http://localhost:8000/api/courses');
+                const response = await fetch('http://localhost:8000/api/activities');
 
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
 
                 const data = await response.json();
-                setCourses(data);
+                setActivities(data);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -110,14 +111,14 @@ function Activities() {
 
                 <div className='coursesContainer'>
                     <ul>
-                        {courses.map(course => (
-                            <li key={course.id} className={(activeTab === 'All' || course.type === activeTab) ? 'activeCourse' : 'unactiveCourse'}>
-                                <img src={course.image} alt={course.name}></img>
-                                <h2>{course.name}</h2>
-                                <p className='courseDescription'>{course.description}</p>
-                                <p>{course.date}</p>
-                                <p>{course.duration}</p>
-                                <p>${course.cost}</p>
+                        {activities.map(activity => (
+                            <li key={activity.id} className={(activeTab === 'All' || activity.type === activeTab) ? 'activeCourse' : 'unactiveCourse'}>
+                                <img src={activity.image} alt={activity.name}></img>
+                                <h2>{activity.name}</h2>
+                                <p className='courseDescription'>{activity.subtitle}</p>
+                                <p>{activity.time}</p>
+                                <p>{activity.duration}</p>
+                                <p>${activity.cost}</p>
                                 <button onClick={handleShow}>Book Now</button> {/*() => routeChange("/fee_for_service_form")*/}
                             </li>
                         ))}
@@ -131,7 +132,7 @@ function Activities() {
                 <Modal.Header closeButton>
                     <Modal.Title>Book Now</Modal.Title>
                 </Modal.Header>
-                <Modal.Body><FeeForServiceForm/></Modal.Body>
+                <Modal.Body><ACFEForm/></Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close

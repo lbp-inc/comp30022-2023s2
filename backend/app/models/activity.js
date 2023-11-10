@@ -32,11 +32,13 @@ const activitySchema = mongoose.Schema(
       // A longer description, will be shown in details page
     description: {
       type: String,
-      required: true
     },
 
       // Time and duration of the activity
-    time: Date,
+    time: {
+      type: Date,
+      required: true
+    },
     duration: {
       type: Number,
       required: true
