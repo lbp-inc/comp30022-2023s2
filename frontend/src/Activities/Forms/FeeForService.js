@@ -12,9 +12,9 @@ import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/esm/Button';
 
 import './Forms.css';
-import Button from 'react-bootstrap/esm/Button';
 
 const FeeForServiceForm = () => {
 
@@ -37,7 +37,7 @@ const FeeForServiceForm = () => {
         wishVote: '',
         volunteeringAggreement: null,
         mcAgreement: '',
-        signature: '', // Not sure about its datatype
+        signature: '' // Not sure about its datatype
     });
 
     /* Keep track of input change for fields */
@@ -52,7 +52,7 @@ const FeeForServiceForm = () => {
     const submitForm = (form) => {
         form.preventDefault();
         // Send it to Activity API
-        window.alert(formData.subscribeForBrochure);  // Test
+        window.alert(formData.dob);  // Test
     };
     
     function CustomToggle({ children, eventKey }) {
@@ -177,7 +177,7 @@ const FeeForServiceForm = () => {
                                     type={'checkbox'}
                                     id={`FFS.wishVoting`}
                                     label={`I wish to apply for voting membership. (Information is available at reception)`}
-                                    onChange={(e) => inputChange('wishVote', e.target.value)}
+                                    onChange={(e) => inputChange('wishVote', e.target.checked)}
                                 /> <br></br>
                                 <h4> <u> Voluntering </u> </h4>
                                 <Accordion defaultActiveKey="">
@@ -243,7 +243,7 @@ const FeeForServiceForm = () => {
                                     type={'checkbox'}
                                     id={`FFS.MCCAggrement`}
                                     label={`I have read and agree to abide by the Member's Code.`}
-                                    onChange={(e) => inputChange('mcAgreement', e.target.value)}
+                                    onChange={(e) => inputChange('mcAgreement', e.target.checked)}
                                 />
                             </Accordion.Body>
                         </Accordion.Item>
@@ -258,7 +258,8 @@ const FeeForServiceForm = () => {
                     <Form.Text id="PaymentNotice" muted>
                         This registration may require a payment for few dollars.<br></br>
                     </Form.Text>
-                    {/* Submit Button */}
+
+                    {/* Tester Button */}
                     <Button type="submit">Test Output!</Button>
                 </Form>
             </div>
