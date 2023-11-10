@@ -70,7 +70,7 @@ const ACFEForm = () => {
         // T&Cs
         wishVoting: false,
         acknowlegementAggreement: false,
-        signature: '', // Not sure about its datatype
+        signature: '',                          // Signature store as data URL
         guardianName: '',
         guardianSignature: ''
     });
@@ -81,6 +81,28 @@ const ACFEForm = () => {
             ...formData,
             [field]: value,
         });
+    };
+
+    // refrence to signatures
+    const applicantSignatureRef = React.createRef();
+    const guardianSignatureRef = React.createRef();
+    
+    const clearSignature = (sigType) => {
+        if (sigType === 'applicant')
+            applicantSignatureRef.current.clear();
+        if (sigType === 'guardian')
+            guardianSignatureRef.current.clear();
+    };
+    
+    const saveSignature = (sigType) => {
+        if (sigType === 'applicant'){
+            const imageData = applicantSignatureRef.current.toDataURL();
+            inputChange('signature', imageData);
+        }
+        if (sigType === 'guardian'){
+            const imageData = guardianSignatureRef.current.toDataURL();
+            inputChange('guardianSignature', imageData);
+        }
     };
 
     /* Handle disability multiselection */
@@ -1207,20 +1229,26 @@ const ACFEForm = () => {
                                     onChange={() => inputChange('acknowlegementAggreement', true)}
                                 />
                                 {/* Signature for Applicant */}
-                                <FloatingLabel controlId="FFS.Signature" label="Signature">
-                                    <SignatureCanvas penColor='blue'
-                                                    canvasProps={{width: 500, height: 200, className: 'sigCanvas'}} />
-                                </FloatingLabel> <br/>
+                                <FloatingLabel controlId="ACFE.Signature" label="Signature">
+                                    <SignatureCanvas penColor='black' canvasProps={{width: 500, height: 200, className: 'sigCanvas'}} 
+                                        onEnd={() => saveSignature('applicant')} ref={applicantSignatureRef} />
+                                </FloatingLabel>
+                                <Button variant="secondary" size="sm" className="float-end" onClick={() => clearSignature('applicant')}>
+                                    Clear
+                                </Button> <br/>
 
                                 <b> For Applicant Under 18 Years of Age: </b><br/>
                                 <FloatingLabel controlId="ACFE.guardianName" label="Parent/Guardian Name">
                                     <Form.Control type="name" placeholder='' onChange={(e) => inputChange('guardianName', e.target.value)} />
                                 </FloatingLabel>
                                 {/* Signature for Parent/Guardian */}
-                                <FloatingLabel controlId="FFS.Signature" label="Signature">
-                                    <SignatureCanvas penColor='blue'
-                                                    canvasProps={{width: 500, height: 200, className: 'sigCanvas'}} />
+                                <FloatingLabel controlId="ACFE.Signature" label="Signature">
+                                    <SignatureCanvas penColor='black' canvasProps={{width: 500, height: 200, className: 'sigCanvas'}} 
+                                        onEnd={() => saveSignature('guardian')} ref={guardianSignatureRef} />
                                 </FloatingLabel>
+                                <Button variant="secondary" size="sm" className="float-end" onClick={() => clearSignature('guardian')}>
+                                    Clear
+                                </Button> <br/>
                             </Accordion.Body>
                         </Accordion.Item>
                     </Accordion>

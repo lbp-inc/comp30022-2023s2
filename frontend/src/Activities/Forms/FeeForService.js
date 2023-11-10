@@ -37,7 +37,7 @@ const FeeForServiceForm = () => {
         wishVote: '',
         volunteeringAggreement: null,
         mcAgreement: '',
-        signature: '' // Not sure about its datatype
+        signature: ''                       // store as data URL (base64 png)
     });
 
     /* Keep track of input change for fields */
@@ -48,11 +48,22 @@ const FeeForServiceForm = () => {
         });
     };
 
+    const signatureRef = React.createRef();
+    
+    const clearSignature = () => {
+        signatureRef.current.clear();
+    };
+    
+    const saveSignature = () => {
+        const imageData = signatureRef.current.toDataURL();
+        inputChange('signature', imageData);
+    };
+
     /* Submit the form */
     const submitForm = (form) => {
         form.preventDefault();
         // Send it to Activity API
-        window.alert(formData.dob);  // Test
+        window.alert(formData.signature);  // Test
     };
     
     function CustomToggle({ children, eventKey }) {
@@ -244,17 +255,19 @@ const FeeForServiceForm = () => {
                                     id={`FFS.MCCAggrement`}
                                     label={`I have read and agree to abide by the Member's Code.`}
                                     onChange={(e) => inputChange('mcAgreement', e.target.checked)}
-                                />
+                                /><br/>
+                                {/* Signature */}
+                                <FloatingLabel controlId="FFS.Signature" label="Signature">
+                                    <SignatureCanvas penColor='black' canvasProps={{width: 500, height: 200, className: 'sigCanvas'}} 
+                                        onEnd={saveSignature} ref={signatureRef} />
+                                </FloatingLabel>
+                                <Button variant="secondary" size="sm" className="float-end" onClick={clearSignature}>
+                                    Clear
+                                </Button> <br/>
                             </Accordion.Body>
                         </Accordion.Item>
                     </Accordion><br></br>
 
-                    {/* Signature */}
-                    <FloatingLabel controlId="FFS.Signature" label="Signature">
-                        <SignatureCanvas penColor='blue'
-                                         canvasProps={{width: 500, height: 200, className: 'sigCanvas'}} />
-                    </FloatingLabel>
-                    
                     <Form.Text id="PaymentNotice" muted>
                         This registration may require a payment for few dollars.<br></br>
                     </Form.Text>
