@@ -128,7 +128,7 @@ const ACFEForm = () => {
     const submitForm = (form) => {
         form.preventDefault();
         // Send it to Activity API
-        window.alert(formData.bornCountry);  // Test
+        window.alert(formData.guardianSignature);  // Test
     };
 
     return (
@@ -488,9 +488,9 @@ const ACFEForm = () => {
                                         label={`Medical Condition`}
                                         onChange={() => disabilityChange("Medical")}
                                     /> <br/>
-                                </Form.Group>
+                                </Form.Group> <br/>
                                 <Form.Group>
-                                    <Form.Label> Do you have a condition that may affect your participation in class?  </Form.Label>
+                                    <Form.Label> Do you have a condition that may affect your participation in class?  </Form.Label> <br/>
                                     <Form.Check
                                         inline
                                         type={'radio'}
@@ -694,7 +694,7 @@ const ACFEForm = () => {
                                     />
                                 </Form.Group>
                                 <Form.Group>
-                                    <Form.Label> <b> What kind of qualification do you hold? </b> </Form.Label>
+                                    <Form.Label> <b> What kind of qualification do you hold? </b> </Form.Label> <br/>
                                     <Form.Check
                                         inline
                                         type={'radio'}
@@ -1079,7 +1079,7 @@ const ACFEForm = () => {
                                     />
                                 </Form.Group> <br/>
                                 <Form.Group>
-                                    <Form.Label> <b> Where did you find out about this course? </b> </Form.Label>
+                                    <Form.Label> <b> Where did you find out about this course? </b> </Form.Label> <br />
                                     <Form.Check
                                         inline
                                         type={'radio'}
