@@ -70,7 +70,7 @@ function Navbar() {
                           {activeDropdown === 'activities' && (
                               <div className="dropdownContent">
                                   <table>
-                                      <tr><td>Timetable</td></tr>
+                                      <tr><Link to="/UserTimetable"><td>Timetable</td></Link></tr>
                                       <tr><td>Brochure</td></tr>
                                   </table>
                               </div>

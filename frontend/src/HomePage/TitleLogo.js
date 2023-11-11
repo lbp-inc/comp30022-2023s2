@@ -11,7 +11,7 @@ function TitleLogo() {
             </div>
 
             <div className="title">
-                LongBeach Place Inc
+                Longbeach Place Inc.
             </div>
 
         </div>

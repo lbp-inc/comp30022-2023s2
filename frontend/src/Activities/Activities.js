@@ -1,17 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from "react-router-dom";
 import Layout from '../Layout';
 import './Activities.css';
 import courseImage from '../image/event.webp';
 import axios from 'axios';
-
-import FallsAndBalanceImage from '../image/NewImage/Falls and Balance.jpg';
-import MicrosoftApplicationsImage from '../image/NewImage/Microsoft Applications.jpg';
-import WalkAndTalkImage from '../image/NewImage/Walk and Talk.jpg';
-import XeroImage from '../image/NewImage/Xero.jpg';
-
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import FeeForServiceForm from "./Forms/FeeForService";
+import ACFEForm from './Forms/ACFE_Form';
 
 function useLoadContentFromDatabase(ref, pageKey) {
-    const backendUrl  = 'http://localhost:5000';
+    const backendUrl  = 'http://localhost:8000';
 
     useEffect(() => {
       const fetchData = async () => {
@@ -38,27 +37,9 @@ function useLoadContentFromDatabase(ref, pageKey) {
     }, [ref, pageKey, backendUrl]);
   }
 
-// function useLoadContentFromLocalStorage(ref, pageKey) {
-    
-//     useEffect(() => {
-//     //  const mapContainer = document.getElementById(mapID); 
-//       const savedHtml = localStorage.getItem(`savedHtml${pageKey}`);
-//       const savedCss = localStorage.getItem(`savedCss${pageKey}`);
-//       if (savedHtml && savedCss && ref.current) {
-//         ref.current.innerHTML = savedHtml;
-
-//         const styleElement = document.createElement('style');
-//         styleElement.type = 'text/css';
-//         styleElement.innerHTML = savedCss;
-//         document.head.appendChild(styleElement);
-
-//         }
-//     }, [ref, pageKey]);
-//   }
-
 function Activities() {
     const activitiesRef = useRef(null);
-    useLoadContentFromDatabase(activitiesRef, 'Activities');
+    //useLoadContentFromDatabase(activitiesRef, 'Activities');
 
     const [activeTab, setActiveTab] = useState('All');
 
@@ -70,79 +51,49 @@ function Activities() {
         {id: 5, name: 'English'}
     ];
 
-    const courses = [
-        {
-            id: 1, 
-            courseName: 'Course 1', 
-            type: '', 
-            Image: courseImage, 
-            description: 'description',
-            date: 'date',
-            duration: 'hours',
-            fee: '$'
-        },
-        {
-            id: 2, 
-            courseName: 'Falls and Balance', 
-            type: 'Health and Wellbeing', 
-            Image: FallsAndBalanceImage, 
-            description: 'Learn drama and acting skills with creativity and have fun while doing...',
-            date: 'date',
-            duration: 'hours',
-            fee: '$'
-        },
-        {
-            id: 3, 
-            courseName: 'Microsoft Applications', 
-            type: 'Digital Skills', 
-            Image: MicrosoftApplicationsImage, 
-            description: 'description',
-            date: 'date',
-            duration: 'hours',
-            fee: '$'
-        },
-        {
-            id: 4, 
-            courseName: 'Xero', 
-            type: 'Digital Skills', 
-            Image: XeroImage, 
-            description: 'description',
-            date: 'date',
-            duration: 'hours',
-            fee: '$'
-        },
-        {
-            id: 5, 
-            courseName: 'Walk and Talk', 
-            type: 'Social and Community Groups', 
-            Image: WalkAndTalkImage, 
-            description: 'description',
-            date: 'date',
-            duration: 'hours',
-            fee: '$'
-        },
-        {
-            id: 6, 
-            courseName: 'English Course', 
-            type: 'English', 
-            Image: courseImage, 
-            description: 'description',
-            date: 'date',
-            duration: 'hours',
-            fee: '$'
+    const [activities, setActivities] = useState([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await fetch('http://localhost:8000/api/activities');
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                setActivities(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
         }
-    ];
+
+        fetchData();
+    }, []); // Empty dependency array, so it runs only once when the component mounts
+
+    let navigate = useNavigate();
+    const routeChange = (path) => navigate(path);
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
 
     return (
 
         <Layout>
 
         <div ref={activitiesRef} id="Activities">
-
+            <div
+                className="modal show"
+                style={{ display: 'block', position: 'initial' }}
+            >
+            </div>
         <div id="content-only">
             <div className='activitiesPageContainer'>
                 <div className='activitiesbanner'>
-                    <h1>Activities</h1>
+                    <h1 className='activitiesname'>Activities</h1>
                 </div>
 
                 <div className='categoryContainer'>
@@ -160,15 +111,15 @@ function Activities() {
 
                 <div className='coursesContainer'>
                     <ul>
-                        {courses.map(course => (
-                            <li key={course.id} className={(activeTab === 'All' || course.type === activeTab) ? 'activeCourse' : 'unactiveCourse'}>
-                                <img src={course.Image} alt={course.courseName}></img>
-                                <h2>{course.courseName}</h2>
-                                <p className='courseDescription'>{course.description}</p>
-                                <p>{course.date}</p>
-                                <p>{course.duration}</p>
-                                <p>{course.fee}</p>
-                                <button>Book Now</button>
+                        {activities.map(activity => (
+                            <li key={activity.id} className={(activeTab === 'All' || activity.type === activeTab) ? 'activeCourse' : 'unactiveCourse'}>
+                                <img src={activity.image} alt={activity.name}></img>
+                                <h2>{activity.name}</h2>
+                                <p className='courseDescription'>{activity.subtitle}</p>
+                                <p>{activity.time}</p>
+                                <p>{activity.duration}</p>
+                                <p>${activity.cost}</p>
+                                <button onClick={handleShow}>Book Now</button> {/*() => routeChange("/fee_for_service_form")*/}
                             </li>
                         ))}
                     </ul>
@@ -177,8 +128,22 @@ function Activities() {
             </div>
         </div>
         </div>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Book Now</Modal.Title>
+                </Modal.Header>
+                <Modal.Body><ACFEForm/></Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" >
+                        Next &gt;
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Layout>
-        
+
     );
 }
 

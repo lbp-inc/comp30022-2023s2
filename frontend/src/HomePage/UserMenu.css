@@ -33,12 +33,12 @@
 
 @media screen and (max-width: 950px) {
     .userMenuContainer {
-        right: 30px; /* 调整右边距以适应小屏幕 */
+        right: 30px;
         top: 50px;
     }
 
     .userIcon {
-        font-size: 30px; /* 进一步缩小图标大小 */
+        font-size: 30px;
     }
 
     .dropdownMenu {
@@ -46,18 +46,18 @@
     }
 
     .menuItem {
-        font-size: 1pt; /* 进一步缩小字体大小 */
+        font-size: 1pt;
     }
 }
 
 @media screen and (max-width: 600px) {
     .userMenuContainer {
-        right: 10px; /* 调整右边距以适应小屏幕 */
+        right: 10px;
         top: 25px;
     }
 
     .userIcon {
-        font-size: 27px; /* 进一步缩小图标大小 */
+        font-size: 27px;
     }
 
     .menuItem {
@@ -70,12 +70,12 @@
 
 @media screen and (max-width: 400px) {
     .userMenuContainer {
-        right: 10px; /* 调整右边距以适应小屏幕 */
+        right: 10px; 
         top: 25px;
     }
 
     .userIcon {
-        font-size: 25px; /* 进一步缩小图标大小 */
+        font-size: 25px; 
     }
 
     .menuItem {

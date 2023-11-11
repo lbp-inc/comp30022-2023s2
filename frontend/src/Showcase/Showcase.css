@@ -10,7 +10,7 @@
 .showcasebanner {
     height: 500px;
     width: 100%;
-    background-image: url('../image/NewImage/h.webp');
+    background-image: url('../image/NewImage/Dot Lyn Margot (1).jpg');
     background-size: cover;
   }
   .showcasebanner h1 {
@@ -30,9 +30,41 @@
 
 .enjoy {
     padding: 50px 5%;
-    font-size: 20px;
-    text-align: center;
+    font-size: 30px;
+    text-align: left;
     color: rgb(80, 80, 80);
+}
+
+.enjoy1 {
+    padding: 50px 5%;
+    font-size: 30px;
+    text-align: center;
+    color: #D89D5B
+}
+
+.enjoy2 {
+    margin-top: 50px;
+    font-size: 26px;
+    color: black;
+}
+
+.section2 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.enjoyText{
+    width: 50%;
+    padding: 20px 5%;
+    color: rgb(80, 80, 80);
+    font-size: 28px;
+}
+
+.enjoyPic {
+    width: 30%;
+    height: 500px;
 }
 
 .gallery {
@@ -42,4 +74,35 @@
     color: #fcc846;
     text-align: center;
     font-size: 36px;
+}
+.galleryItemResponsive {
+    display: none;
+}
+
+@media screen and (max-width: 800px) {
+    .enjoy {
+        font-size: 15px;
+        padding: 20px;
+    }
+    .enjoy1 {
+        font-size: 15px;
+    }
+    
+    .enjoy2 {
+        font-size: 13px;
+    }
+    
+    .enjoyText{
+        font-size: 13px;
+    }
+    
+    .enjoyPic{
+        display: none;
+    }
+    .galleryItem {
+        display: none;
+    }
+    .galleryItemResponsive {
+        display: block;
+    }
 }

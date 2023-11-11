@@ -1,12 +1,14 @@
 import { Card, Form, Input, Button, Checkbox, message } from "antd"
 import '../../style/register.css'
-import { enUS } from "../../locales/en-us"
+import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 
 import Layout from '../../../Layout';
 
 // This component returns a registration form
 const Register = () => {
+    const { t } = useTranslation();
+
     const [form] = Form.useForm();
 
     const [messageApi, contextHolder] = message.useMessage();
@@ -91,21 +93,21 @@ const Register = () => {
     const errorUsername = () => {
         messageApi.open({
           type: 'error',
-          content: enUS.alert_message.username_exist,
+          content: t('alert_message_username_exist'),
         });
     };
 
     const errorEmail = () => {
         messageApi.open({
           type: 'error',
-          content: enUS.alert_message.email_exist,
+          content: t('alert_message_email_exist'),
         });
     };
 
     const errorUE = () => {
         messageApi.open({
           type: 'error',
-          content: enUS.alert_message.ue_exist,
+          content: t('alert_message_ue_exist'),
         });
     };
 
@@ -124,18 +126,18 @@ const Register = () => {
                     {/* Username form */}
                     <Form.Item
                         name="username"
-                        label={enUS.form_label.username}
-                        tooltip={enUS.form_tooltip.username}
+                        label={t('form_label_username')}
+                        tooltip={t('form_tooltip_username')}
                         rules={[
                         {
                             required: true,
-                            message: enUS.form_message.username,
+                            message: t('form_message_username'),
                             whitespace: true,
                         },
                         ]}
                         hasFeedback
                         validateStatus={isUsernameValid ? "success" : "error"}
-                        help={isUsernameValid ? "" : enUS.alert_message.username_space}
+                        help={isUsernameValid ? "" : t('alert_message_username_space')}
                     >
                         <Input onChange={onUsernameChange} autoComplete="username"/>
                     </Form.Item>
@@ -143,15 +145,15 @@ const Register = () => {
                     {/* Email form */}
                     <Form.Item
                         name="email"
-                        label={enUS.form_label.email}
+                        label={t('form_label_email')}
                         rules={[
                         {
                             type: 'email',
-                            message: enUS.form_message.email_not_valid,
+                            message: t('form_message_email_not_valid'),
                         },
                         {
                             required: true,
-                            message: enUS.form_message.email,
+                            message: t('form_message_email'),
                         },
                         ]}
                     >
@@ -160,17 +162,17 @@ const Register = () => {
                     
                     <Form.Item
                         name="password"
-                        label={enUS.form_label.password}
-                        tooltip={enUS.form_tooltip.passowrd}
+                        label={t('form_label_password')}
+                        tooltip={t('form_tooltip_passowrd')}
                         rules={[
                         {
                             required: true,
-                            message: enUS.form_message.password,
+                            message: t('form_message_password'),
                         },
                         ]}
                         hasFeedback
                         validateStatus={isPasswordValid ? "success" : "error"}
-                        help={isPasswordValid ? "" : enUS.alert_message.password_invalid}
+                        help={isPasswordValid ? "" : t('alert_message_password_invalid')}
                     >
                         <Input.Password 
                             onChange={handlePasswordChange}
@@ -181,13 +183,13 @@ const Register = () => {
                     {/* Enter confirm new password form */}
                     <Form.Item
                         name="confirm"
-                        label={enUS.form_label.confirm_password}
+                        label={t('form_label_confirm_password')}
                         dependencies={['password']}
                         hasFeedback
                         rules={[
                         {
                             required: true,
-                            message: enUS.form_message.password_confirm,
+                            message: t('form_message_password_confirm'),
                         },
 
                         // Check if the 'confirm password' is empty or 'confirm password' is the same as 'password'
@@ -196,7 +198,7 @@ const Register = () => {
                             if (!value || getFieldValue('password') === value) {
                                 return Promise.resolve();
                             }
-                            return Promise.reject(new Error(enUS.form_message.password_not_match));
+                            return Promise.reject(new Error(t('form_message_password_not_match')));
                             },
                         }),
                         ]}
@@ -211,19 +213,19 @@ const Register = () => {
                         rules={[
                         {
                             validator: (_, value) =>
-                            value ? Promise.resolve() : Promise.reject(new Error(enUS.form_message.agreement)),
+                            value ? Promise.resolve() : Promise.reject(new Error(t('form_message_agreement'))),
                         },
                         ]}
                     >
                         <Checkbox>
-                            {enUS.link.agree} <a href="/">{enUS.link.agreement}</a>
+                            {t('link_agree')} <a href="/">{t('link_agreement')}</a>
                         </Checkbox>
                     </Form.Item>
                     
                     {/* Submit button */}
                     <Form.Item>
                         <Button type="primary" disabled={!(isUsernameValid && isPasswordValid)} htmlType="submit" size="large" block className="register-button">
-                            {enUS.buttons.register_}
+                            {t('button_register_')}
                         </Button>
                     </Form.Item>
                 </Form>

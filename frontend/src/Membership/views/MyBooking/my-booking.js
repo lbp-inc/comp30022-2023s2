@@ -1,5 +1,5 @@
 import { Card, Table, Tooltip } from "antd";
-import { enUS } from "../../locales/en-us";
+import { useTranslation } from 'react-i18next';
 import { useMediaQuery } from "react-responsive";
 import AdminSider from "../../components/admin-sider";
 import AdminDrawerSider from "../../components/admin-drawer-sider";
@@ -8,60 +8,6 @@ import Layout from "../../../Layout";
 
 import "../../style/my-booking.css";
 import "../../style/personal-info.css";
-
-// Test Data
-const columns = [
-  {
-    title: enUS.title.course,
-    dataIndex: "course",
-    key: "course",
-    width: 150,
-  },
-  {
-    title: enUS.title.location,
-    dataIndex: "location",
-    key: "location",
-    ellipsis: true,
-    render: (text) => (
-      <Tooltip title={text} placement="topLeft">
-        {text}
-      </Tooltip>
-    ),
-  },
-  {
-    title: enUS.title.time,
-    dataIndex: "time",
-    key: "time",
-    width: 170,
-  },
-];
-
-// Test Data
-const columnsSmall = [
-  {
-    title: enUS.title.course,
-    dataIndex: "course",
-    key: "course",
-    width: 150,
-  },
-  // {
-  //     title: enUS.title.location,
-  //     dataIndex: 'location',
-  //     key: 'location',
-  //     ellipsis: true,
-  //     render: (text) => (
-  //         <Tooltip title={text} placement="topLeft">
-  //           {text}
-  //         </Tooltip>
-  //     ),
-  // },
-  {
-    title: enUS.title.time,
-    dataIndex: "time",
-    key: "time",
-    width: 170,
-  },
-];
 
 // Test Data
 const data = [
@@ -132,23 +78,86 @@ const data = [
 const MyBooking = () => {
   const isDesktop = useMediaQuery({ minWidth: 768 });
 
+  const { t } = useTranslation();
+
+  const columns = [
+      {
+          title: t('title_course'),
+          dataIndex: 'course',
+          key: 'course',
+          width:150,
+      },
+      {
+          title: t('title_location'),
+          dataIndex: 'location',
+          key: 'location',
+          ellipsis: true,
+          render: (text) => (
+              <Tooltip title={text} placement="topLeft">
+                {text}
+              </Tooltip>
+          ),
+      },
+      {
+          title: t('title_time'),
+          dataIndex: 'time',
+          key: 'time',
+          width:170,
+      }
+  ];
+  
+  // Test Data
+  const columnsSmall = [
+      {
+          title: t('title_course'),
+          dataIndex: 'course',
+          key: 'course',
+          width:150,
+      },
+      // {
+      //     title: t('title_location'),
+      //     dataIndex: 'location',
+      //     key: 'location',
+      //     ellipsis: true,
+      //     render: (text) => (
+      //         <Tooltip title={text} placement="topLeft">
+      //           {text}
+      //         </Tooltip>
+      //     ),
+      // },
+      {
+          title: t('title_time'),
+          dataIndex: 'time',
+          key: 'time',
+          width:170,
+      }
+  ];
+
+  const checkPageSize = () => {
+    if (isDesktop) {
+      return 9;
+    } else {
+      return 7;
+    }
+  }
+
   return (
     <Layout>
       <div className="loginSection">
         <div className="membership">
           <div className="membership-card">
-            {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider" />}
-            <Card className="content">
-              <Table
-                // columns={columns}
-                // className="booking-table"
-                columns={isDesktop ? columns : columnsSmall}
-                dataSource={data}
-                pagination={{
-                  pageSize: 7,
-                }}
-              />
-            </Card>
+              {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>}
+              <Card className="membership-content-main">
+                  <Table 
+                      // columns={columns}
+                      // className="booking-table"
+                      columns={isDesktop ? columns : columnsSmall}
+                      dataSource={data}
+                      pagination={{
+                          pageSize: checkPageSize(),
+                      }} 
+                  />
+              </Card>
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@ import Layout from '../Layout';
 import './GetInvolved.css'
 
 function useLoadContentFromDatabase(ref, pageKey) {
-  const backendUrl  = 'http://localhost:5000';
+  const backendUrl  = 'http://localhost:8000';
 
     useEffect(() => {
       const fetchData = async () => {
