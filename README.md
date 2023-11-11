@@ -14,7 +14,7 @@ npm start
 
 ## Frontend
 ```sh
-cd frontend
+cd ../frontend
 npm install
 npm start
 ```
