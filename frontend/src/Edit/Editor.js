@@ -17,7 +17,7 @@ import Activities from '../Activities/Activities';
 import Showcase from '../Showcase/Showcase';
 import Events from '../Events/Events';
 import GetInvolved from '../GetInvolved/GetInvolved';
-import RoomHire from '../RoomHire/RoomHire';
+import RoomHire from '../RoomHire/pages/RoomHire';
 import ContactPage from '../Contact/Contact';
 import LogIn from '../LogIn/Login';
 

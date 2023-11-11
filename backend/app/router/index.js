@@ -29,7 +29,6 @@ router.route("/get-single-msg/:msg_id").get(getSingleMsg);
 router.post("/get-users", getUsers);
 router.post("/get-user-Info", getUserInfo);
 
-//From content group
 router.post("/save-content", savePreviewPage);
 router.get("/load-content/:pageKey", loadPreviewPage);
 

@@ -6,7 +6,7 @@ import Showcase from './Showcase/Showcase';
 import Contact from './Contact/Contact';
 import Events from './Events/Events';
 import GetInvolved from './GetInvolved/GetInvolved';
-import RoomHire from './RoomHire/RoomHire';
+import RoomHire from './RoomHire/pages/RoomHire';
 // import LogIn from './LogIn/Login';
 import Editor from './Edit/Editor';
 import EditorLogin from './Edit/EditorLogin';
@@ -33,6 +33,20 @@ import TimeTable from './Membership/views/Timetable/timetable';
 import TestForm from "./Activities/Forms/TestForm";
 
 
+import RoomHireForm from './RoomHire/components/RoomHireForm';
+import Room1and2 from './RoomHire/pages/Room1and2';
+import Room3 from './RoomHire/pages/Room3';
+import Room4 from './RoomHire/pages/Room4';
+import Room5 from './RoomHire/pages/Room5';
+import Room6 from './RoomHire/pages/Room6';
+import RoomBookingSucceed from './RoomHire/components/RoomBookingSucceed';
+import Donate from './Donate/pages/Donate';
+import DonateForm from './Donate/components/DonateForm';
+import RoomBookingAdmin from './AdminRoomBooking/RoomBookingAdmin';
+import DonationAdmin from './AdminDonate/DonationAdmin';
+import DonationPageMessage from './Donate/pages/DonationPageMessage';
+
+
 function App() {
     return (
       <BrowserRouter>
@@ -52,7 +66,7 @@ function App() {
                     <Route path="/Timetable" element={<EventsTimetable />} />
                     <Route path="/UserTimetable" element={<UserEventsTimetable />} />
 
-                  {/* Membership */}
+                    {/* Membership */}
                   <Route path="/login" element={<Login />}></Route>
                   <Route path="/register" element={<Register />}></Route>
                   <Route path="/forgot-password" element={<ForgotPassword />}></Route>
@@ -69,8 +83,27 @@ function App() {
                   <Route path="/email-verification" element={<EmailVerification/>}></Route>
                   <Route path="/admin-timetable" element={<TimeTable/>}></Route>
 
+
                   {/* Booking System */}
                   <Route path="/form" element={<TestForm/>} />
+
+                  {/* Room Booking */}
+                  <Route path="/RoomHire" element={<RoomHire />} />
+                  <Route path="/RoomHireForm" element={<RoomHireForm />} />
+                  <Route path="/Room1and2" element={<Room1and2 />} />
+                  <Route path="/Room3" element={<Room3 />} />
+                  <Route path="/Room4" element={<Room4 />} />
+                  <Route path="/Room5" element={<Room5 />} />
+                  <Route path="/Room6" element={<Room6 />} />
+                  <Route path='/RoomBookingSucceed' element={<RoomBookingSucceed/>}/>
+                  {/* Room Booking Admin*/}
+                  <Route path='/RoomBookingAdmin' element={<RoomBookingAdmin/>}/>
+                  {/* Donate */}
+                  <Route path='/Donate' element={<Donate/>} />
+                  <Route path="/DonateForm" element={<DonateForm />} />
+                  <Route path='/DonationPageMessage' element={<DonationPageMessage/>}/>
+                  {/* Donate Admin */}
+                  <Route path='/DonationAdmin' element={<DonationAdmin/>}/>
               </Routes>
           </div>
       </BrowserRouter>  
