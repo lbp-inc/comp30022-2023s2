@@ -7,9 +7,8 @@ import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
 const JWT_SECRET = "liTq9vasHanieW0Sb8ClegPSs6dZV05xHLKSiEZhPUC4KPSurj0pmJJs66L8biTNSvTxM11rUacxXX0P23clrB8vmC7i0e0RMVc";
 
-import Course from "../models/courseModel.js";
+import Activity from "../models/activity.js";
 import Notification from "../models/notificationModel.js";
-// import Message from "../models/messageModel.js";
 
 /**
  * @async
@@ -83,11 +82,20 @@ const registerUser = asyncHandler(async (req, res) => {
       email,
       password,
       isEmailVerified: false,
-      name: "",
+      firstname: "",
+      surname: "",
       gender: "",
       birthday: "",
       phone: "",
       emailVerificationCode: "",
+      prefix: "",
+      address: "",
+      suburb: "",
+      postcode: "",
+      homePhone: "",
+      ecName: "",
+      ecRelationship: "",
+      ecPhone: "",
     });
 
     if (userModel) {
@@ -135,11 +143,20 @@ const getUserProfile = asyncHandler(async (req, res) => {
       res.status(200).json({
         message: "Find Successfully!",
         data: {
-          name: userModel.name,
+          prefix: userModel.prefix,
+          firstname: userModel.firstname,
+          surname: userModel.surname,
           gender: userModel.gender,
           birthday: userModel.birthday,
           email: userModel.email,
           phone: userModel.phone,
+          address: userModel.address,
+          suburb: userModel.suburb,
+          postcode: userModel.postcode,
+          homePhone: userModel.homePhone,
+          ecName: userModel.ecName,
+          ecRelationship: userModel.ecRelationship,
+          ecPhone: userModel.ecPhone,
         },
         role: userModel.role,
       });
@@ -161,7 +178,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
  */
 const updateUserProfile = asyncHandler(async (req, res) => {
   try {
-    const { token, name, gender, birthday, email, phone } = req.body;
+    const { token, firstname, surname, gender, birthday, email, phone } = req.body;
     const verified = jwt.verify(token, JWT_SECRET);
     const userModel = await UserModel.findOne({ _id: verified._id });
     if (userModel && email !== userModel.email) {
@@ -170,7 +187,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       await userModel.save();
     }
     if (userModel) {
-      userModel.name = name;
+      userModel.firstname = firstname;
+      userModel.surname = surname;
       userModel.gender = gender;
       userModel.birthday = birthday;
       userModel.email = email;
@@ -392,10 +410,10 @@ const emailCodeMatch = asyncHandler(async (req, res) => {
  * @returns {Promise<void>}
  */
 const getUserGroups = asyncHandler(async (req, res) => {
-  const courses = await Course.find({});
-  if (courses) {
-    let courseNames = courses.map((course) => course.course_name);
-    res.json(courseNames);
+  const activities = await Activity.find({});
+  if (activities) {
+    let activityNames = activities.map((activity) => activity.name);
+    res.json(activityNames);
   } else {
     res.status(404);
     throw new Error("Courses not found");
@@ -412,7 +430,7 @@ const getUserGroups = asyncHandler(async (req, res) => {
  */
 const getUserListByGroup = asyncHandler(async (req, res) => {
   const { groupNames } = req.body;
-  const courses = await Course.find({ course_name: { $in: groupNames } });
+  const courses = await Activity.find({ name: { $in: groupNames } });
   if (!courses) {
     res.status(404);
     throw new Error("Course not found");
@@ -449,7 +467,7 @@ const sendMessage = asyncHandler(async (req, res) => {
 
   let recipients = [];
   for (let i = 0; i < groups.length; i++) {
-    const course = await Course.findOne({ course_name: groups[i] });
+    const course = await Activity.findOne({ name: groups[i] });
     if (!course) {
       return res.status(404).json({ message: "Course not found" });
     }
@@ -642,7 +660,8 @@ const getUserInfo = asyncHandler(async (req, res) => {
           message: "User Information",
           data: {
             username: userInfo.username,
-            name: userInfo.name,
+            firstname: userInfo.firstname,
+            surname: userInfo.surname,
             gender: userInfo.gender,
             birthday: userInfo.birthday,
             email: userInfo.email,

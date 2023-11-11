@@ -24,7 +24,11 @@ const userSchema = mongoose.Schema(
       enum: ["user", "admin", "tutor"],
       default: "user",
     },
-    name: {
+    firstname: {
+      type: String,
+      require: true,
+    },
+    surname: {
       type: String,
       require: true,
     },
@@ -32,15 +36,40 @@ const userSchema = mongoose.Schema(
       type: String,
       require: true,
     },
+    prefix: {
+      type: String,
+    },
     birthday: {
       type: String,
       require: true,
+    },
+    address: {
+      type: String,
+    },
+    postcode: {
+      type: String,
+    },
+    suburb: {
+      type: String,
+    },
+    homePhone: {
+      type: String,
     },
     phone: {
       type: String,
       require: true,
     },
     emailVerificationCode: {
+      type: String,
+    },
+    // Emergency Contact Details
+    ecName: {
+      type: String,
+    },
+    ecRelationship: {
+      type: String,
+    },
+    ecPhone: {
       type: String,
     },
     messages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Notification" }],

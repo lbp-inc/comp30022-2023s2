@@ -1,0 +1,19 @@
+// Override theme
+$primary: #3b9da6;
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
+
+// Defines primary button to match LBP theme
+.btn-primary {
+  @include button-variant($primary,
+          darken($primary, 7.5%),
+          $white,
+          lighten($primary,5%),
+          lighten($primary, 10%),
+          darken($primary,30%));
+}
+
+.btn-primary:hover {
+  color: $white;
+}

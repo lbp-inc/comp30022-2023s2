@@ -46,7 +46,7 @@ const ACFEForm = () => {
         EnglishLevel: '',
         haveEnglishDiff: false,
         diffAspect: '',
-        isAborigin: false,
+        isAboriginal: false,
         isIslander: false,
         // Student Support
         disability: [],
@@ -69,8 +69,8 @@ const ACFEForm = () => {
         knownFrom: '',
         // T&Cs
         wishVoting: false,
-        acknowlegementAggreement: false,
-        signature: '', // Not sure about its datatype
+        acknowledgementAgreement: false,
+        signature: '',                          // Signature store as data URL
         guardianName: '',
         guardianSignature: ''
     });
@@ -83,7 +83,29 @@ const ACFEForm = () => {
         });
     };
 
-    /* Handle disability multiselection */
+    // reference to signatures
+    const applicantSignatureRef = React.createRef();
+    const guardianSignatureRef = React.createRef();
+    
+    const clearSignature = (sigType) => {
+        if (sigType === 'applicant')
+            applicantSignatureRef.current.clear();
+        if (sigType === 'guardian')
+            guardianSignatureRef.current.clear();
+    };
+    
+    const saveSignature = (sigType) => {
+        if (sigType === 'applicant'){
+            const imageData = applicantSignatureRef.current.toDataURL();
+            inputChange('signature', imageData);
+        }
+        if (sigType === 'guardian'){
+            const imageData = guardianSignatureRef.current.toDataURL();
+            inputChange('guardianSignature', imageData);
+        }
+    };
+
+    /* Handle disability multi-selection */
     const disabilityChange = (newValue) => {
         const isChecked = formData.disability.includes(newValue);
     
@@ -106,7 +128,7 @@ const ACFEForm = () => {
     const submitForm = (form) => {
         form.preventDefault();
         // Send it to Activity API
-        window.alert(formData.bornCountry);  // Test
+        window.alert(formData.guardianSignature);  // Test
     };
 
     return (
@@ -288,7 +310,7 @@ const ACFEForm = () => {
                                     inline
                                     type={'radio'}
                                     name={'EnglishWellness'}
-                                    id={`ACFE.langWellness`}
+                                    id={`ACFE.VeryWell`}
                                     label={`Very well`}
                                     onChange={() => inputChange('EnglishLevel', "VeryWell")}
                                 />
@@ -296,7 +318,7 @@ const ACFEForm = () => {
                                     inline
                                     type={'radio'}
                                     name={'EnglishWellness'}
-                                    id={`ACFE.langWellness`}
+                                    id={`ACFE.Well`}
                                     label={`Well`}
                                     onChange={() => inputChange('EnglishLevel', "Well")}
                                 />
@@ -304,7 +326,7 @@ const ACFEForm = () => {
                                     inline
                                     type={'radio'}
                                     name={'EnglishWellness'}
-                                    id={`ACFE.langWellness`}
+                                    id={`ACFE.NotWell`}
                                     label={`Not well`}
                                     onChange={() => inputChange('EnglishLevel', "NotWell")}
                                 />
@@ -312,7 +334,7 @@ const ACFEForm = () => {
                                     inline
                                     type={'radio'}
                                     name={'EnglishWellness'}
-                                    id={`ACFE.langWellness`}
+                                    id={`ACFE.Bad`}
                                     label={`What is English?`}
                                     onChange={() => inputChange('EnglishLevel', "Bad")}
                                 /><br/><br/>
@@ -321,7 +343,7 @@ const ACFEForm = () => {
                                     inline
                                     type={'radio'}
                                     name={'EnglishDiff'}
-                                    id={`ACFE.diffEnglish`}
+                                    id={`ACFE.diffEnglishY`}
                                     label={`Yes`}
                                     onChange={() => inputChange('haveEnglishDiff', true)}
                                 />
@@ -329,7 +351,7 @@ const ACFEForm = () => {
                                     inline
                                     type={'radio'}
                                     name={'EnglishDiff'}
-                                    id={`ACFE.diffEnglish`}
+                                    id={`ACFE.DiffEnglishN`}
                                     label={`No`}
                                     onChange={() => inputChange('haveEnglishDiff', false)}
                                 /><br/>
@@ -340,7 +362,7 @@ const ACFEForm = () => {
                                     inline
                                     type={'radio'}
                                     name={'EnglishDiffAspect'}
-                                    id={`ACFE.diffAspect`}
+                                    id={`ACFE.reading`}
                                     label={`Reading`}
                                     onChange={() => inputChange('diffAspect', 'reading')}
                                 />
@@ -348,7 +370,7 @@ const ACFEForm = () => {
                                     inline
                                     type={'radio'}
                                     name={'EnglishDiffAspect'}
-                                    id={`ACFE.diffAspect`}
+                                    id={`ACFE.speaking`}
                                     label={`Speaking`}
                                     onChange={() => inputChange('diffAspect', 'speaking')}
                                 />
@@ -356,7 +378,7 @@ const ACFEForm = () => {
                                     inline
                                     type={'radio'}
                                     name={'EnglishDiffAspect'}
-                                    id={`ACFE.diffAspect`}
+                                    id={`ACFE.writing`}
                                     label={`Writing`}
                                     onChange={() => inputChange('diffAspect', 'writing')}
                                 /><br/><br/>
@@ -366,7 +388,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'isAboriginal'}
-                                        id={`ACFE.isAboriginal`}
+                                        id={`ACFE.isAboriginalY`}
                                         label={`Yes`}
                                         onChange={() => inputChange('isAborigin', true)}
                                     />
@@ -374,7 +396,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'isAboriginal'}
-                                        id={`ACFE.isAboriginal`}
+                                        id={`ACFE.isAboriginalN`}
                                         label={`No`}
                                         onChange={() => inputChange('isAborigin', false)}
                                     /><br/>
@@ -385,7 +407,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'isIslander'}
-                                        id={`ACFE.isIslander`}
+                                        id={`ACFE.isIslanderY`}
                                         label={`Yes`}
                                         onChange={() => inputChange('isIslander', true)}
                                     />
@@ -393,7 +415,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'isIslander'}
-                                        id={`ACFE.isIslander`}
+                                        id={`ACFE.isIslanderN`}
                                         label={`No`}
                                         onChange={() => inputChange('isIslander', false)}
                                     />
@@ -466,20 +488,20 @@ const ACFEForm = () => {
                                         label={`Medical Condition`}
                                         onChange={() => disabilityChange("Medical")}
                                     /> <br/>
-                                </Form.Group>
+                                </Form.Group> <br/>
                                 <Form.Group>
-                                    <Form.Label> Do you have a condition that may affect your participation in class?  </Form.Label>
+                                    <Form.Label> Do you have a condition that may affect your participation in class?  </Form.Label> <br/>
                                     <Form.Check
                                         inline
                                         type={'radio'}
-                                        name={'haveCondition'}
+                                        name={'haveConditionY'}
                                         id={`ACFE.haveCondition`}
                                         label={`Yes`}
                                     />
                                     <Form.Check
                                         inline
                                         type={'radio'}
-                                        name={'haveCondition'}
+                                        name={'haveConditionN'}
                                         id={`ACFE.haveCondition`}
                                         label={`No`}
                                     />
@@ -507,7 +529,7 @@ const ACFEForm = () => {
                                 <Form.Check
                                     type={'radio'}
                                     name={'vicSchool'}
-                                    id={`ACFE.vicSchool`}
+                                    id={`ACFE.vicSchoolY`}
                                     label={`Yes`}
                                     onChange={() => inputChange('doneVicSchool', true)}
                                 />
@@ -517,7 +539,7 @@ const ACFEForm = () => {
                                 <Form.Check
                                     type={'radio'}
                                     name={'vicSchool'}
-                                    id={`ACFE.vicSchool`}
+                                    id={`ACFE.vicSchoolN`}
                                     label={`No`}
                                     onChange={() => inputChange('doneVicSchool', false)}
                                 />
@@ -545,7 +567,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'inSecondary'}
-                                        id={`ACFE.inSecondary`}
+                                        id={`ACFE.inSecondaryY`}
                                         label={`Yes`}
                                         onChange={() => inputChange("inSecondary", true)}
                                     />
@@ -553,7 +575,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'inSecondary'}
-                                        id={`ACFE.inSecondary`}
+                                        id={`ACFE.inSecondaryN`}
                                         label={`No`}
                                         onChange={() => inputChange("inSecondary", false)}
                                     /><br/>
@@ -567,7 +589,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'secondaryCompletion'}
-                                        id={`ACFE.secondaryCompletion`}
+                                        id={`ACFE.noSchool`}
                                         label={`Did not go to School`}
                                         onChange={() => inputChange("secondaryCompletion", "N/A")}
                                     />
@@ -575,7 +597,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'secondaryCompletion'}
-                                        id={`ACFE.secondaryCompletion`}
+                                        id={`ACFE.8`}
                                         label={`Year 8 or below`}
                                         onChange={() => inputChange("secondaryCompletion", "Year 8 or below")}
                                     />
@@ -583,7 +605,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'secondaryCompletion'}
-                                        id={`ACFE.secondaryCompletion`}
+                                        id={`ACFE.9`}
                                         label={`Year 9 or equivalent`}
                                         onChange={() => inputChange("secondaryCompletion", "Year 9 or equivalent")}
                                     />
@@ -591,7 +613,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'secondaryCompletion'}
-                                        id={`ACFE.secondaryCompletion`}
+                                        id={`ACFE.10`}
                                         label={`Year 10`}
                                         onChange={() => inputChange("secondaryCompletion", "Year 10")}
                                     />
@@ -599,7 +621,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'secondaryCompletion'}
-                                        id={`ACFE.secondaryCompletion`}
+                                        id={`ACFE.11`}
                                         label={`Year 11`}
                                         onChange={() => inputChange("secondaryCompletion", "Year 11")}
                                     />
@@ -607,7 +629,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'secondaryCompletion'}
-                                        id={`ACFE.secondaryCompletion`}
+                                        id={`ACFE.12`}
                                         label={`Year 12`}
                                         onChange={() => inputChange("secondaryCompletion", "Year 12")}
                                     />
@@ -616,68 +638,68 @@ const ACFEForm = () => {
                                     <Form.Label> <b> Have you successfully completed any of the following qualifications in AUSTRALIA? </b> </Form.Label>
                                     <Form.Check
                                         type={'radio'}
-                                        name={'eduQulification'}
-                                        id={`ACFE.eduQulification`}
+                                        name={'eduQualification'}
+                                        id={`ACFE.Bachelor`}
                                         label={`Bachelor Degree (or higher) `}
                                         onChange={() => inputChange("qualificationCompletion", "Bachelor")}
                                     />
                                     <Form.Check
                                         type={'radio'}
-                                        name={'eduQulification'}
-                                        id={`ACFE.eduQulification`}
+                                        name={'eduQualification'}
+                                        id={`ACFE.Diploma1`}
                                         label={`Advanced Diploma or Associate`}
                                         onChange={() => inputChange("qualificationCompletion", "Advanced Diploma")}
                                     />
                                     <Form.Check
                                         type={'radio'}
-                                        name={'eduQulification'}
-                                        id={`ACFE.eduQulification`}
+                                        name={'eduQualification'}
+                                        id={`ACFE.Diploma2`}
                                         label={`Diploma or Associate Diploma `}
                                         onChange={() => inputChange("qualificationCompletion", "Associate Diploma")}
                                     />
                                     <Form.Check
                                         type={'radio'}
-                                        name={'eduQulification'}
-                                        id={`ACFE.eduQulification`}
+                                        name={'eduQualification'}
+                                        id={`ACFE.IV`}
                                         label={`Certificate IV (or advanced Certificate/Technician)`}
                                         onChange={() => inputChange("qualificationCompletion", "IV")}
                                     />
                                     <Form.Check
                                         type={'radio'}
-                                        name={'eduQulification'}
-                                        id={`ACFE.eduQulification`}
+                                        name={'eduQualification'}
+                                        id={`ACFE.III`}
                                         label={`Certificate III l (or Trade Certificate)`}
                                         onChange={() => inputChange("qualificationCompletion", "III")}
                                     />
                                     <Form.Check
                                         type={'radio'}
-                                        name={'eduQulification'}
-                                        id={`ACFE.eduQulification`}
+                                        name={'eduQualification'}
+                                        id={`ACFE.II`}
                                         label={`Certificate II`}
                                         onChange={() => inputChange("qualificationCompletion", "II")}
                                     />
                                     <Form.Check
                                         type={'radio'}
-                                        name={'eduQulification'}
-                                        id={`ACFE.eduQulification`}
+                                        name={'eduQualification'}
+                                        id={`ACFE.I`}
                                         label={`Certificate I`}
                                         onChange={() => inputChange("qualificationCompletion", "I")}
                                     />
                                     <Form.Check
                                         type={'radio'}
-                                        name={'eduQulification'}
-                                        id={`ACFE.eduQulification`}
+                                        name={'eduQualification'}
+                                        id={`ACFE.OtherQualification`}
                                         label={`Certificates (other than above)`}
                                         onChange={() => inputChange("qualificationCompletion", "Other")}
                                     />
                                 </Form.Group>
                                 <Form.Group>
-                                    <Form.Label> <b> What kind of qualification do you hold? </b> </Form.Label>
+                                    <Form.Label> <b> What kind of qualification do you hold? </b> </Form.Label> <br/>
                                     <Form.Check
                                         inline
                                         type={'radio'}
                                         name={'qualificationHold'}
-                                        id={`ACFE.qualificationHold`}
+                                        id={`ACFE.QA`}
                                         label={`Australian Qualification (A)`}
                                         onChange={() => inputChange("qualificationType", 'A')}
                                     />
@@ -685,7 +707,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'qualificationHold'}
-                                        id={`ACFE.qualificationHold`}
+                                        id={`ACFE.QE`}
                                         label={`Australian Equivalent (E)`}
                                         onChange={() => inputChange("qualificationType", 'E')}
                                     />
@@ -693,7 +715,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'qualificationHold'}
-                                        id={`ACFE.qualificationHold`}
+                                        id={`ACFE.QI`}
                                         label={`International (l)`}
                                         onChange={() => inputChange("qualificationType", 'I')}
                                     />
@@ -710,56 +732,56 @@ const ACFEForm = () => {
                                     <Form.Check
                                         type={'radio'}
                                         name={'employmentStatus'}
-                                        id={`ACFE.employmentStatus`}
+                                        id={`ACFE.Full`}
                                         label={`Full Time employee`}
                                         onChange={() => inputChange("employmentStatus", "Full Time")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'employmentStatus'}
-                                        id={`ACFE.employmentStatus`}
+                                        id={`ACFE.Part`}
                                         label={`Part Time employee `}
                                         onChange={() => inputChange("employmentStatus", "Part Time")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'employmentStatus'}
-                                        id={`ACFE.employmentStatus`}
+                                        id={`ACFE.Self`}
                                         label={`Self Employed - with no employees`}
                                         onChange={() => inputChange("employmentStatus", "Self Employed")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'employmentStatus'}
-                                        id={`ACFE.employmentStatus`}
+                                        id={`ACFE.Employer`}
                                         label={`Employer`}
                                         onChange={() => inputChange("employmentStatus", "Employer")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'employmentStatus'}
-                                        id={`ACFE.employmentStatus`}
+                                        id={`ACFE.Family`}
                                         label={`Employed - unpaid family worker`}
                                         onChange={() => inputChange("employmentStatus", "Unpaid Family Worker")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'employmentStatus'}
-                                        id={`ACFE.employmentStatus`}
+                                        id={`ACFE.SeekingFull`}
                                         label={`Unemployed - seeking full time work`}
                                         onChange={() => inputChange("employmentStatus", "Seekig Full Time")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'employmentStatus'}
-                                        id={`ACFE.employmentStatus`}
+                                        id={`ACFE.SeekingPart`}
                                         label={`Unemployed - seeking part time work`}
                                         onChange={() => inputChange("employmentStatus", "Seeking Part Time")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'employmentStatus'}
-                                        id={`ACFE.employmentStatus`}
+                                        id={`ACFE.Unemployed`}
                                         label={`Unemployed/Retired `}
                                         onChange={() => inputChange("employmentStatus", "Unemployed")}
                                     />
@@ -769,133 +791,133 @@ const ACFEForm = () => {
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.Agriculture`}
                                         label={`Agriculture, Forestry & Fishing (A)`}
                                         onChange={() => inputChange("employmentIndustry", "Agriculture")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.Mining`}
                                         label={`Mining(B)`}
                                         onChange={() => inputChange("employmentIndustry", "Mining")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.Manufacturing`}
                                         label={`Manufacturing (C)`}
                                         onChange={() => inputChange("employmentIndustry", "Manufacturing")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.Electricity`}
                                         label={`Electricity, Gas, Water & Waste Services (D)`}
                                         onChange={() => inputChange("employmentIndustry", "Electricity")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.Construction`}
                                         label={`Construction (E)`}
                                         onChange={() => inputChange("employmentIndustry", "Construction")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.Wholesale`}
                                         label={`Wholesale Trade (F)`}
                                         onChange={() => inputChange("employmentIndustry", "Wholesale")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.Retail`}
                                         label={`Retail Trade (G)`}
                                         onChange={() => inputChange("employmentIndustry", "Retail")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.Accommodation`}
                                         label={`Accommodation & Food Services (H)`}
                                         onChange={() => inputChange("employmentIndustry", "Accommodation")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.Transport`}
                                         label={`Transport, Postal & Warehouse (I)`}
                                         onChange={() => inputChange("employmentIndustry", "Transport")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.Media`}
                                         label={`Information, Media & Telecommunication (J)`}
                                         onChange={() => inputChange("employmentIndustry", "Media")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.Financial`}
                                         label={`Financial & Insurance Services (K)`}
                                         onChange={() => inputChange("employmentIndustry", "Financial")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.Rental`}
                                         label={`Rental, Hiring & Real Estate Services (L)`}
                                         onChange={() => inputChange("employmentIndustry", "Rental")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.Scientific`}
                                         label={`Professional, Scientific & Tech. Services (M)`}
                                         onChange={() => inputChange("employmentIndustry", "Scientific")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.Support`}
                                         label={`Administrative & Support Services (N) `}
                                         onChange={() => inputChange("employmentIndustry", "Support Services")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.Administration`}
                                         label={`Public Administration & Safety (O)`}
                                         onChange={() => inputChange("employmentIndustry", "Public Administration")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.Education`}
                                         label={`Education & Training (P)`}
                                         onChange={() => inputChange("employmentIndustry", "Education")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.HealthCare`}
                                         label={`HealthCare & Social Assistance (Q)`}
                                         onChange={() => inputChange("employmentIndustry", "HealthCare")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.Recreation`}
                                         label={`Arts & Recreation Services (R)`}
                                         onChange={() => inputChange("employmentIndustry", "Recreation")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'industry'}
-                                        id={`ACFE.industry`}
+                                        id={`ACFE.OtherIndustry`}
                                         label={`Other Services`}
                                         onChange={() => inputChange("employmentIndustry", "Others")}
                                     />
@@ -906,7 +928,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'occupation'}
-                                        id={`ACFE.occupation`}
+                                        id={`ACFE.Manager`}
                                         label={`Manager (1)`}
                                         onChange={() => inputChange("occupationType", "Manager")}
                                     />
@@ -914,7 +936,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'occupation'}
-                                        id={`ACFE.occupation`}
+                                        id={`ACFE.Professionals`}
                                         label={`Professionals (2)`}
                                         onChange={() => inputChange("occupationType", "Professionals")}
                                     />
@@ -922,7 +944,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'occupation'}
-                                        id={`ACFE.occupation`}
+                                        id={`ACFE.Technicians`}
                                         label={`Technicians & Trade Workers (3)`}
                                         onChange={() => inputChange("occupationType", "Technicians")}
                                     />
@@ -930,7 +952,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'occupation'}
-                                        id={`ACFE.occupation`}
+                                        id={`ACFE.Community`}
                                         label={`Community & Personal Services ( 4)`}
                                         onChange={() => inputChange("occupationType", "Community")}
                                     />
@@ -938,7 +960,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'occupation'}
-                                        id={`ACFE.occupation`}
+                                        id={`ACFE.Clerical`}
                                         label={`Clerical & Administrative Worker (5)`}
                                         onChange={() => inputChange("occupationType", "Clerical")}
                                     />
@@ -946,7 +968,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'occupation'}
-                                        id={`ACFE.occupation`}
+                                        id={`ACFE.Sales`}
                                         label={`Sales Worker (6)`}
                                         onChange={() => inputChange("occupationType", "Sales")}
                                     />
@@ -954,7 +976,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'occupation'}
-                                        id={`ACFE.occupation`}
+                                        id={`ACFE.Machinery`}
                                         label={`Machinery Operator & Driver (7)`}
                                         onChange={() => inputChange("occupationType", "Machinery")}
                                     />
@@ -962,7 +984,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'occupation'}
-                                        id={`ACFE.occupation`}
+                                        id={`ACFE.Labourer`}
                                         label={`Labourer (8)`}
                                         onChange={() => inputChange("occupationType", "Labourer")}
                                     />
@@ -970,7 +992,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'occupation'}
-                                        id={`ACFE.occupation`}
+                                        id={`ACFE.otherOccupation`}
                                         label={`Other (9)`}
                                         onChange={() => inputChange("occupationType", "Other")}
                                     />
@@ -988,63 +1010,63 @@ const ACFEForm = () => {
                                     <Form.Check
                                         type={'radio'}
                                         name={'studyReason'}
-                                        id={`ACFE.studyReason`}
+                                        id={`ACFE.job1`}
                                         label={`To get a job`}
                                         onChange={() => inputChange("attendReason", "get a job")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'studyReason'}
-                                        id={`ACFE.studyReason`}
+                                        id={`ACFE.job2`}
                                         label={`It was a requirement of my job`}
                                         onChange={() => inputChange("attendReason", "job prerequisite")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'studyReason'}
-                                        id={`ACFE.studyReason`}
+                                        id={`ACFE.skilled`}
                                         label={`To develop my existing business`}
                                         onChange={() => inputChange("attendReason", "get skilled")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'studyReason'}
-                                        id={`ACFE.studyReason`}
+                                        id={`ACFE.job3`}
                                         label={`I wanted extra skills for my job`}
                                         onChange={() => inputChange("attendReason", "job skill")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'studyReason'}
-                                        id={`ACFE.studyReason`}
+                                        id={`ACFE.business`}
                                         label={`To start my own business`}
                                         onChange={() => inputChange("attendReason", "start business")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'studyReason'}
-                                        id={`ACFE.studyReason`}
+                                        id={`ACFE.anotherCourse`}
                                         label={`To get into another course of study`}
                                         onChange={() => inputChange("attendReason", "another course")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'studyReason'}
-                                        id={`ACFE.studyReason`}
+                                        id={`ACFE.careerTrial`}
                                         label={`To try for a different career`}
                                         onChange={() => inputChange("attendReason", "try different career")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'studyReason'}
-                                        id={`ACFE.studyReason`}
+                                        id={`ACFE.personal`}
                                         label={`For personal reasons`}
                                         onChange={() => inputChange("attendReason", "personal reasons")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'studyReason'}
-                                        id={`ACFE.studyReason`}
+                                        id={`ACFE.job4`}
                                         label={`To get a better job or promotion`}
                                         onChange={() => inputChange("attendReason", "better job")}
                                     />
@@ -1057,12 +1079,12 @@ const ACFEForm = () => {
                                     />
                                 </Form.Group> <br/>
                                 <Form.Group>
-                                    <Form.Label> <b> Where did you find out about this course? </b> </Form.Label>
+                                    <Form.Label> <b> Where did you find out about this course? </b> </Form.Label> <br />
                                     <Form.Check
                                         inline
                                         type={'radio'}
                                         name={'knownFrom'}
-                                        id={`ACFE.knownFrom`}
+                                        id={`ACFE.knownFromFriend`}
                                         label={`Friend`}
                                         onChange={() => inputChange("knownFrom", "Friend")}
                                     />
@@ -1070,7 +1092,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'knownFrom'}
-                                        id={`ACFE.knownFrom`}
+                                        id={`ACFE.knownFromWork`}
                                         label={`Work`}
                                         onChange={() => inputChange("knownFrom", "Work")}
                                     />
@@ -1078,7 +1100,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'knownFrom'}
-                                        id={`ACFE.knownFrom`}
+                                        id={`ACFE.knownFromAgency`}
                                         label={`Job Agency`}
                                         onChange={() => inputChange("knownFrom", "Agency")}
                                     />
@@ -1086,7 +1108,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'knownFrom'}
-                                        id={`ACFE.knownFrom`}
+                                        id={`ACFE.knownFromEmployer`}
                                         label={`Employer`}
                                         onChange={() => inputChange("knownFrom", "Employer")}
                                     />
@@ -1094,7 +1116,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'knownFrom'}
-                                        id={`ACFE.knownFrom`}
+                                        id={`ACFE.knownFromNewspaper`}
                                         label={`Newspaper`}
                                         onChange={() => inputChange("knownFrom", "Newspaper")}
                                     />
@@ -1102,7 +1124,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'knownFrom'}
-                                        id={`ACFE.knownFrom`}
+                                        id={`ACFE.knownFromWebsite`}
                                         label={`Longbeach PLACE Website`}
                                         onChange={() => inputChange("knownFrom", "Website")}
                                     />
@@ -1110,7 +1132,7 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'knownFrom'}
-                                        id={`ACFE.knownFrom`}
+                                        id={`ACFE.knownFromFacebook`}
                                         label={`Longbeach PLACE Facebook page`}
                                         onChange={() => inputChange("knownFrom", "Facebook")}
                                     />
@@ -1118,14 +1140,14 @@ const ACFEForm = () => {
                                         inline
                                         type={'radio'}
                                         name={'knownFrom'}
-                                        id={`ACFE.knownFrom`}
+                                        id={`ACFE.knownFromBrochure`}
                                         label={`Longbeach PLACE Brochure`}
                                         onChange={() => inputChange("knownFrom", "Brochure")}
                                     />
                                     <Form.Check
                                         type={'radio'}
                                         name={'knownFrom'}
-                                        id={`ACFE.knownFrom`}
+                                        id={`ACFE.knownFromOthers`}
                                         label={`Other`}
                                         onChange={() => inputChange("knownFrom", "Other")}
                                     />
@@ -1194,33 +1216,39 @@ const ACFEForm = () => {
                                     inline
                                     name = 'agreement'
                                     type={'radio'}
-                                    id={`ACFE.aggrement`}
+                                    id={`ACFE.agreementY`}
                                     label={`Yes I do`}
-                                    onChange={() => inputChange('acknowlegementAggreement', true)}
+                                    onChange={() => inputChange('acknowledgementAgreement', true)}
                                 />
                                 <Form.Check
                                     inline
                                     name = 'agreement'
                                     type={'radio'}
-                                    id={`ACFE.agreement`}
+                                    id={`ACFE.agreementN`}
                                     label={`No I don't`}
-                                    onChange={() => inputChange('acknowlegementAggreement', true)}
+                                    onChange={() => inputChange('acknowledgementAgreement', true)}
                                 />
                                 {/* Signature for Applicant */}
-                                <FloatingLabel controlId="FFS.Signature" label="Signature">
-                                    <SignatureCanvas penColor='blue'
-                                                    canvasProps={{width: 500, height: 200, className: 'sigCanvas'}} />
-                                </FloatingLabel> <br/>
+                                <FloatingLabel controlId="ACFE.Signature" label="Signature">
+                                    <SignatureCanvas penColor='black' canvasProps={{width: 500, height: 200, className: 'sigCanvas'}} 
+                                        onEnd={() => saveSignature('applicant')} ref={applicantSignatureRef} />
+                                </FloatingLabel>
+                                <Button variant="secondary" size="sm" className="float-end" onClick={() => clearSignature('applicant')}>
+                                    Clear
+                                </Button> <br/>
 
                                 <b> For Applicant Under 18 Years of Age: </b><br/>
                                 <FloatingLabel controlId="ACFE.guardianName" label="Parent/Guardian Name">
                                     <Form.Control type="name" placeholder='' onChange={(e) => inputChange('guardianName', e.target.value)} />
                                 </FloatingLabel>
                                 {/* Signature for Parent/Guardian */}
-                                <FloatingLabel controlId="FFS.Signature" label="Signature">
-                                    <SignatureCanvas penColor='blue'
-                                                    canvasProps={{width: 500, height: 200, className: 'sigCanvas'}} />
+                                <FloatingLabel controlId="ACFE.Signature" label="Signature">
+                                    <SignatureCanvas penColor='black' canvasProps={{width: 500, height: 200, className: 'sigCanvas'}} 
+                                        onEnd={() => saveSignature('guardian')} ref={guardianSignatureRef} />
                                 </FloatingLabel>
+                                <Button variant="secondary" size="sm" className="float-end" onClick={() => clearSignature('guardian')}>
+                                    Clear
+                                </Button> <br/>
                             </Accordion.Body>
                         </Accordion.Item>
                     </Accordion>

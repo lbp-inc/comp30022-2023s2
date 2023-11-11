@@ -30,8 +30,7 @@ import EmailVerification from "./Membership/views/Register/email-Verification";
 import EventsTimetable from './TimeTable/EventsTimetable';
 import UserEventsTimetable from './TimeTable/UserEventsTimetable';
 import TimeTable from './Membership/views/Timetable/timetable';
-import FeeForServiceForm from "./Activities/Forms/FeeForService";
-import ACFEForm from "./Activities/Forms/ACFE_Form";
+import TestForm from "./Activities/Forms/TestForm";
 
 
 import RoomHireForm from './RoomHire/components/RoomHireForm';
@@ -49,7 +48,7 @@ import DonationPageMessage from './Donate/pages/DonationPageMessage';
 
 
 function App() {
-  return (
+    return (
       <BrowserRouter>
           <div className="App">
               <Routes>
@@ -85,28 +84,26 @@ function App() {
                   <Route path="/admin-timetable" element={<TimeTable/>}></Route>
 
 
-                  <Route path="/acfe_form" element={<ACFEForm />} />
-                  <Route path="/fee_for_service_form" element={<FeeForServiceForm />} />
+                  {/* Booking System */}
+                  <Route path="/form" element={<TestForm/>} />
 
-
-                    {/* Room Booking */}
-                    <Route path="/RoomHire" element={<RoomHire />} />
-                    <Route path="/RoomHireForm" element={<RoomHireForm />} />
-                    <Route path="/Room1and2" element={<Room1and2 />} />
-                    <Route path="/Room3" element={<Room3 />} />
-                    <Route path="/Room4" element={<Room4 />} />
-                    <Route path="/Room5" element={<Room5 />} />
-                    <Route path="/Room6" element={<Room6 />} />
-                    <Route path='/RoomBookingSucceed' element={<RoomBookingSucceed/>}/>
-                    {/* Room Booking Admin*/}
-                    <Route path='/RoomBookingAdmin' element={<RoomBookingAdmin/>}/>
-                    {/* Donate */}
-                    <Route path='/Donate' element={<Donate/>} />
-                    <Route path="/DonateForm" element={<DonateForm />} />
-                    <Route path='/DonationPageMessage' element={<DonationPageMessage/>}/>
-                    {/* Donate Admin */}
-                    <Route path='/DonationAdmin' element={<DonationAdmin/>}/>
-                    
+                  {/* Room Booking */}
+                  <Route path="/RoomHire" element={<RoomHire />} />
+                  <Route path="/RoomHireForm" element={<RoomHireForm />} />
+                  <Route path="/Room1and2" element={<Room1and2 />} />
+                  <Route path="/Room3" element={<Room3 />} />
+                  <Route path="/Room4" element={<Room4 />} />
+                  <Route path="/Room5" element={<Room5 />} />
+                  <Route path="/Room6" element={<Room6 />} />
+                  <Route path='/RoomBookingSucceed' element={<RoomBookingSucceed/>}/>
+                  {/* Room Booking Admin*/}
+                  <Route path='/RoomBookingAdmin' element={<RoomBookingAdmin/>}/>
+                  {/* Donate */}
+                  <Route path='/Donate' element={<Donate/>} />
+                  <Route path="/DonateForm" element={<DonateForm />} />
+                  <Route path='/DonationPageMessage' element={<DonationPageMessage/>}/>
+                  {/* Donate Admin */}
+                  <Route path='/DonationAdmin' element={<DonationAdmin/>}/>
               </Routes>
           </div>
       </BrowserRouter>  
