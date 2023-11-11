@@ -24,13 +24,15 @@ const userSchema = mongoose.Schema(
       enum: ["user", "admin", "tutor"],
       default: "user",
     },
-    firstname: {
+    name: {
       type: String,
       require: true,
     },
+    firstname: {
+      type: String,
+    },
     surname: {
       type: String,
-      require: true,
     },
     gender: {
       type: String,
