@@ -38,8 +38,8 @@ async function getActivity(req, res) {
         let query = {_id: new mongoose.Types.ObjectId(req.params.id)};
         let result = await Activity.find(query);
 
-        if (!result) res.send("Activity not found").status(404);
-        else res.send(result).status(200);
+        if (!result || !result[0]) res.send("Activity not found").status(404);
+        else res.send(result[0]).status(200);
     }
     catch (e) {
         res.send(e.message).status(400);

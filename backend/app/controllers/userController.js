@@ -82,6 +82,7 @@ const registerUser = asyncHandler(async (req, res) => {
       email,
       password,
       isEmailVerified: false,
+      name: "",
       firstname: "",
       surname: "",
       gender: "",
@@ -144,6 +145,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
         message: "Find Successfully!",
         data: {
           prefix: userModel.prefix,
+          name: userModel.name,
           firstname: userModel.firstname,
           surname: userModel.surname,
           gender: userModel.gender,
@@ -178,7 +180,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
  */
 const updateUserProfile = asyncHandler(async (req, res) => {
   try {
-    const { token, firstname, surname, gender, birthday, email, phone } = req.body;
+    const { token, name, gender, birthday, email, phone } = req.body;
     const verified = jwt.verify(token, JWT_SECRET);
     const userModel = await UserModel.findOne({ _id: verified._id });
     if (userModel && email !== userModel.email) {
@@ -187,8 +189,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       await userModel.save();
     }
     if (userModel) {
-      userModel.firstname = firstname;
-      userModel.surname = surname;
+      userModel.name = name;
       userModel.gender = gender;
       userModel.birthday = birthday;
       userModel.email = email;
@@ -660,6 +661,7 @@ const getUserInfo = asyncHandler(async (req, res) => {
           message: "User Information",
           data: {
             username: userInfo.username,
+            name: userInfo.name,
             firstname: userInfo.firstname,
             surname: userInfo.surname,
             gender: userInfo.gender,

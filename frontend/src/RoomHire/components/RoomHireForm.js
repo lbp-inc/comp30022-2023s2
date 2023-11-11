@@ -1,6 +1,11 @@
 import React from "react";
 import { useState, useRef, useEffect } from "react";
+
+/* Please check Slack before uncommenting the stylesheet
+Relevant thread: https://itprojectworkshop16.slack.com/archives/C05LGFPN37F/p1699730387228319
 import "./RoomHireForm.css";
+*/
+
 import SignatureCanvas from 'react-signature-canvas'
 import { Link, useNavigate } from "react-router-dom";
 import RoomBookingSucceed from "./RoomBookingSucceed";
