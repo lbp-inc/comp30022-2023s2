@@ -15,6 +15,7 @@ import cookieParser from "cookie-parser";
  */
 import connectDB from "./app/utils/connectDB.js";
 import userRoutes from "./app/router/index.js";
+import roomHireRoutes from "./app/controllers/roomHireController.js";
 import eventRoutes from "./app/router/eventRoute.js";
 import activitiesRoutes from "./app/router/activities.js";
 import { notFound, errorHandler } from "./app/utils/errorHandler.js";
@@ -42,6 +43,7 @@ app.use(cors());
 
 // Registering users related API routes.
 app.use("/api/users", userRoutes);
+app.use("/api/roomHire", roomHireRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/activities", activitiesRoutes);
 

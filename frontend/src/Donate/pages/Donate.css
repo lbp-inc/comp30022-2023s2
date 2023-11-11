@@ -1,0 +1,24 @@
+.donate-form{
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: aliceblue;
+}
+
+.donation-head-banner {
+    height: 500px;
+    width: 100%;
+    background-image: url('../../image/volunteer.webp');
+    background-size: cover;
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .donation-head-banner h1 {
+    color:#ffffff;
+    text-align: center;
+    justify-content: center;
+    font-size: 90px;
+  }
