@@ -60,33 +60,13 @@ function Activities() {
         (async () => setActivities(await Api.getActivitiesAsync()))();
     }, []); // Empty dependency array, so it runs only once when the component mounts
 
-    let navigate = useNavigate();
-    const routeChange = (path) => navigate(path);
-
-    const [show, setShow] = useState(false);
-    const [shownActivity, setShownActivity] = useState(activities[0]);
-    const handleClose = () => setShow(false);
-    const showDetails = (activity) => {
-        //setShownActivity(activity);
-        setModalContent(<ActivityDetails activity={activity}/>)
-        setShow(true);
-    };
-
-    const [modalContent, setModalContent] = useState()
-    const showBookNow = () => {
-        setModalContent(<BookNow/>);
-    };
+    const navigate = useNavigate();
 
     return (
 
         <Layout>
 
         <div ref={activitiesRef} id="Activities">
-            <div
-                className="modal show"
-                style={{ display: 'block', position: 'initial' }}
-            >
-            </div>
         <div id="content-only">
             <div className='activitiesPageContainer'>
                 <div className='activitiesbanner'>
@@ -109,14 +89,14 @@ function Activities() {
                 <div className='coursesContainer'>
                     <ul>
                         {activities.map(activity => (
-                            <li key={activity.id} className={(activeTab === 'All' || activity.type === activeTab) ? 'activeCourse' : 'unactiveCourse'}>
+                            <li key={activity._id} className={(activeTab === 'All' || activity.type === activeTab) ? 'activeCourse' : 'unactiveCourse'}>
                                 <img src={activity.image} alt={activity.name}></img>
                                 <h2>{activity.name}</h2>
                                 <p className='courseDescription'>{activity.subtitle}</p>
                                 <p>{activity.time}</p>
                                 <p>{activity.duration}</p>
                                 <p>${activity.cost}</p>
-                                <button onClick={() => showDetails(activity)}>Learn More...</button> {/*() => routeChange("/fee_for_service_form")*/}
+                                <Button onClick={() => navigate(`./${activity._id}`)}>Learn More...</Button>
                             </li>
                         ))}
                     </ul>
@@ -125,20 +105,6 @@ function Activities() {
             </div>
         </div>
         </div>
-            <Modal show={show} fullscreen="lg-down" size="lg" onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title></Modal.Title>
-                </Modal.Header>
-                {modalContent}
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={showBookNow}>
-                        Continue to book &gt;
-                    </Button>
-                </Modal.Footer>
-            </Modal>
         </Layout>
 
     );
