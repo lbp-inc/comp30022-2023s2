@@ -38,7 +38,6 @@ const userSchema = mongoose.Schema(
     },
     prefix: {
       type: String,
-      require: true,
     },
     birthday: {
       type: String,
@@ -46,19 +45,15 @@ const userSchema = mongoose.Schema(
     },
     address: {
       type: String,
-      require: true,
     },
     postcode: {
       type: String,
-      require: true,
     },
     suburb: {
       type: String,
-      require: true,
     },
     homePhone: {
       type: String,
-      require: false,
     },
     phone: {
       type: String,
