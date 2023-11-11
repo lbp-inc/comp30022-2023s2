@@ -1,3 +1,41 @@
+# Getting Started
+Clone this project (obviously)
+
+## Backend
+```sh
+cd backend
+npm install
+npm start
+```
+
+> Go to mongoDB website and add your current IP address
+> 
+> `nodemon server` or `node server`, please restart your server if you use `node server`.
+
+## Frontend
+```sh
+cd frontend
+npm install
+npm start
+```
+
+
+# Patch notes
+
+## Patch note in **23/9/2023**
+
+1. Deploy successful in front and back end
+2. Edit function now can be easily use and access to the database
+3. Over all layout and portal for other group has been finalised
+4. Minor bug to be fix in website
+   - including layout in different page, nav bar now would stack with the text
+   - edit function's Layout preview need to be fix
+
+
+
+<!--
+This deployment app should not be used as "The Heroku deployment in the readme file is only for our content segment, which is not meant for the whole class; the whole class deployment was incharged by the membership team, which I think they are deploying today? I did asked them this morning, they said they are waiting for every groups to merge into the main branch and start deploying."
+
 deploy url：
 ------------------------
 
@@ -7,18 +45,6 @@ Front end: [LongBeach Place Inc (longbeachfrontend0adcfe405469.herokuapp.com)](h
 ## Back end: [Error (longbeachbackend-2c4b09f98b44.herokuapp.com)](https://longbeachbackend-2c4b09f98b44.herokuapp.com/) // dw about the error
 
 ------------
-
-Patch note in **23/9/2023**
-
-1. Deploy successful in front and back end
-2. Edit function now can be easily use and access to the database
-3. Over all layout and portal for other group has been finalised
-4. Minor bug to be fix in website
-   - including layout in different page, nav bar now would stack with the text
-   - edit function's Layout preview need to be fix
-
-----------------------
-
 ```
 For deployment in Frontend
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass can be use when access not granted
@@ -46,26 +72,10 @@ For deployment in Backend
 7. Remember to commit to the 'main' branch after changes
 8. **git subtree push --prefix=backend longbeach-backend main** // cd .. back to the toplevel of the working tree
 10. heroku open --app longbeachbackend // to check if deploy has been successful
-
-
-
 ```
+-->
 
-
-
-# For backend server
-The backend code follows the MCV structure:
-
-1: Make sure to use `cd backend` 
-
-2:`npm install` at the first time
-
-3: Go to mongoDB website and add your current IP address
-
-4:`nodemon server` or `node server`, please restart your server if you use `node server`.
-
-------------------------
-
+<!--
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -150,3 +160,4 @@ git subtree push --prefix=backend longbeach-backend main
 ### Frontend deploy - run at root folder
 
 git subtree push --prefix=frontend longbeach-frontend main
+-->
