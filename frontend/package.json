@@ -50,6 +50,7 @@
     "react-signature-canvas": "^1.0.6",
     "reactjs-popup": "^2.0.6",
     "responsive": "^2.0.0",
+    "sass": "^1.69.5",
     "serve": "^14.2.1",
     "sort-by": "^1.2.0",
     "styled-components": "^5.3.11",
