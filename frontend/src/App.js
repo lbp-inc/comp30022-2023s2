@@ -45,6 +45,7 @@ import DonateForm from './Donate/components/DonateForm';
 import RoomBookingAdmin from './AdminRoomBooking/RoomBookingAdmin';
 import DonationAdmin from './AdminDonate/DonationAdmin';
 import DonationPageMessage from './Donate/pages/DonationPageMessage';
+import ActivityDetails from "./Activities/ActivityDetails";
 
 
 function App() {
@@ -86,6 +87,7 @@ function App() {
 
                   {/* Booking System */}
                   <Route path="/form" element={<TestForm/>} />
+                  <Route path="Activities/:activityId" element={<ActivityDetails/>} />
 
                   {/* Room Booking */}
                   <Route path="/RoomHire" element={<RoomHire />} />

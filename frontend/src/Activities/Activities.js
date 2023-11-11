@@ -10,6 +10,7 @@ import FeeForServiceForm from "./Forms/FeeForService";
 import ACFEForm from './Forms/ACFE_Form';
 import ActivityDetails from "./ActivityDetails";
 import BookNow from "./BookNow";
+import Api from "../Api";
 
 function useLoadContentFromDatabase(ref, pageKey) {
     const backendUrl  = 'http://localhost:8000';
@@ -56,22 +57,7 @@ function Activities() {
     const [activities, setActivities] = useState([]);
 
     useEffect(() => {
-        async function fetchData() {
-            try {
-                const response = await fetch('http://localhost:8000/api/activities');
-
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                const data = await response.json();
-                setActivities(data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
-
-        fetchData();
+        (async () => setActivities(await Api.getActivitiesAsync()))();
     }, []); // Empty dependency array, so it runs only once when the component mounts
 
     let navigate = useNavigate();
@@ -86,7 +72,7 @@ function Activities() {
         setShow(true);
     };
 
-    const [modalContent, setModalContent] = useState(<ActivityDetails activity={shownActivity}/>)
+    const [modalContent, setModalContent] = useState()
     const showBookNow = () => {
         setModalContent(<BookNow/>);
     };
