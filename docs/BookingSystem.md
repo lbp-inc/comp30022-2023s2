@@ -1,5 +1,5 @@
 # Booking System Documentation
-![By Team 107](https://img.shields.io/badge/Stephen_Zhang-Team_107-blue?style=for-the-badge)
+![By Team 107](https://img.shields.io/badge/By-Team_107-blue?style=for-the-badge)
 
 ## Models
 ### Activity
@@ -28,3 +28,6 @@
 | `transaction_id`  | `[ObjectId]`   | no       | Records relevant transactions (to calculate outstanding payment)  |                                    |
 
 ### Transaction
+
+## Endpoints
+Please check out `BookingSystemFrontendAPI.md`
