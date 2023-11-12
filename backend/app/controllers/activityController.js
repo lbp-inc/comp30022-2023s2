@@ -4,6 +4,11 @@ import DangerDanger from "../views/dangerdanger.js";
 import jwt from "jsonwebtoken";
 const JWT_SECRET = "liTq9vasHanieW0Sb8ClegPSs6dZV05xHLKSiEZhPUC4KPSurj0pmJJs66L8biTNSvTxM11rUacxXX0P23clrB8vmC7i0e0RMVc";
 
+/**
+ * @function generateDangerToken
+ * @description Generate a length 5 danger token
+ * @returns {Promise<void>}
+ */
 function generateDangerToken() {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -18,17 +23,40 @@ function generateDangerToken() {
 
 var dangerToken = generateDangerToken();
 
+/**
+ * @async
+ * @function getDangerToken
+ * @description Respond with the generated danger token
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 async function getDangerToken(req, res) {
     dangerToken = generateDangerToken();
     const response = DangerDanger(dangerToken);
     res.send(response).status(200);
 }
 
-// Get all courses from database and return as json
+/**
+ * @async
+ * @function getActivities
+ * @description Get all courses from database and return as json
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 async function getActivities(req, res) {
     res.send(await Activity.find()).status(200);
 }
 
+/**
+ * @async
+ * @function getActivity
+ * @description Get the activity on object ID
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 // Get a specific course by id
 async function getActivity(req, res) {
     try {
@@ -46,6 +74,14 @@ async function getActivity(req, res) {
 
 }
 
+/**
+ * @async
+ * @function addActivity
+ * @description Add a new activity based on fields given in request body
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 async function addActivity(req, res) {
     console.log(req.body);
     let activity = new Activity({
@@ -92,6 +128,14 @@ async function addBooking(req, res){
     }
 }
 
+/**
+ * @async
+ * @function initDb
+ * @description Initialise database to original state
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 async function initDb(req, res) {
     const token = req.params.dangerToken;
     if (token != dangerToken)

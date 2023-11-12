@@ -4,6 +4,14 @@ import mongoose from "mongoose";
 // Not found string. Does not have an actual meaning.
 const NotFound = "                                                 xx\n            xxxxx                                x\n           xx   x                                x\n           x    x                               xx                                      xxxxx\n           x    x                              xx                                      xx    xxx    xxxx\n          x     x                              xx                                      x        x  xx   x\n               x                              x                                         x        xxx    x\n          x   x                              x  x                                       x         x     x\n          xx x                              x                                            x              x\n       xxxxxxxx      xx                     x  x                                         xx            xx\n    xxx   xx   xx  xxxx      x     xxxxx   x   xxxx         xx                            xx          xx\nxxx      xxxxxxxxxx xx      xx     x  x    x  x   x       xxx         x                    x         xx\n         x      x   x      xx     x xx     x x    x         x        xx    xx  x x     x    xx     xx\n         x      x   x      xx     xxx     x  xx xxx     x   x        x    xxxxxx x    xx     xx xxx\n         x     xx    x   x   x   xxxx   xx   x xx     x     x     x xx  xx xx  x  x   xx    xxxxx\n         x   xx      xxxx    xxxx   xxxx    xx  xx  xx       x   x   xxx   x   x  x   xx  xxx\n         x xx                               xx    xxx        xxx     xx    x   x  x  x xxxxx\n          x                                 x                       xx      xxx   xxx\n                                                                  xxx\n                                                                 x  x\n                                                               xx   x\n                                                               x    x\n                                                               x   x\n                                                               x  xx\n                                                               xxxx\n                                                                x";
 
+/**
+ * @async
+ * @function createBooking
+ * @description Creat a new booking event
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 export async function createBooking(req, res) {
     console.log(req.body);
     const { activity_id, member_id, payment_required } = req.body;
@@ -18,11 +26,26 @@ export async function createBooking(req, res) {
     res.send(result).status(204);
 }
 
-// Get all bookings from database and return as json
+/**
+ * @async
+ * @function
+ * @description Get all bookings from database and return as json
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 export async function getBookings(req, res) {
     res.send(await Booking.find()).status(200);
 }
 
+/**
+ * @async
+ * @function queryBookings
+ * @description Get booking event by query (reduce duplication)
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 async function queryBookings(req, res, query) {
     try {
         let result = await Booking.find(query);
@@ -35,22 +58,53 @@ async function queryBookings(req, res, query) {
     }
 }
 
-// Get a specific booking by id
+/**
+ * @async
+ * @function getBooking
+ * @description Get a specific booking by id
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 export async function getBooking(req, res) {
     let query = {_id: new mongoose.Types.ObjectId(req.params.id)};
     await queryBookings(req, res, query);
 }
 
+/**
+ * @async
+ * @function getBookingByMember
+ * @description Find booking event with member ID
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 export async function getBookingByMember(req, res) {
     let query = {member_id: new mongoose.Types.ObjectId(req.params.id)};
     await queryBookings(req, res, query);
 }
 
+/**
+ * @async
+ * @function getBookingByActivity
+ * @description getBookingByMember
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 export async function getBookingByActivity(req, res) {
     let query = {activity_id: new mongoose.Types.ObjectId(req.params.id)};
     await queryBookings(req, res, query);
 }
 
+/**
+ * @async
+ * @function removeBooking
+ * @description Removes a booking event from database based on its ID
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 export async function removeBooking(req, res) {
     const { bookingId } = req.body;
     console.log(`Booking removed: id: ${bookingId}`);
