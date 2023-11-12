@@ -5,10 +5,11 @@ By Team 107
 ### Activity
 | Name            | Type           | Required | Description                                                       | Possible Values                    |
 |-----------------|----------------|----------|-------------------------------------------------------------------|------------------------------------|
+| `_id`           | `ObjectId`     | N/A      | Primary key                                                       |                                    |
 | `name`          | `String`       | yes      | Title of activity                                                 |                                    |
 | `subtitle`      | `String`       | yes      | A short description, will be shown in "all activities" page       |                                    |
 | `activity_type` | `String`       | yes      | Type of activity                                                  | course \| event                    |
-| `labels`        | `[String]` | no       | Category labels, used for filtering                               |                                    |
+| `labels`        | `[String]`     | no       | Category labels, used for filtering                               |                                    |
 | `image`         | `String`       | no       | A resource URI pointing to an image (please put in public folder) | /res/courses/Falls and Balance.jpg |
 | `description`   | `String`       | no       | A longer description, will be shown in "details" page             |                                    |
 | `time`          | `Date`         | yes      | Time of the activity                                              |                                    |
@@ -18,4 +19,12 @@ By Team 107
 | `max_capacity`  | `Number`       | no       | Max capacity of an activity, default to be no limit               |                                    |
 | `bookings`      | `[ObjectId]`   | no       | List of bookings, used to calculate availability                  |                                    |
 ### Booking
+| Name              | Type           | Required | Description                                                       | Possible Values                    |
+|-------------------|----------------|----------|-------------------------------------------------------------------|------------------------------------|
+| `_id`             | `ObjectId`     | N/A      | Primary key                                                       |                                    |
+| `activity_id`     | `ObjectId`     | yes      | Associated activity                                               |                                    |
+| `member_id`       | `ObjectId`     | yes      | Associated member, including guests                               |                                    |
+| `paymentRequired` | `Number`       | no       | Total amount of payment required (default to 0 for free activities). This should not change once booking has made. Outstanding payment should be calculated by adding transactions (manual credit adjustments can be made using virtual transactions with no member_id stated)  |                                    |
+| `transaction_id`  | `[ObjectId]`   | no       | Records relevant transactions (to calculate outstanding payment)  |                                    |
+
 ### Transaction
