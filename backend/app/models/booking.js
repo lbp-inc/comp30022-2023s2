@@ -19,7 +19,7 @@ const bookingSchema = mongoose.Schema(
         // This should not change once booking has made
         // Outstanding payment should be calculated by adding transactions
         // (manual credit adjustments can be made using virtual transactions with no member_id stated)
-        paymentRequired: Number,
+        payment_required: Number,
 
         // Records relevant transactions (to calculate outstanding payment)
         // Note the transaction doesn't necessarily have to be made by this member
