@@ -11,7 +11,7 @@ const BookNow = () => {
             <Container className="p-3">
                 <Row>
                     <Col sm={7} lg={9}>
-                        <Alert variant="success" className="my-3 m-1 h-auto">
+                        <Alert className="my-3 m-1 h-auto">
                             <Alert.Heading><i className="bi bi-info-circle"></i> Book with Membership</Alert.Heading>
                             <p>With your membership account, you can easily book activities without having to fill the forms every single time.</p>
                         </Alert>
