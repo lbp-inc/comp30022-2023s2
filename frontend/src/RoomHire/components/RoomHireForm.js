@@ -1,10 +1,9 @@
 import React from "react";
 import { useState, useRef, useEffect } from "react";
 
-/* Please check Slack before uncommenting the stylesheet
-Relevant thread: https://itprojectworkshop16.slack.com/archives/C05LGFPN37F/p1699730387228319
+
+//Relevant thread: https://itprojectworkshop16.slack.com/archives/C05LGFPN37F/p1699730387228319
 import "./RoomHireForm.css";
-*/
 
 import SignatureCanvas from 'react-signature-canvas'
 import { Link, useNavigate } from "react-router-dom";
@@ -134,12 +133,13 @@ function RoomHireForm() {
             <Layout>
                 <div className="pagelayout">
                     <h1>Room Rental Form</h1>
-                    <form onSubmit={handleSubmit}>
+                    <form className="roomHire-form" onSubmit={handleSubmit}>
                         <div className="subheading"><center> General Info</center> </div>
 
                         <label>Date of Application <span className="requires">*</span>
                             <br />
                             <input type="text"
+                                className="roomHire-inputText"
                                 name="applicationDate"
                                 value={inputs.applicationDate}
                                 readOnly
@@ -150,14 +150,15 @@ function RoomHireForm() {
                             Room Chosen <span className="requires">*</span>
                             <br />
                             <select
+                                className="roomHire-select"
                                 name="chosenRoom"
                                 value={inputs.chosenRoom}
                                 onChange={handleChange}
                                 required
                             >
-                                <option value="" disabled>Select a room(s)</option>
+                                <option value="" className="roomHire-option" disabled>Select a room(s)</option>
                                 {roomOptions.map((room, index) => (
-                                    <option key={index} value={room}>{room}</option>
+                                    <option className="roomHire-option" key={index} value={room}>{room}</option>
                                 ))}
                             </select>
                         </label>
@@ -169,6 +170,7 @@ function RoomHireForm() {
                             <input
                                 type="text"
                                 name="eventDate"
+                                className="roomHire-inputText"
                                 value={new Date(localStorage.getItem("selectedDate")).toDateString()}
                                 readOnly
                                 required
@@ -177,8 +179,10 @@ function RoomHireForm() {
 
                         <label>If More Than One Date, Please Specify Those Dates Below in Date Format
                             <br />
-                            <input type="text"
+                            <input
+                                type="text"
                                 name="eventDateExtra"
+                                className="roomHire-inputText"
                                 placeholder="eg. 23/07/2023, 23/08/2023, etc."
                                 value={inputs.eventDateExtra || ""}
                                 onChange={handleChange} />
@@ -187,6 +191,7 @@ function RoomHireForm() {
                         <label>Start Time:
                             <input type="time"
                                 name="eventStartTime"
+                                className="roomHire-inputDateTime"
                                 value={inputs.eventStartTime || ""}
                                 onChange={handleChange}
                                 required
@@ -196,6 +201,7 @@ function RoomHireForm() {
 
                         <label>End Time:
                             <input type="time"
+                                className="roomHire-inputDateTime"
                                 name="eventEndTime"
                                 value={inputs.eventEndTime || ""}
                                 onChange={handleChange}
@@ -210,6 +216,7 @@ function RoomHireForm() {
                             <br />
                             <input type="text"
                                 name="activity"
+                                className="roomHire-inputText"
                                 value={inputs.activity || ""}
                                 onChange={handleChange}
                                 placeholder="What are you using the room for?"
@@ -220,6 +227,7 @@ function RoomHireForm() {
                             <br />
                             <input type="text"
                                 name="fullName"
+                                className="roomHire-inputText"
                                 value={inputs.fullName || ""}
                                 onChange={handleChange}
                                 required />
@@ -229,6 +237,7 @@ function RoomHireForm() {
                             <br />
                             <input type="tel"
                                 name="phoneNumber"
+                                className="roomHire-inputText"
                                 placeholder="+61 4__ ___ ___"
                                 value={inputs.phoneNumber || ""}
                                 onChange={handleChange}
@@ -239,6 +248,7 @@ function RoomHireForm() {
                             <br />
                             <input type="email"
                                 name="email"
+                                className="roomHire-inputText"
                                 placeholder="example@gmail.com"
                                 value={inputs.email || ""}
                                 onChange={handleChange}
@@ -249,6 +259,7 @@ function RoomHireForm() {
                             <br />
                             <input type="text"
                                 name="abn"
+                                className="roomHire-inputText"
                                 value={inputs.abn || ""}
                                 onChange={handleChange}
                                 placeholder="If you have an ABN for your business, insert it here" />
@@ -258,6 +269,7 @@ function RoomHireForm() {
                             <br />
                             <input type="text"
                                 name="streetAddress"
+                                className="roomHire-inputText"
                                 value={inputs.streetAddress || ""}
                                 onChange={handleChange}
                                 required />
@@ -267,6 +279,7 @@ function RoomHireForm() {
                             <br />
                             <input type="text"
                                 name="suburb"
+                                className="roomHire-inputText"
                                 value={inputs.suburb || ""}
                                 onChange={handleChange}
                                 required />
@@ -276,6 +289,7 @@ function RoomHireForm() {
                             <br />
                             <input type="text"
                                 name="postcode"
+                                className="roomHire-inputText"
                                 value={inputs.postcode || ""}
                                 onChange={handleChange}
                                 required />
@@ -287,6 +301,7 @@ function RoomHireForm() {
                             <br />
                             <input type="text"
                                 name="paymentMethod"
+                                className="roomHire-inputText"
                                 placeholder="eg. Invoice, pay on the day, etc."
                                 value={inputs.paymentMethod || ""}
                                 onChange={handleChange}
@@ -299,6 +314,7 @@ function RoomHireForm() {
                             <br />
                             <input type="text"
                                 name="namePaying"
+                                className="roomHire-inputText"
                                 value={inputs.namePaying || ""}
                                 onChange={handleChange} />
                         </label>
@@ -306,6 +322,7 @@ function RoomHireForm() {
                         <label>Phone Number
                             <br />
                             <input type="tel"
+                                className="roomHire-inputText"
                                 name="phoneNumberPayment"
                                 placeholder="+61 4__ ___ ___"
                                 value={inputs.phoneNumberPayment || ""}
@@ -315,6 +332,7 @@ function RoomHireForm() {
                         <label>Street Address
                             <br />
                             <input type="text"
+                                className="roomHire-inputText"
                                 name="streetAddressPayment"
                                 value={inputs.streetAddressPayment || ""}
                                 onChange={handleChange} />
@@ -323,6 +341,7 @@ function RoomHireForm() {
                         <label>Suburb
                             <br />
                             <input type="text"
+                                className="roomHire-inputText"
                                 name="suburbPayment"
                                 value={inputs.suburbPayment || ""}
                                 onChange={handleChange} />
@@ -331,6 +350,7 @@ function RoomHireForm() {
                         <label>State
                             <br />
                             <input type="text"
+                                className="roomHire-inputText"
                                 name="statePayment"
                                 value={inputs.statePayment || ""}
                                 onChange={handleChange} />
@@ -339,6 +359,7 @@ function RoomHireForm() {
                         <label>Postcode
                             <br />
                             <input type="text"
+                                className="roomHire-inputText"
                                 name="postcodePayment"
                                 value={inputs.postcodePayment || ""}
                                 onChange={handleChange} />
@@ -360,6 +381,7 @@ function RoomHireForm() {
                         <label>If yes please attach a letter of authority:
                             <div class="file-drop-area">
                                 <input type="file"
+                                    className="roomHire-inputFile"
                                     name="authorityLetter"
                                     value={inputs.authorityLetter || ""}
                                     onChange={handleChange} />
@@ -385,6 +407,7 @@ function RoomHireForm() {
                             <br />
                             <div class="file-drop-area">
                                 <input type="file"
+                                    className="roomHire-inputFile"
                                     name="insuranceDetails"
                                     value={inputs.insuranceDetails || ""}
                                     onChange={handleChange} />
@@ -432,12 +455,12 @@ function RoomHireForm() {
                                 onEnd={handleSignatureEnd}
                             />
                             <br></br>
-                            <Button type="button" variant='contained' onClick={clearSig} className="form-button">Clear</Button>
+                            <Button className="roomHire-button" type="button" variant='contained' onClick={clearSig} className="form-button">Clear</Button>
                         </div>
                         <br></br>
                         <div>
-                            <Button type="clear" variant='contained' onClick={resetForm} className="form-button">Reset Form</Button>
-                            <Button type="submit" variant='contained' className="form-button">Submit</Button>
+                            <Button className="roomHire-button" type="clear" variant='contained' onClick={resetForm} className="form-button">Reset Form</Button>
+                            <Button className="roomHire-button" type="submit" variant='contained' className="form-button">Submit</Button>
                         </div>
                     </form>
 
@@ -655,8 +678,8 @@ function RoomHireForm() {
                                     <img src={signatureData} alt="User Signature" className="signature-image" />
                                 </div>
                                 <div className="button-section">
-                                    <Button onClick={handleEdit} className="review-button"> Edit </Button>
-                                    <Button onClick={handleConfirm} className="review-button"> Confirm </Button>
+                                    <Button className="roomHire-button" onClick={handleEdit} className="review-button"> Edit </Button>
+                                    <Button className="roomHire-button" onClick={handleConfirm} className="review-button"> Confirm </Button>
                                 </div>
                             </div>
                         </>

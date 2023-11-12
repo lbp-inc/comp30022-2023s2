@@ -34,9 +34,9 @@ function DonateForm() {
   return (
     <div className="donate-form-container">
       <h2>Donation Form</h2>
-      <form onSubmit={handleSubmit}>
+      <form className="donation-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="firstName">First Name</label>
+          <label className="donation-label" htmlFor="firstName">First Name</label>
           <input
             type="text"
             id="firstName"
@@ -48,8 +48,9 @@ function DonateForm() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="lastName">Last Name</label>
+          <label className="donation-label" htmlFor="lastName">Last Name</label>
           <input
+            className="donation-input"
             type="text"
             id="lastName"
             name="lastName"
@@ -60,8 +61,9 @@ function DonateForm() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label className="donation-label" htmlFor="email">Email</label>
           <input
+          className="donation-input"
             type="email"
             id="email"
             name="email"
@@ -72,8 +74,9 @@ function DonateForm() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="phoneNumber">Phone Number</label>
+          <label className="donation-label" htmlFor="phoneNumber">Phone Number</label>
           <input
+          className="donation-input"
             type="tel"
             id="phoneNumber"
             name="phoneNumber"
@@ -83,8 +86,9 @@ function DonateForm() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="donationAmount">Donation Amount ($)</label>
+          <label className="donation-label" htmlFor="donationAmount">Donation Amount ($)</label>
           <input
+          className="donation-input"
             type="number"
             id="donationAmount"
             name="donationAmount"
@@ -95,7 +99,7 @@ function DonateForm() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="comments">Message</label>
+          <label className="donation-label" htmlFor="comments">Message</label>
           <textarea
             id="comments"
             name="comments"

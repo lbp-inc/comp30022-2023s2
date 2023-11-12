@@ -7,34 +7,34 @@
     margin-top: 200px;
     width: 100%;
     margin-bottom: 200px;
-  }
-  
-  .thanks-message > h1{
+}
+
+.thanks-message > h1{
     font-size: 70px;
-  }
-  
-  .thanks-message > p{
+}
+
+.thanks-message > p{
     font-size: 23px;
     max-width: 1000px;
     flex-wrap: nowrap;
-  }
-  
-  .custom-checkmark-icon {
-    color: green ; 
-  }
-  
-  @media screen and (max-width:1300px) {
-  
+}
+
+.custom-checkmark-icon {
+    color: green ;
+}
+
+@media screen and (max-width:1300px) {
+    
     .thanks-message{
-      margin-top: 60px;
-      width: 70%;
+        margin-top: 60px;
+        width: 70%;
     }
-  
+    
     .thanks-message > h1{
-      font-size: 50px;
+        font-size: 50px;
     }
-  
+    
     .thanks-message > p{
-      font-size: 15px;
+        font-size: 15px;
     }
-  }
+}
