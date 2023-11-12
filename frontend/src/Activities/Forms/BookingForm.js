@@ -1,14 +1,16 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
-import {Container} from "react-bootstrap";
+import {CardBody, CardHeader, Container, Nav, NavLink} from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import "./Forms.css";
 import Form from "react-bootstrap/Form";
+import ACFEForm from "./ACFE_Form";
+import Card from "react-bootstrap/Card";
 
 // Create a Context for the formKeys
 const FormContext = createContext();
-const NavigableForm = ({ children, style, onSubmit }) => {
+const BookingForm = ({ children, style, onSubmit }) => {
 
     const [formSections, setFormSections] = useState([]);
 
@@ -19,29 +21,35 @@ const NavigableForm = ({ children, style, onSubmit }) => {
         }
     };
 
+    document.body.dataset.bsSpy = "scroll";
+    document.body.dataset.bsTarget="#form-nav";
+    document.body.dataset.bsSmoothScroll="true";
+
     return (
         <FormContext.Provider value={{ addFormSection }}>
             <Form onSubmit={onSubmit}>
-                <Container style={style}>
-                    <Row>
-                        <Col md="auto">
-                            <nav className="nav nav-pills flex-column" id="form-nav">
-                                {formSections.map((section, index) => (
-                                    <a className="nav-link ms-3 my-1" href={`#${section.id}`} key={index}>{section.name}</a>
-                                ))}
-                            </nav>
-                        </Col>
-                        <Col>
-                            <div className="form-scrollable py-1 px-5"
-                                 data-bs-spy="scroll"
-                                 data-bs-target="#form-nav"
-                                 data-bs-smooth-scroll="true"
-                                 tabIndex="0">
-                                {children}
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
+                <div id="form-header">
+                    <h1>HAHAHAHA</h1>
+                </div>
+                <Card className="m-3">
+                    <CardHeader className="sticky-top" style={{background: "white"}}>
+                        <Nav variant="pills" id="form-nav" fill>
+                            {formSections.map((section, index) => (
+                                <Nav.Item>
+                                    <NavLink className="me-1 my-1" href={`#${section.id}`} key={index}>{section.name}</NavLink>
+                                </Nav.Item>
+                            ))}
+                        </Nav>
+                    </CardHeader>
+                    <CardBody>
+
+                        <div className="py-1 px-5"
+                             tabIndex="0">
+                            {children}
+                        </div>
+                    </CardBody>
+                </Card>
+
             </Form>
         </FormContext.Provider>
     );
@@ -63,6 +71,15 @@ const Section = ({ children, sectionId, sectionName }) => {
     );
 };
 
-NavigableForm.Section = Section;
+const Header = ({children}) => {
+    return (
+        <div>
+            {children}
+        </div>
+    )
+}
 
-export default NavigableForm;
+BookingForm.Header = Header;
+BookingForm.Section = Section;
+
+export default BookingForm;

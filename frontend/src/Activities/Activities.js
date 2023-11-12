@@ -9,6 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import FeeForServiceForm from "./Forms/FeeForService";
 import ACFEForm from './Forms/ACFE_Form';
 import ActivityDetails from "./ActivityDetails";
+import BookNow from "./BookNow";
 
 function useLoadContentFromDatabase(ref, pageKey) {
     const backendUrl  = 'http://localhost:8000';
@@ -77,13 +78,18 @@ function Activities() {
     const routeChange = (path) => navigate(path);
 
     const [show, setShow] = useState(false);
-    const [shownActivity, setShownActivity] = useState();
+    const [shownActivity, setShownActivity] = useState(activities[0]);
     const handleClose = () => setShow(false);
     const showDetails = (activity) => {
-        setShownActivity(activity);
+        //setShownActivity(activity);
+        setModalContent(<ActivityDetails activity={activity}/>)
         setShow(true);
     };
 
+    const [modalContent, setModalContent] = useState(<ActivityDetails activity={shownActivity}/>)
+    const showBookNow = () => {
+        setModalContent(<BookNow/>);
+    };
 
     return (
 
@@ -105,8 +111,8 @@ function Activities() {
                     <h1>Categories</h1>
                     <ul className='categoryBar'>
                         {tabs.map(tab => (
-                            <li 
-                            key={tab.id} 
+                            <li
+                            key={tab.id}
                             className={tab.name === activeTab ? 'active' : 'unactive'}
                             onClick={() => setActiveTab(tab.name)}
                             >{tab.name}</li>
@@ -129,7 +135,7 @@ function Activities() {
                         ))}
                     </ul>
                 </div>
-                
+
             </div>
         </div>
         </div>
@@ -137,13 +143,13 @@ function Activities() {
                 <Modal.Header closeButton>
                     <Modal.Title></Modal.Title>
                 </Modal.Header>
-                <Modal.Body><ActivityDetails activity={shownActivity}/></Modal.Body>
+                {modalContent}
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" >
-                        Next &gt;
+                    <Button variant="primary" onClick={showBookNow}>
+                        Continue to book &gt;
                     </Button>
                 </Modal.Footer>
             </Modal>
