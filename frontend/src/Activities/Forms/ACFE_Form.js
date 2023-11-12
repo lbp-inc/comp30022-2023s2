@@ -180,8 +180,6 @@ const ACFEForm = () => {
     const SubmitForm = (form) => {
         const [formComplete, setFormComplete] = useState(false);
         form.preventDefault();
-        // Send it to Activity API
-        window.alert(formData.prefix);  // Test
         // Check form completion
         // TODO
         // Update user profile if changed
@@ -1366,9 +1364,6 @@ const ACFEForm = () => {
             <Form.Text id="PaymentNotice" muted>
                 This registration may require a payment for few dollars.<br></br>
             </Form.Text>
-
-            {/* Tester Button */}
-            <Button type="submit">Test Output!</Button>
         </BookingForm>
     )
 };
