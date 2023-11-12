@@ -30,7 +30,6 @@ import EmailVerification from "./Membership/views/Register/email-Verification";
 import EventsTimetable from './TimeTable/EventsTimetable';
 import UserEventsTimetable from './TimeTable/UserEventsTimetable';
 import TimeTable from './Membership/views/Timetable/timetable';
-import TestForm from "./Activities/Forms/TestForm";
 
 
 import RoomHireForm from './RoomHire/components/RoomHireForm';
@@ -46,7 +45,8 @@ import RoomBookingAdmin from './AdminRoomBooking/RoomBookingAdmin';
 import DonationAdmin from './AdminDonate/DonationAdmin';
 import DonationPageMessage from './Donate/pages/DonationPageMessage';
 import ActivityDetails from "./Activities/ActivityDetails";
-
+import FeeForServiceForm from "./Activities/Forms/FeeForService";
+import ACFEForm from "./Activities/Forms/ACFE_Form";
 
 function App() {
     return (
@@ -86,7 +86,7 @@ function App() {
 
 
                   {/* Booking System */}
-                  <Route path="/form" element={<TestForm/>} />
+                  <Route path="/form" element={<FeeForServiceForm/>} />
                   <Route path="Activities/:activityId" element={<ActivityDetails/>} />
 
                   {/* Room Booking */}
