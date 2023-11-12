@@ -27,38 +27,38 @@
 @media screen and (max-width: 950px) {
 
     .socialMediaLinks {
-        top: 50px; /* 调整顶部位置以适应小屏幕 */
-        right: 70px; /* 调整右边距以适应小屏幕 */
+        top: 50px; 
+        right: 70px; 
     }
 
     .socialMediaLinks i {
 
-        margin: 0 12px; /* 调整图标之间的间距以适应小屏幕 */
+        margin: 0 12px; 
 
-        font-size: 30px; /* 进一步缩小图标大小 */
+        font-size: 30px; 
     }
 }
 
 @media screen and (max-width: 600px) {
     .socialMediaLinks {
-        top: 16px; /* 调整顶部位置以适应小屏幕 */
-        right: 48px; /* 调整右边距以适应小屏幕 */
+        top: 16px; 
+        right: 48px;
     }
 
     .socialMediaLinks i {
-        margin: 0 12px; /* 调整图标之间的间距以适应小屏幕 */
-        font-size: 30px; /* 进一步缩小图标大小 */
+        margin: 0 12px; 
+        font-size: 30px; 
     }
 }
 
 @media screen and (max-width: 500px) {
     .socialMediaLinks {
-        top: 16px; /* 调整顶部位置以适应小屏幕 */
-        right: 37px; /* 调整右边距以适应小屏幕 */
+        top: 25px; 
+        right: 58px; 
     }
 
     .socialMediaLinks i {
-        margin: 0 10px; /* 调整图标之间的间距以适应小屏幕 */
-        font-size: 19px; /* 进一步缩小图标大小 */
+        margin: 10 20px; 
+        font-size: 35px; 
     }
 }

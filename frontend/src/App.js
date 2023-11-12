@@ -22,11 +22,16 @@ import AdminPersonalInfo from "./Membership/views/PersonalInfo/admin-personal-in
 import MyBooking from "./Membership/views/MyBooking/my-booking";
 import Notifications from "./Membership/views/Notifications/notifications";
 import AdminNotification from "./Membership/views/Notifications/admin-notification";
-import Content from "./Membership/views/Notifications/content";
+import PersonalInfoContent from "./Membership/views/PersonalInfo/personal-info-content";
 import RegisterJump from "./Membership/views/jump/register-jump";
 import ResetJump from "./Membership/views/jump/reset-jump";
-import PersonalInfoContent from "./Membership/views/PersonalInfo/personal-info-content";
+import NotificationContent from "./Membership/views/Notifications/notification-content";
 import EmailVerification from "./Membership/views/Register/email-Verification";
+import EventsTimetable from './TimeTable/EventsTimetable';
+import UserEventsTimetable from './TimeTable/UserEventsTimetable';
+import TimeTable from './Membership/views/Timetable/timetable';
+import TestForm from "./Activities/Forms/TestForm";
+
 
 import RoomHireForm from './RoomHire/components/RoomHireForm';
 import Room1and2 from './RoomHire/pages/Room1and2';
@@ -40,10 +45,11 @@ import DonateForm from './Donate/components/DonateForm';
 import RoomBookingAdmin from './AdminRoomBooking/RoomBookingAdmin';
 import DonationAdmin from './AdminDonate/DonationAdmin';
 import DonationPageMessage from './Donate/pages/DonationPageMessage';
+import ActivityDetails from "./Activities/ActivityDetails";
 
 
 function App() {
-  return (
+    return (
       <BrowserRouter>
           <div className="App">
               <Routes>
@@ -58,42 +64,48 @@ function App() {
                     {/* <Route path="/LogIn" element={<LogIn />} /> */}
                     <Route path="/Editor" element={<Editor />} />
                     <Route path="/EditorLogin" element={<EditorLogin />} />
+                    <Route path="/Timetable" element={<EventsTimetable />} />
+                    <Route path="/UserTimetable" element={<UserEventsTimetable />} />
 
                     {/* Membership */}
-                    <Route path="/login" element={<Login />}></Route>
-                    <Route path="/register" element={<Register />}></Route>
-                    <Route path="/forgot-password" element={<ForgotPassword />}></Route>
-                    <Route path="/reset-password/:username/:token" element={<ResetPassword />}></Route>
-                    <Route path="/personal-info" element={<PersonalInfo />}></Route>
-                    <Route path="/admin-personal-info" element={<AdminPersonalInfo />}></Route>
-                    <Route path="/my-booking" element={<MyBooking />}></Route>
-                    <Route path="/notifications" element={<Notifications />}></Route>
-                    <Route path="/admin-notification" element={<AdminNotification />}></Route>
-                    <Route path="/content" element={<Content />}></Route>
-                    <Route path="/register-jump" element={<RegisterJump />}></Route>
-                    <Route path="/reset-jump" element={<ResetJump />}></Route>
-                    <Route path="/personal-info-content" element={<PersonalInfoContent />}></Route>
-                    <Route path="/email-verification" element={<EmailVerification/>}></Route>
+                  <Route path="/login" element={<Login />}></Route>
+                  <Route path="/register" element={<Register />}></Route>
+                  <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+                  <Route path="/reset-password/:username/:token" element={<ResetPassword />}></Route>
+                  <Route path="/personal-info" element={<PersonalInfo />}></Route>
+                  <Route path="/admin-personal-info" element={<AdminPersonalInfo />}></Route>
+                  <Route path="/my-booking" element={<MyBooking />}></Route>
+                  <Route path="/notifications" element={<Notifications />}></Route>
+                  <Route path="/admin-notification" element={<AdminNotification />}></Route>
+                  <Route path="/content/:username" element={<PersonalInfoContent />}></Route>
+                  <Route path="/register-jump" element={<RegisterJump />}></Route>
+                  <Route path="/reset-jump" element={<ResetJump />}></Route>
+                  <Route path="/notification-content/:notification" element={<NotificationContent />}></Route>
+                  <Route path="/email-verification" element={<EmailVerification/>}></Route>
+                  <Route path="/admin-timetable" element={<TimeTable/>}></Route>
 
 
-                    {/* Room Booking */}
-                    <Route path="/RoomHire" element={<RoomHire />} />
-                    <Route path="/RoomHireForm" element={<RoomHireForm />} />
-                    <Route path="/Room1and2" element={<Room1and2 />} />
-                    <Route path="/Room3" element={<Room3 />} />
-                    <Route path="/Room4" element={<Room4 />} />
-                    <Route path="/Room5" element={<Room5 />} />
-                    <Route path="/Room6" element={<Room6 />} />
-                    <Route path='/RoomBookingSucceed' element={<RoomBookingSucceed/>}/>
-                    {/* Room Booking Admin*/}
-                    <Route path='/RoomBookingAdmin' element={<RoomBookingAdmin/>}/>
-                    {/* Donate */}
-                    <Route path='/Donate' element={<Donate/>} />
-                    <Route path="/DonateForm" element={<DonateForm />} />
-                    <Route path='/DonationPageMessage' element={<DonationPageMessage/>}/>
-                    {/* Donate Admin */}
-                    <Route path='/DonationAdmin' element={<DonationAdmin/>}/>
-                    
+                  {/* Booking System */}
+                  <Route path="/form" element={<TestForm/>} />
+                  <Route path="Activities/:activityId" element={<ActivityDetails/>} />
+
+                  {/* Room Booking */}
+                  <Route path="/RoomHire" element={<RoomHire />} />
+                  <Route path="/RoomHireForm" element={<RoomHireForm />} />
+                  <Route path="/Room1and2" element={<Room1and2 />} />
+                  <Route path="/Room3" element={<Room3 />} />
+                  <Route path="/Room4" element={<Room4 />} />
+                  <Route path="/Room5" element={<Room5 />} />
+                  <Route path="/Room6" element={<Room6 />} />
+                  <Route path='/RoomBookingSucceed' element={<RoomBookingSucceed/>}/>
+                  {/* Room Booking Admin*/}
+                  <Route path='/RoomBookingAdmin' element={<RoomBookingAdmin/>}/>
+                  {/* Donate */}
+                  <Route path='/Donate' element={<Donate/>} />
+                  <Route path="/DonateForm" element={<DonateForm />} />
+                  <Route path='/DonationPageMessage' element={<DonationPageMessage/>}/>
+                  {/* Donate Admin */}
+                  <Route path='/DonationAdmin' element={<DonationAdmin/>}/>
               </Routes>
           </div>
       </BrowserRouter>  

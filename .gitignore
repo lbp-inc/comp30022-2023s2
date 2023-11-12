@@ -7,6 +7,10 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
+# IDE configs
+# JetBrains
+.idea/
+
 # Diagnostic reports (https://nodejs.org/api/reporzt.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -35,8 +39,8 @@ bower_components
 # node-waf configuration
 .lock-wscript
 
-# Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
+# Production binaries
+build/
 
 # Dependency directories
 node_modules/
@@ -131,7 +135,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-
 
 **/.DS_Store
 **/__pycache__

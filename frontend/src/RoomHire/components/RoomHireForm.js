@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useRef, useEffect } from "react";
 
+
 //Relevant thread: https://itprojectworkshop16.slack.com/archives/C05LGFPN37F/p1699730387228319
 import "./RoomHireForm.css";
 

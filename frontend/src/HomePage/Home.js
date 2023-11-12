@@ -12,7 +12,7 @@ import SocialMedia from './SocialMedia';
 import TitleLogo from './TitleLogo';
 
 function useLoadContentFromDatabase(ref, pageKey) {
-  const backendUrl  = 'http://localhost:5000';
+  const backendUrl  = 'http://localhost:8000';
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,7 +66,7 @@ function Home() {
     <div>
     <div ref={HomeRef} id="Home">
     <div id="content-only">    
-      <div className="Home"> 
+      <div className="Home">
         <UserMenu />
         <TitleLogo />
         <SocialMedia />

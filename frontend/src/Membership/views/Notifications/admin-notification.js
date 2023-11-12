@@ -1,88 +1,189 @@
 import AdminSider from "../../components/admin-sider"
-import { Card} from 'antd';
+import { Card, Form} from 'antd';
 import "../../style/admin-notification.css"
 import React from 'react';
 import { Input } from 'antd';
 import { Select, Space } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
-import { Button, message, Upload,Checkbox } from 'antd';
+import { Button, message, Checkbox } from 'antd';
 import AdminDrawerSider from "../../components/admin-drawer-sider";
 import { useMediaQuery } from 'react-responsive';
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import Layout from '../../../Layout';
 
-const props = {
-    name: 'file',
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-    headers: {
-      authorization: 'authorization-text',
-    },
-    onChange(info) {
-      if (info.file.status !== 'uploading') {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
 const { TextArea } = Input;
-const options = [];
-for (let i = 10; i < 36; i++) {
-  options.push({
-    label: i.toString(36) + i,
-    value: i.toString(36) + i,
-  });
-}
-const handleChange = (value) => {
-  console.log(`selected ${value}`);
-};
+
 
 const AdminNotification = () => {
     const isDesktop = useMediaQuery({ minWidth: 768 });
+
+    const [messageApi, contextHolder] = message.useMessage();
+
+    const { t } = useTranslation();
+
+    const [userGroupOption, SetUserGroupOption] = useState()
+
+    useEffect(() => {
+      const token = localStorage.getItem('token');
+
+      const fetchUserGroup = async () => {
+        try {
+          // Send a request to obtain user groups
+          const response = await fetch("http://localhost:8000/api/users/get-user-groups", {
+            method: "GET",
+            headers: {
+              'Authorization': token,
+            },
+          });
+          const UserGroup = await response.json();
+          // console.log(UserGroup);
+          if (response.ok) {
+            // Fetch user groups successful
+            SetUserGroupOption(UserGroup)
+            console.log("Fetch user groups successful");
+          } else {
+            // Fetch failed
+            console.log("Fetch user group failed");
+          }
+        } catch (error) {
+          console.error("Fetch user group error:", error);
+        }
+      };
+      fetchUserGroup();
+    }, []);
+
+    const options = userGroupOption ? userGroupOption.map((item, index) => ({
+      label: item,
+      value: item,
+    })) : [];
+
+    const onFinish = async (values) => {
+      // console.log(values);
+      try {
+        if (values["isEmail"] === "on") {
+          values["isEmail"] = true
+        } else {
+          values["isEmail"] = false
+        }
+  
+        const dataToSend = {
+            subject: values["subject"],
+            text: values["text"],
+            isEmail: values["isEmail"],
+            groups: values["recipients"],
+            token: localStorage.getItem('token'), // username
+        };
+  
+        // console.log(dataToSend);
+        // Send notification values to backend for sending notification
+        const response = await fetch("http://localhost:8000/api/users/send-message", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept:'application/json',
+              'Access-Control-Allow-Origin':'*',
+              'Authorization': localStorage.getItem('token'),
+            },
+            body: JSON.stringify(dataToSend),
+        });
+    
+        if (response.status===201) {
+          console.log("Send notification successful")
+          sendSuccess()
+        } else if (response.status===403) {
+          console.log("Unauthorized user")
+          errorUnauthorized()
+        } else {
+          console.log("Send notification failed")
+          errorSend()
+        }
+      } catch (error) {
+        console.error('Send notification request error:', error);
+        errorInternal()
+      }
+    };
+
+    const sendSuccess = () => {
+      messageApi.open({
+        type: "success",
+        content: t("alert_message_notification_success"),
+      });
+    };
+
+    const errorUnauthorized = () => {
+      messageApi.open({
+        type: "error",
+        content: t("alert_message_notification_unauthorized"),
+      });
+    };
+
+    const errorSend = () => {
+      messageApi.open({
+        type: "error",
+        content: t("alert_message_notification_failed"),
+      });
+    };
+
+    const errorInternal = () => {
+      messageApi.open({
+        type: "error",
+        content: t("alert_message_network_error"),
+      });
+    };
 
     return (
         <Layout>
         <div className="loginSection">
         <div className="membership">
+          {contextHolder}
             <div className="membership-card">
               {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>}
-                <Card className="content">
-                    <Space
-                    style={{
-                    width: '100%',
-                    }}
-                        direction="vertical"
+                <Card className="membership-content-main">
+                  <Form
+                    name="admin-notification"
+                    onFinish={onFinish}
+                  >
+                    <Form.Item
+                      name="recipients"
+                      initialValue={[]}
                     >
-                        <Select
+                      <Select
                         mode="multiple"
                         allowClear
                         style={{
                             width: '100%',
                         }}
                         placeholder="Recipients"
-                        defaultValue={[]}
-                        onChange={handleChange}
                         options={options}
-                        />
-                    </Space>
-                    <br />
-                    <br />
-                    <Input placeholder="Subject" />
-                    <br />
-                    <br />
-                    <TextArea rows={15} style = {{resize: "none"}}/> 
-                    <br />
-                    <br />
-                    <Space wrap>
-                        <Button type="primary">Send</Button>
-                        <Upload {...props} showUploadList = {false}>
-                            <Button icon={<UploadOutlined />}>Click to Upload</Button>
-                        </Upload>
+                      />
+                    </Form.Item>
+
+                    <Form.Item
+                      name="subject"
+                    >
+                      <Input placeholder="Subject" />
+                    </Form.Item>
+
+                    <Form.Item
+                      name="text"
+                    >
+                      <TextArea rows={isDesktop ? 18 : 14} style = {{resize: "none"}}/> 
+                    </Form.Item>
+
+                    <Form.Item
+                      name="isEmail"
+                    >
+                      <Space wrap>
+                        <Button type="primary" htmlType="submit"  block className="button">Send</Button>
+                        {/* <Upload {...props} showUploadList = {false}>
+                          <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                        </Upload> */}
                         <Checkbox>{"Send to email"}</Checkbox>
-                    </Space>
+                      </Space>
+                    </Form.Item>
+
+                  </Form>
                 </Card>
             </div>
         </div>

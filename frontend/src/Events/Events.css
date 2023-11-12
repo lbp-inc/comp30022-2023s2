@@ -1,106 +1,106 @@
 @font-face {
-    font-family: 'SF FONT bold'; 
-    src: url('../fonts/SFPRODISPLAYBOLD.OTF') format('opentype');
+  font-family: 'SF FONT bold'; 
+  src: url('../fonts/SFPRODISPLAYBOLD.OTF') format('opentype');
 }
 .eventsbanner {
-  height: 500px;
-  width: 100%;
-  background-image: url('../image/NewImage/l.webp');
-  background-size: cover;
-  margin-top: 100px;
-  
+height: 500px;
+width: 100%;
+background-image: url('../image/NewImage/IMG_0052.jpg');
+background-size: cover;
+margin-top: 100px;
+
 }
 .eventsbanner h1 {
-  color:#ffffff;
-  text-align: center;
-  padding-top: 220px;
-  font-size: 90px;
+color:#ffffff;
+text-align: center;
+padding-top: 220px;
+font-size: 90px;
 }
 /* .newsTitleEvent {
-  width: 100%;
-  height: 200px;
-  background-color: #3b9da6;
-  color: #fcc846;
-  text-align: center;
-  padding-top: 5%;
-  font-size: 30px;
-  margin-top: 100px;
+width: 100%;
+height: 200px;
+background-color: #3b9da6;
+color: #fcc846;
+text-align: center;
+padding-top: 5%;
+font-size: 30px;
+margin-top: 100px;
 } */
 
 .carousel-container {
-    width: 200%;
-    max-width: 1500px; 
-    margin: 0 auto; /* 居中显示 */
-    margin-top: 15vh;
-    margin-bottom: 15vh ;
-    position: relative;
-    overflow: hidden;
-  }
-  
+  width: 200%;
+  max-width: 1500px; 
+  margin: 0 auto; 
+  margin-top: 15vh;
+  margin-bottom: 15vh ;
+  position: relative;
+  overflow: hidden;
+}
 
-  .carousel-slide {
-    display: flex; 
-    align-items: center; 
-  }
-  
-  .carousel-slide img {
-    max-width: 50%; 
-    height: auto;
-    order: 2; /* 调整图像的显示顺序 */
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  }
-  
-  .carousel-text {
-    flex: 1; 
-    display: flex;
-    flex-direction: column;
-    padding: 10%;
-    font-size: 1.2em;
-    color: #3b9da6;
-    background-color: #fff;
-    border-radius: 10px;
-    order: 1; /* 调整文本的显示顺序 */
-  }
-  
-  .carousel-title {
-    font-weight: bold; 
-    font-size: 1.5em; 
-  }
-  
-  .carousel-body {
-    flex: 1; 
-  }
-  
-  /* Swiper Navigation Styles */
-  .swiper-button-next, .swiper-button-prev {
-    color: #fff; 
-    font-size: 24px; 
-    background-color: rgba(0, 0, 0, 0.5); 
-    border-radius: 50%; 
-    width: 40px; 
-    height: 40px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: background-color 0.3s ease; 
-  }
-  
-  .swiper-button-next:hover, .swiper-button-prev:hover {
-    background-color: rgba(0, 0, 0, 0.8); /* 鼠标悬停时的导航按钮背景颜色 */
-  }
-  
-  /* 隐藏Swiper导航按钮的内容 */
-  .swiper-button-next::after, .swiper-button-prev::after {
-    content: none;
-  }
 
-  @media (max-width: 950px) {
-    .carousel-container {
-        transform: scale(0.5);
-        transform-origin: left; 
-      }
-  }
+.carousel-slide {
+  display: flex; 
+  align-items: center; 
+}
+
+.carousel-slide img {
+  max-width: 50%; 
+  height: auto;
+  order: 2;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.carousel-text {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  padding: 10%;
+  font-size: 1.2em;
+  color: #3b9da6;
+  background-color: #fff;
+  border-radius: 10px;
+  order: 1;
+}
+
+.carousel-title {
+  font-weight: bold; 
+  font-size: 1.5em; 
+}
+
+.carousel-body {
+  flex: 1; 
+}
+
+/* Swiper Navigation Styles */
+.swiper-button-next, .swiper-button-prev {
+  color: #fff; 
+  font-size: 24px; 
+  background-color: rgba(0, 0, 0, 0.5); 
+  border-radius: 50%; 
+  width: 40px; 
+  height: 40px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: background-color 0.3s ease; 
+}
+
+.swiper-button-next:hover, .swiper-button-prev:hover {
+  background-color: rgba(0, 0, 0, 0.8); 
+}
+
+
+.swiper-button-next::after, .swiper-button-prev::after {
+  content: none;
+}
+
+@media (max-width: 950px) {
+  .carousel-container {
+      transform: scale(0.5);
+      transform-origin: left; 
+    }
+}

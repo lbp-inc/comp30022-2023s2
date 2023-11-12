@@ -7,7 +7,7 @@
     src: url('../fonts/SFPRODISPLAYREGULAR.OTF') format('opentype');
 }
 
-/* 这是我加的popup animation */
+/* popup animation */
 @keyframes popUp {
     0% {
       opacity: 0;
@@ -62,7 +62,8 @@
 .swiper-slide img {
     margin-right: 10px;
     max-width: 100%;
-    height: auto;
+    max-height: 400px;
+    min-height: 125px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
@@ -80,9 +81,14 @@
   
 .split-container .text-part {
     flex: 1;
-    padding: 20px;
-    font-size: 1.2em;
+    padding: 0px 2%;
+    font-size: 26px;
     color: rgb(194, 32, 32);
+    font-family: 'SF FONT bold', sans-serif; 
+    line-height: 2; 
+    color: #D89D5B;
+    text-shadow: 2px 2px 4px #f1fa63;
+    align-self: center;
 }
   
 .split-container .image-part {
@@ -96,6 +102,21 @@
 
 .swiper-button-next::after, .swiper-button-prev::after {
     display: none;
+}
+
+@media screen and (max-width: 900px) {
+    .split-container {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .split-container .text-part {
+        flex: 1;
+        padding: 10px;
+        font-size: 1em;
+        line-height: 1.5; 
+    }
 }
 
 

@@ -1,146 +1,115 @@
-import "../../style/personal-info.css";
-import AdminSider from "../../components/admin-sider";
-import { Cascader } from "antd";
-import React from "react";
-import { Space } from "antd";
-import { Card, List } from "antd";
-import { Link } from "react-router-dom";
+import "../../style/personal-info.css"
+import "../../style/admin-personal-list.css"
+import AdminSider from "../../components/admin-sider"
+import React, { useState } from 'react';
+import { Card, Form, Input, List} from 'antd';
 import AdminDrawerSider from "../../components/admin-drawer-sider";
-import { useMediaQuery } from "react-responsive";
-import { Input } from "antd";
+import { useMediaQuery } from 'react-responsive';
+import VirtualList from 'rc-virtual-list';
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
-import Layout from "../../../Layout";
+import Layout from '../../../Layout';
 
 const { Search } = Input;
-const onSearch = (value, _e, info) => console.log(info?.source, value);
-
-const data = ["User 1", "User 2", "User 3", "User 4", "User 5", "User 6", "User 7", "User 8", "User 9", "User 10", "User 11", "User 12"];
-const onChange = (value) => {
-  console.log(`selected ${value}`);
-};
-
-const options = [
-  {
-    value: "course1",
-    label: "course1",
-    children: [
-      {
-        value: "Attend",
-        label: "Attend",
-        children: [
-          {
-            value: "new student",
-            label: "new student",
-          },
-          {
-            value: "old student",
-            label: "old student",
-          },
-        ],
-      },
-      {
-        value: "non-Attend",
-        label: "non-Attend",
-        children: [
-          {
-            value: "new student",
-            label: "new student",
-          },
-          {
-            value: "old student",
-            label: "old student",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: "course2",
-    label: "course2",
-    children: [
-      {
-        value: "Attend",
-        label: "Attend",
-        children: [
-          {
-            value: "new student",
-            label: "new student",
-          },
-          {
-            value: "old student",
-            label: "old student",
-          },
-        ],
-      },
-      {
-        value: "non-Attend",
-        label: "non-Attend",
-        children: [
-          {
-            value: "new student",
-            label: "new student",
-          },
-          {
-            value: "old student",
-            label: "old student",
-          },
-        ],
-      },
-    ],
-  },
-];
 
 const AdminPersonalInfo = () => {
-  const isDesktop = useMediaQuery({ minWidth: 768 });
+    const isDesktop = useMediaQuery({ minWidth: 768 });
 
-  return (
-    <Layout>
-      <div className="loginSection">
+    const [searchText, setSearchText] = useState("");
+
+    const [userList, setuserList] = useState([]);
+
+    // const filteredData = testData.filter(
+    const filteredData = userList.filter(
+      (user) =>
+        user.username.toLowerCase().includes(searchText.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchText.toLowerCase())
+    );
+
+    useEffect(() => {
+      // const token = localStorage.getItem('token');
+  
+      const fetchUserList = async () => {
+        try {
+          // Send a request to obtain all user list
+          const response = await fetch("http://localhost:8000/api/users/get-users", {
+            // method: "GET",
+            method: 'POST',
+            headers: {
+              // 'Authorization': token,
+              'Content-Type': 'application/json',
+              Accept:'application/json',
+              'Access-Control-Allow-Origin':'*',
+            },
+            body: JSON.stringify({ token: localStorage.getItem("token") }),
+          });
+          const UserList = await response.json();
+          // console.log(UserList);
+          // console.log(UserList["data"]);
+          if (response.ok) {
+            // Fetch all user list successful
+            setuserList(UserList["data"])
+            console.log("Fetch all user list successful");
+          } else {
+            // Fetch failed
+            console.log("Fetch all user list failed");
+          }
+        } catch (error) {
+          console.error("Fetch all user list error:", error);
+        }
+      };
+      fetchUserList();
+    }, []);
+
+    return (
+        <Layout>
+        <div className="loginSection">
         <div className="membership">
-          <div className="membership-card">
-            {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider" />}
+            <div className="membership-card">
+              {isDesktop ? <AdminSider /> : <AdminDrawerSider className="drawersider"/>} 
+            
+                <Card className="membership-content-main">
+                  <Form
+                    name="admin-notification"
+                    >
+                      <Form.Item>
+                        <Search 
+                          placeholder="Please input email or username"  
+                          style={{ width: '100%' }}
+                          onChange={(e) => setSearchText(e.target.value)}
+                          value={searchText}
+                        />
+                      </Form.Item>
 
-            <Card className="content">
-              <Space
-                style={{
-                  width: "100%",
-                }}
-                direction="vertical"
-              >
-                <Cascader options={options} onChange={onChange} placeholder="Please select" />
-              </Space>
-              <br />
-              <br />
-              <Search
-                placeholder="input search text"
-                allowClear
-                onSearch={onSearch}
-                style={{
-                  width: 200,
-                }}
-              />
-              <br />
-              <br />
-              <Card className="list-container-admin">
-                <List
-                  dataSource={data}
-                  // itemLayout="horizontal"
-                  pagination={{
-                    pageSize: 7,
-                  }}
-                  renderItem={(item) => (
-                    <List.Item>
-                      <Link to="/personal-info-content">{item}</Link>
-                    </List.Item>
-                  )}
-                />
-              </Card>
-            </Card>
-          </div>
+                      <Form.Item>
+                        <List className="personal-info-list">
+                          <VirtualList
+                            data={filteredData}
+                            height={isDesktop ? 530 : 430}
+                            itemHeight={47}
+                            itemKey={(item) => item.email}
+                          >
+                            {(item) => (
+                              <List.Item key={item.email}>
+                                <Link to={`/content/${item.username}`}>
+                                <List.Item.Meta
+                                  title={<span style={{ marginLeft: '20px' }}>{item.username}</span>} // Show username
+                                  description={<div style={{ marginLeft: '20px' }}>{item.email}</div>} // Show email
+                                />
+                                </Link>
+                              </List.Item>
+                            )}
+                          </VirtualList>
+                        </List>
+                      </Form.Item>
+                    </Form>
+                </Card>
+            </div>
         </div>
-      </div>
-    </Layout>
-  );
-};
-
-export default AdminPersonalInfo;
+        </div>
+        </Layout>
+    )
+}
+  
+export default AdminPersonalInfo

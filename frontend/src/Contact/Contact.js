@@ -11,11 +11,12 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import emailjs from 'emailjs-com';
+import DOMPurify from 'dompurify';
 
 const defaultTheme = createTheme();
 
 function useLoadContentFromDatabase(ref, pageKey) {
-    const backendUrl  = 'http://localhost:5000';
+    const backendUrl  = 'http://localhost:8000';
 
     useEffect(() => {
       const fetchData = async () => {
@@ -83,22 +84,46 @@ function ContactPage () {
         console.log(`Feedback from ${firstName} ${lastName} ${phoneNo} with email ${email} is: ${feedback}`);
     };
     */
-
-    const handleSubmit = (e) => {
-      e.preventDefault();
-
-      // Initialize your EmailJS user ID
-      emailjs.init('P_x49JLOkWPJMQ5qc'); // Replace with your EmailJS user ID
-
-      emailjs.sendForm('service_pp9de04', 'template_oyzc478', e.target, 'P_x49JLOkWPJMQ5qc')
-        .then((result) => {
-            alert('Email sent successfully!');
-            console.log(result.text);
-        }, (error) => {
-            alert('Failed to send the email!');
-            console.log(error.text);
-        });
-    };
+    function handleSubmit(e) {
+        e.preventDefault();
+    
+        // Email validation
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+    
+        // Phone number validation (only digits)
+        const phonePattern = /^\d+$/;
+        if (!phonePattern.test(phoneNo)) {
+            alert("Phone number should contain only digits.");
+            return;
+        }
+    
+        // Name validation (only letters)
+        const namePattern = /^[A-Za-z]+$/;
+        if (!namePattern.test(firstName) || !namePattern.test(lastName)) {
+            alert("Names should contain only letters.");
+            return;
+        }
+    
+        // XSS prevention
+        const sanitizedFeedback = DOMPurify.sanitize(feedback);
+    
+        // Initialize your EmailJS user ID
+        emailjs.init('68-D-7Uxs_KKibcJ9'); // Replace with your EmailJS user ID
+    
+        emailjs.sendForm('service_g4k2zig', 'template_x5fxlbg', e.target, '68-D-7Uxs_KKibcJ9')
+            .then((result) => {
+                alert('Email sent successfully!');
+                console.log(result.text);
+            }, (error) => {
+                alert('Failed to send the email!');
+                console.log(error.text);
+            });
+    }
+    
       
     return (
         <Layout>

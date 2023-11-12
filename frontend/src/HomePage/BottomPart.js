@@ -16,7 +16,7 @@ import './BottomPart.css';
 const BottomPart = () => {
   const position = [-38.0507295, 145.1176978]; // Approximate coordinates of Longbeach Place Inc
   
-  useEffect(() => { //把icon正确加载出来
+  useEffect(() => { 
       delete L.Icon.Default.prototype._getIconUrl; 
       L.Icon.Default.mergeOptions({
           iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
@@ -40,9 +40,6 @@ const BottomPart = () => {
             </Popup>
           </Marker>
         </MapContainer>
-        <Link to="/EditorLogin">
-          <FontAwesomeIcon icon={faScrewdriverWrench} className="editFeature" />
-        </Link>
       </div>
     </div>
   );

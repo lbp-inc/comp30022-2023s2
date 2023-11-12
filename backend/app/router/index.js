@@ -2,6 +2,7 @@ import express from "express";
 const router = express.Router();
 
 import { getUserInfo, getUsers, authUser, registerUser, logoutUser, getUserProfile, updateUserProfile, forgetPassword, resetPassword, emailVerify, getUserGroups, getUserListByGroup, sendMessage, getMsgList, getrole, emailCodeMatch, getSingleMsg } from "../controllers/userController.js";
+import { savePreviewPage, loadPreviewPage } from "../controllers/editController.js";
 
 import { admin } from "../utils/authHandler.js";
 import { get } from "mongoose";
@@ -27,5 +28,8 @@ router.route("/get-single-msg/:msg_id").get(getSingleMsg);
 
 router.post("/get-users", getUsers);
 router.post("/get-user-Info", getUserInfo);
+
+router.post("/save-content", savePreviewPage);
+router.get("/load-content/:pageKey", loadPreviewPage);
 
 export default router;

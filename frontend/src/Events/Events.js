@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import Layout from '../Layout';
-import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import 'swiper/swiper-bundle.css';
 
 import 'swiper/css';
@@ -17,81 +18,50 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleRight } from '@fortawesome/free-solid-svg-icons';
 import { faCircleLeft } from '@fortawesome/free-solid-svg-icons';
 
-
-function useLoadContentFromDatabase(ref, pageKey) {
-  const backendUrl  = 'http://localhost:5000';
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${backendUrl}/api/users/load-content/${pageKey}`); 
-        if (response.data.success) {
-          const { html, css } = response.data;
-
-          if (html && css && ref.current) {
-            ref.current.innerHTML = html;
-
-            const styleElement = document.createElement('style');
-            styleElement.type = 'text/css';
-            styleElement.innerHTML = css;
-            document.head.appendChild(styleElement);
-          }
-        }
-      } catch (error) {
-        console.error("Error loading data from database:", error);
-      }
-    };
-
-    fetchData();
-  }, [ref, pageKey, backendUrl]);
-}
-
-// function useLoadContentFromLocalStorage(ref, pageKey) {
-    
-//     useEffect(() => {
-//     //  const mapContainer = document.getElementById(mapID); 
-//       const savedHtml = localStorage.getItem(`savedHtml${pageKey}`);
-//       const savedCss = localStorage.getItem(`savedCss${pageKey}`);
-//       if (savedHtml && savedCss && ref.current) {
-//         ref.current.innerHTML = savedHtml;
-
-//         const styleElement = document.createElement('style');
-//         styleElement.type = 'text/css';
-//         styleElement.innerHTML = savedCss;
-//         document.head.appendChild(styleElement);
-
-//         }
-//     }, [ref, pageKey]);
-//   }
-
 function Events() {
+    const [data, setData] = useState([])
 
-    const EventsRef = useRef(null);
-    useLoadContentFromDatabase(EventsRef, 'Events');
+    useEffect(() => {
+        axios
+          .get("http://localhost:8000/api/events")
+          .then((res) => setData(res.data));
+      }, []);
+
 
     const slides = [
         {
           image: carouseImage1,
-          title: 'Event 1 title',
-          body: 'Event 1 Body Text',
+          title: data.map((event)=>(
+            event.title
+          ))[0],
+          body: data.map((event)=>(
+            event.describe
+          ))[0],
         },
         {
           image: carouseImage2,
-          title: 'Event 2 Title',
-          body: 'Event 2 Body Text',
+          title: data.map((event)=>(
+            event.title
+          ))[1],
+          body: data.map((event)=>(
+            event.describe
+          ))[1],
         },
         {
           image: carouseImage3,
-          title: 'Event 3 Text',
-          body: 'Event 3 Body Text',
+          title: data.map((event)=>(
+            event.title
+          ))[2],
+          body: data.map((event)=>(
+            event.describe
+          ))[2],
         },
       ];
     return (
         <Layout>
-        <div ref={EventsRef} id="Events">
-        <div id="content-only">
-            <div className="eventsbanner">
+            <div className="newsTitleEvent">
                 <h1>Events</h1>
+
             </div>
             <div className="carousel-container">
                 <Swiper
@@ -121,8 +91,6 @@ function Events() {
                 <div className="swiper-button-next"><FontAwesomeIcon icon={faCircleRight} color='#fff'></FontAwesomeIcon></div>
                 </Swiper>
             </div>
-        </div>
-        </div>
         </Layout>
     );
 }
