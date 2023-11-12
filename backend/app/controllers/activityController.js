@@ -1,6 +1,8 @@
 import Activity from "../models/activity.js"
 import mongoose from "mongoose";
 import DangerDanger from "../views/dangerdanger.js";
+import jwt from "jsonwebtoken";
+const JWT_SECRET = "liTq9vasHanieW0Sb8ClegPSs6dZV05xHLKSiEZhPUC4KPSurj0pmJJs66L8biTNSvTxM11rUacxXX0P23clrB8vmC7i0e0RMVc";
 
 function generateDangerToken() {
     let result = '';
@@ -62,6 +64,32 @@ async function addActivity(req, res) {
     });
     let result = await activity.save();
     res.send(result).status(204);
+}
+
+/**
+ * @async
+ * @function addBooking
+ * @description Update activity details
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
+async function addBooking(req, res){
+    try {
+        const { token, bookId } = req.body;
+        const verified = jwt.verify(token, JWT_SECRET);
+        const currActivity = await Activity.findOne({ _id: verified._id });
+        if (currActivity) {
+            if (!currActivity.bookings.contains(bookId)){
+                currActivity.bookings.push(bookId);
+            }
+            res.status(200).json({ message: "Booking recorded!" });
+        } else {
+            res.status(404).json({ error: "Activity not found" });
+        }
+    } catch (error) {
+        res.status(500).json({ error: "Update failed" });
+    }
 }
 
 async function initDb(req, res) {
@@ -132,4 +160,4 @@ async function initDb(req, res) {
     res.send(`Database has been initialised. (${numDeleted} record${numDeleted > 1 ? "s were" : " was"} removed.)`).status(200);
 }
 
-export { getActivities, getActivity, addActivity, initDb, getDangerToken };
+export { getActivities, getActivity, addActivity, initDb, getDangerToken, addBooking };
