@@ -1,5 +1,5 @@
 # Booking System Documentation
-By Team 107
+![By Team 107](https://img.shields.io/badge/Stephen_Zhang-Team_107-blue?style=for-the-badge)
 
 ## Models
 ### Activity
