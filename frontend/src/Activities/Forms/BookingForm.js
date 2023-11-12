@@ -1,5 +1,5 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
-import {CardBody, CardHeader, Container, Nav, NavLink} from "react-bootstrap";
+import {Alert, CardBody, CardHeader, Container, Nav, NavLink} from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -28,27 +28,27 @@ const BookingForm = ({ children, style, onSubmit }) => {
     return (
         <FormContext.Provider value={{ addFormSection }}>
             <Form onSubmit={onSubmit}>
-                <div id="form-header">
-                    <h1>HAHAHAHA</h1>
-                </div>
-                <Card className="m-3">
-                    <CardHeader className="sticky-top" style={{background: "white"}}>
-                        <Nav variant="pills" id="form-nav" fill>
-                            {formSections.map((section, index) => (
-                                <Nav.Item>
-                                    <NavLink className="me-1 my-1" href={`#${section.id}`} key={index}>{section.name}</NavLink>
-                                </Nav.Item>
-                            ))}
-                        </Nav>
-                    </CardHeader>
-                    <CardBody>
 
-                        <div className="py-1 px-5"
-                             tabIndex="0">
-                            {children}
-                        </div>
-                    </CardBody>
+                <Alert className="h-auto">
+                    <Alert.Heading>
+                        <i className="bi bi-info-circle"></i> Enrolment Form
+                    </Alert.Heading>
+                    <p className="mb-1">Please fill in the enrolment form to complete booking.</p>
+                    <p>Payment will be handled at the reception.</p>
+                </Alert>
+
+                <Card className="sticky-top" style={{background: "white"}}>
+                    <Nav variant="pills" id="form-nav" fill>
+                        {formSections.map((section, index) => (
+                            <Nav.Item>
+                                <NavLink className="me-1 my-1" href={`#${section.id}`} key={index}>{section.name}</NavLink>
+                            </Nav.Item>
+                        ))}
+                    </Nav>
                 </Card>
+                <div className="p-0" tabIndex="0">
+                    {children}
+                </div>
 
             </Form>
         </FormContext.Provider>
@@ -64,20 +64,14 @@ const Section = ({ children, sectionId, sectionName }) => {
     }, [formSection, addFormSection]);
 
     return (
-        <div className="mb-3" id={sectionId}>
+        <Card className="mb-4 p-4" id={sectionId}>
             <h2>{sectionName}</h2>
             {children}
-        </div>
+        </Card>
     );
 };
 
-const Header = ({children}) => {
-    return (
-        <div>
-            {children}
-        </div>
-    )
-}
+const Header = ({children}) => ({children})
 
 BookingForm.Header = Header;
 BookingForm.Section = Section;

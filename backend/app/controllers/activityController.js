@@ -1,6 +1,14 @@
 import Activity from "../models/activity.js"
 import mongoose from "mongoose";
+import DangerDanger from "../views/dangerdanger.js";
+import jwt from "jsonwebtoken";
+const JWT_SECRET = "liTq9vasHanieW0Sb8ClegPSs6dZV05xHLKSiEZhPUC4KPSurj0pmJJs66L8biTNSvTxM11rUacxXX0P23clrB8vmC7i0e0RMVc";
 
+/**
+ * @function generateDangerToken
+ * @description Generate a length 5 danger token
+ * @returns {Promise<void>}
+ */
 function generateDangerToken() {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -15,23 +23,40 @@ function generateDangerToken() {
 
 var dangerToken = generateDangerToken();
 
+/**
+ * @async
+ * @function getDangerToken
+ * @description Respond with the generated danger token
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 async function getDangerToken(req, res) {
     dangerToken = generateDangerToken();
-    var response = `\
-    <div>\
-    <h1 style="color: darkred">Caution</h1>\
-    <p>This operation is going to initialise activity section of the database, which will remove all existing records.</p>
-    <p>If you wish to proceed, please add "/${dangerToken}" to the URL to confirm this operation. This operation cannot be undone.</p>\
-    </div>\
-    `
+    const response = DangerDanger(dangerToken);
     res.send(response).status(200);
 }
 
-// Get all courses from database and return as json
+/**
+ * @async
+ * @function getActivities
+ * @description Get all courses from database and return as json
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 async function getActivities(req, res) {
     res.send(await Activity.find()).status(200);
 }
 
+/**
+ * @async
+ * @function getActivity
+ * @description Get the activity on object ID
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 // Get a specific course by id
 async function getActivity(req, res) {
     try {
@@ -49,6 +74,14 @@ async function getActivity(req, res) {
 
 }
 
+/**
+ * @async
+ * @function addActivity
+ * @description Add a new activity based on fields given in request body
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 async function addActivity(req, res) {
     console.log(req.body);
     let activity = new Activity({
@@ -69,8 +102,42 @@ async function addActivity(req, res) {
     res.send(result).status(204);
 }
 
+/**
+ * @async
+ * @function addBooking
+ * @description Update activity details
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
+async function addBooking(req, res){
+    try {
+        const { token, bookId } = req.body;
+        const verified = jwt.verify(token, JWT_SECRET);
+        const currActivity = await Activity.findOne({ _id: verified._id });
+        if (currActivity) {
+            if (!currActivity.bookings.contains(bookId)){
+                currActivity.bookings.push(bookId);
+            }
+            res.status(200).json({ message: "Booking recorded!" });
+        } else {
+            res.status(404).json({ error: "Activity not found" });
+        }
+    } catch (error) {
+        res.status(500).json({ error: "Update failed" });
+    }
+}
+
+/**
+ * @async
+ * @function initDb
+ * @description Initialise database to original state
+ * @param {object} req - Express request object
+ * @param {object} res - Express response object
+ * @returns {Promise<void>}
+ */
 async function initDb(req, res) {
-    var token = req.params.dangerToken;
+    const token = req.params.dangerToken;
     if (token != dangerToken)
     {
         res.send("Invalid danger token. Operation aborted.").status(401);
@@ -78,7 +145,7 @@ async function initDb(req, res) {
     }
     console.log("Hahahaha database has been cleaned!");
     let result = await Activity.deleteMany();
-    var fab = new Activity({
+    const fab = new Activity({
         name: "Falls and Balance",
         subtitle: "Learn drama and acting skills with creativity and have fun while doing...",
         activity_type: "course",
@@ -91,7 +158,7 @@ async function initDb(req, res) {
         max_capacity: 15,
     });
 
-    var cpsg = new Activity({
+    const cpsg = new Activity({
         name: "Chelsea PC Support Group",
         subtitle: "A group to share knowledge, ideas and problem solve computer issues",
         activity_type: "course",
@@ -104,7 +171,7 @@ async function initDb(req, res) {
         max_capacity: 15,
     });
 
-    var wat = new Activity({
+    const wat = new Activity({
         name: "Walk and Talk",
         subtitle: "Join the friendly group and explore the local community",
         activity_type: "event",
@@ -115,7 +182,7 @@ async function initDb(req, res) {
         location: "Longbeach PLACE",
     });
 
-    var xa = new Activity({
+    const xa = new Activity({
         name: "Xero Accounting",
         subtitle: "This course teaches participants the skills to manage the finances of …",
         activity_type: "course",
@@ -133,8 +200,8 @@ async function initDb(req, res) {
     await wat.save();
     await xa.save();
 
-    var numDeleted = result.deletedCount;
+    const numDeleted = result.deletedCount;
     res.send(`Database has been initialised. (${numDeleted} record${numDeleted > 1 ? "s were" : " was"} removed.)`).status(200);
 }
 
-export { getActivities, getActivity, addActivity, initDb, getDangerToken };
+export { getActivities, getActivity, addActivity, initDb, getDangerToken, addBooking };

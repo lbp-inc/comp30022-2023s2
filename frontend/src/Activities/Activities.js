@@ -5,7 +5,6 @@ import './Activities.css';
 import courseImage from '../image/event.webp';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import FeeForServiceForm from "./Forms/FeeForService";
 import ACFEForm from './Forms/ACFE_Form';
 import ActivityDetails from "./ActivityDetails";
