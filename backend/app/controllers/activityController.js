@@ -1,14 +1,12 @@
 import Activity from "../models/activity.js"
 import mongoose from "mongoose";
 
-function generateDangerToken() {
+//Added a length parameter to allow the generation of random tokens of varying lengths.
+function generateDangerToken(length = 5) {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    let counter = 0;
-    while (counter < 5) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        counter += 1;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
     return result;
 }
