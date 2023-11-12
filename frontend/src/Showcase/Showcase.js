@@ -24,10 +24,12 @@ import gallery6 from '../image/NewImage/Peacock craft.jpg';
 
 
 function useLoadContentFromDatabase(ref, pageKey) {
+    const backendUrl  = 'http://localhost:8000';
+  
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get(`http://localhost:4000/api/load/${pageKey}`);
+          const response = await axios.get(`${backendUrl}/api/users/load-content/${pageKey}`); 
           if (response.data.success) {
             const { html, css } = response.data;
   
@@ -46,8 +48,9 @@ function useLoadContentFromDatabase(ref, pageKey) {
       };
   
       fetchData();
-    }, [ref, pageKey]);
+    }, [ref, pageKey, backendUrl]);
   }
+  
 
 
 // function useLoadContentFromLocalStorage(ref, pageKey) {
