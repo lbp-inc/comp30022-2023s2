@@ -1,5 +1,6 @@
 import Activity from "../models/activity.js"
 import mongoose from "mongoose";
+import DangerDanger from "../views/dangerdanger.js";
 
 function generateDangerToken() {
     let result = '';
@@ -17,13 +18,7 @@ var dangerToken = generateDangerToken();
 
 async function getDangerToken(req, res) {
     dangerToken = generateDangerToken();
-    var response = `\
-    <div>\
-    <h1 style="color: darkred">Caution</h1>\
-    <p>This operation is going to initialise activity section of the database, which will remove all existing records.</p>
-    <p>If you wish to proceed, please add "/${dangerToken}" to the URL to confirm this operation. This operation cannot be undone.</p>\
-    </div>\
-    `
+    const response = DangerDanger(dangerToken);
     res.send(response).status(200);
 }
 
@@ -70,7 +65,7 @@ async function addActivity(req, res) {
 }
 
 async function initDb(req, res) {
-    var token = req.params.dangerToken;
+    const token = req.params.dangerToken;
     if (token != dangerToken)
     {
         res.send("Invalid danger token. Operation aborted.").status(401);
@@ -78,7 +73,7 @@ async function initDb(req, res) {
     }
     console.log("Hahahaha database has been cleaned!");
     let result = await Activity.deleteMany();
-    var fab = new Activity({
+    const fab = new Activity({
         name: "Falls and Balance",
         subtitle: "Learn drama and acting skills with creativity and have fun while doing...",
         activity_type: "course",
@@ -91,7 +86,7 @@ async function initDb(req, res) {
         max_capacity: 15,
     });
 
-    var cpsg = new Activity({
+    const cpsg = new Activity({
         name: "Chelsea PC Support Group",
         subtitle: "A group to share knowledge, ideas and problem solve computer issues",
         activity_type: "course",
@@ -104,7 +99,7 @@ async function initDb(req, res) {
         max_capacity: 15,
     });
 
-    var wat = new Activity({
+    const wat = new Activity({
         name: "Walk and Talk",
         subtitle: "Join the friendly group and explore the local community",
         activity_type: "event",
@@ -115,7 +110,7 @@ async function initDb(req, res) {
         location: "Longbeach PLACE",
     });
 
-    var xa = new Activity({
+    const xa = new Activity({
         name: "Xero Accounting",
         subtitle: "This course teaches participants the skills to manage the finances of …",
         activity_type: "course",
@@ -133,7 +128,7 @@ async function initDb(req, res) {
     await wat.save();
     await xa.save();
 
-    var numDeleted = result.deletedCount;
+    const numDeleted = result.deletedCount;
     res.send(`Database has been initialised. (${numDeleted} record${numDeleted > 1 ? "s were" : " was"} removed.)`).status(200);
 }
 

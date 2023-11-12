@@ -20,6 +20,7 @@ import eventRoutes from "./app/router/eventRoute.js";
 import activitiesRoutes from "./app/router/activities.js";
 import { notFound, errorHandler } from "./app/utils/errorHandler.js";
 import config from "./config/config.js";
+import Index from "./app/views/index.js";
 
 // Loading environment variables.
 dotenv.config();
@@ -48,7 +49,7 @@ app.use("/api/events", eventRoutes);
 app.use("/api/activities", activitiesRoutes);
 
 // Default route - sanity check route.
-app.get("/", (req, res) => res.send("Server is ready"));
+app.get("/", (req, res) => res.send(Index));
 
 // Error handling middlewares.
 app.use(notFound);
