@@ -232,7 +232,7 @@ const ACFEForm = () => {
                 <Row>
                     <Col>
                         <Form.Label>Prefix</Form.Label>
-                        <Form.Select aria-label="Default select example"
+                        <Form.Select aria-label="Default select example" defaultValue={formData.prefix}
                                      onChange={(e) => inputChange('prefix', e.target.value)}>
                             <option>Select...</option>
                             <option value="Mr">Mr</option>
@@ -245,7 +245,7 @@ const ACFEForm = () => {
                     </Col>
                     <Col>
                         <Form.Label>Gender</Form.Label>
-                        <Form.Select aria-label="Default select example"
+                        <Form.Select aria-label="Default select example" defaultValue={formData.gender}
                                      onChange={(e) => inputChange('gender', e.target.value)}>
                             <option>Select...</option>
                             <option value="Male">Male</option>
@@ -257,22 +257,22 @@ const ACFEForm = () => {
 
                 <Form.Label></Form.Label>
                 <FloatingLabel controlId="ACFE.fname" label="First Name">
-                    <Form.Control type="name" placeholder="March"
+                    <Form.Control type="name" placeholder="March" defaultValue={formData.firstName}
                                   onChange={(e) => inputChange('firstName', e.target.value)}/>
                 </FloatingLabel><br></br>
                 <FloatingLabel controlId="ACFE.sname" label="Surname">
-                    <Form.Control type="name" placeholder="Seven"
+                    <Form.Control type="name" placeholder="Seven" defaultValue={formData.surname}
                                   onChange={(e) => inputChange('surname', e.target.value)}/>
                 </FloatingLabel><br></br>
-                <FloatingLabel controlId="ACFE.dob" label="Date of Birth">
+                <FloatingLabel controlId="ACFE.dob" label="Date of Birth"> defaultValue={formData.dob}
                     <Form.Control type="date" placeholder="Seven" onChange={(e) => inputChange('dob', e.target.value)}/>
                 </FloatingLabel><br></br>
                 <FloatingLabel controlId="ACFE.phoneNumber" label="Phone Number">
-                    <Form.Control type="phone" placeholder="0412345678"
+                    <Form.Control type="phone" placeholder="0412345678" defaultValue={formData.phone}
                                   onChange={(e) => inputChange('phone', e.target.value)}/>
                 </FloatingLabel><br></br>
                 <FloatingLabel controlId="ACFE.email" label="Email Address">
-                    <Form.Control type="email" placeholder="iLoveCos@starrail.me"
+                    <Form.Control type="email" placeholder="iLoveCos@starrail.me" defaultValue={formData.email}
                                   onChange={(e) => inputChange('email', e.target.value)}/>
                 </FloatingLabel>
                 <Form.Check
@@ -282,28 +282,28 @@ const ACFEForm = () => {
                     onChange={(e) => inputChange('prefix', e.target.checked)}
                 /><br></br>
                 <FloatingLabel controlId="ACFE.address" label="Address">
-                    <Form.Control type="address" placeholder="15 Chelsea Rd"
+                    <Form.Control type="address" placeholder="15 Chelsea Rd"  defaultValue={formData.address}
                                   onChange={(e) => inputChange('address', e.target.value)}/>
                 </FloatingLabel><br></br>
                 <FloatingLabel controlId="ACFE.suburb" label="Suburb">
-                    <Form.Control type="suburb" placeholder="Chelsea"
+                    <Form.Control type="suburb" placeholder="Chelsea" defaultValue={formData.suburb}
                                   onChange={(e) => inputChange('suburb', e.target.value)}/>
                 </FloatingLabel><br></br>
                 <FloatingLabel controlId="ACFE.postcode" label="Post Code">
-                    <Form.Control type="postcode" placeholder="3196"
+                    <Form.Control type="postcode" placeholder="3196" defaultValue={formData.postcode}
                                   onChange={(e) => inputChange('postcode', e.target.value)}/>
                 </FloatingLabel><br></br>
                 <h3>Emergency Contact</h3>
                 <FloatingLabel controlId="ACFE.ECname" label="Emergency Contact Name">
-                    <Form.Control type="name" placeholder="Pom-Pom"
+                    <Form.Control type="name" placeholder="Pom-Pom" defaultValue={formData.ecName}
                                   onChange={(e) => inputChange('ecName', e.target.value)}/>
                 </FloatingLabel><br></br>
                 <FloatingLabel controlId="ACFE.ECrelationship" label="Relationship to you">
-                    <Form.Control type="relationship" placeholder="Train Conductor"
+                    <Form.Control type="relationship" placeholder="Train Conductor" defaultValue={formData.ecRelationship}
                                   onChange={(e) => inputChange('ecRelationship', e.target.value)}/>
                 </FloatingLabel><br></br>
                 <FloatingLabel controlId="ACFE.ECphoneNumber" label="Phone Number">
-                    <Form.Control type="phone" placeholder="0412345678"
+                    <Form.Control type="phone" placeholder="0412345678"  defaultValue={formData.ecPhone}
                                   onChange={(e) => inputChange('ecPhone', e.target.value)}/>
                 </FloatingLabel><br></br>
                 <h3>Concession Cards</h3>
