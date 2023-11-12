@@ -114,51 +114,53 @@ const FeeForServiceForm = () => {
 
     /* Submit the form */
     const SubmitForm = (form) => {
-        //const [formComplete, setFormComplete] = useState(false);
+        const [formComplete, setFormComplete] = useState(false);
         form.preventDefault();
         // Send it to Activity API
         window.alert(formData.prefix);  // Test
         // Check form completion
         // TODO
         // Update user profile if changed
-        try {
-            const dataToSend = {
-                token: localStorage.getItem('token'),
-                prefix: formData.prefix,
-                gender: formData.gender,
-                firstName: formData.firstName,
-                surname: formData.surname,
-                dob: formData.dob,
-                phone: formData.phone,
-                email: formData.email,
-                address: formData.address,
-                suburb: formData.suburb,
-                postcode: formData.postcode,
-                ecName: formData.ecName,
-                ecRelationship: formData.ecRelationship,
-                ecPhone: formData.ecPhone,
-            };
-            // Send form values to backend for updating personal info
-            const response = async () => fetch("http://localhost:8000/api/users/updateInfo", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                    'Access-Control-Allow-Origin': '*',
-                },
-                body: JSON.stringify(dataToSend),
-            });
+        if (formComplete){
+            try {
+                const dataToSend = {
+                    token: localStorage.getItem('token'),
+                    prefix: formData.prefix,
+                    gender: formData.gender,
+                    firstName: formData.firstName,
+                    surname: formData.surname,
+                    dob: formData.dob,
+                    phone: formData.phone,
+                    email: formData.email,
+                    address: formData.address,
+                    suburb: formData.suburb,
+                    postcode: formData.postcode,
+                    ecName: formData.ecName,
+                    ecRelationship: formData.ecRelationship,
+                    ecPhone: formData.ecPhone,
+                };
+                // Send form values to backend for updating personal info
+                const response = async () => fetch("http://localhost:8000/api/users/updateInfo", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                    body: JSON.stringify(dataToSend),
+                });
 
-            if (response.status === 200) {
-                // Update successful
-                console.log("Update successful.")
-            } else {
-                // Update failed
-                console.log("Update failed.")
+                if (response.status === 200) {
+                    // Update successful
+                    console.log("Update successful.")
+                } else {
+                    // Update failed
+                    console.log("Update failed.")
+                }
+
+            } catch (error) {
+                console.error('Update personal info request error: ', error);
             }
-
-        } catch (error) {
-            console.error('Update personal info request error: ', error);
         }
     };
 
