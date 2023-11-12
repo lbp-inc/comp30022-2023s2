@@ -30,4 +30,4 @@
 ### Transaction
 
 ## Endpoints
-Please check out `BookingSystemFrontendAPI.md`
+Please check out [`BookingSystemFrontendAPI.md`](https://github.com/lbp-inc/lbp-website/blob/main/docs/BookingSystemFrontendAPI.md)https://github.com/lbp-inc/lbp-website/blob/main/docs/BookingSystemFrontendAPI.md
