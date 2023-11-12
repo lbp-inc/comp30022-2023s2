@@ -24,7 +24,7 @@
 | `_id`             | `ObjectId`     | N/A      | Primary key                                                       |                                    |
 | `activity_id`     | `ObjectId`     | yes      | Associated activity                                               |                                    |
 | `member_id`       | `ObjectId`     | yes      | Associated member, including guests                               |                                    |
-| `paymentRequired` | `Number`       | no       | Total amount of payment required (default to 0 for free activities). This should not change once booking has made. Outstanding payment should be calculated by adding transactions (manual credit adjustments can be made using virtual transactions with no member_id stated)  |                                    |
+| `payment_required` | `Number`       | no       | Total amount of payment required (default to 0 for free activities). This should not change once booking has made. Outstanding payment should be calculated by adding transactions (manual credit adjustments can be made using virtual transactions with no member_id stated)  |                                    |
 | `transaction_id`  | `[ObjectId]`   | no       | Records relevant transactions (to calculate outstanding payment)  |                                    |
 
 ### Transaction
