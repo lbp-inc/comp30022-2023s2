@@ -84,13 +84,24 @@ const PersonalInfoContent = () => {
                             // initialValues={userInfo}
                             >
                                 {/* Name form */}
-                                <Form.Item
+                                <Form.Item 
                                     className="form-item left-align"
-                                    name="name"
-                                    label={t("form_label_name")}
-                                    initialValue={userInfo.name}
+                                    name="firstname"
+                                    label= "Firstname"
+                                    initialValue={userInfo.firstname}
+                                    // onChange={handleNameChange}
                                 >
-                                    <Input />
+                                    <Input/>
+                                </Form.Item>
+
+                                <Form.Item 
+                                    className="form-item left-align"
+                                    name="surname"
+                                    label= "Surname"
+                                    initialValue={userInfo.surname}
+                                    // onChange={handleNameChange}
+                                >
+                                    <Input/>
                                 </Form.Item>
 
                                 {/* Gender form */}

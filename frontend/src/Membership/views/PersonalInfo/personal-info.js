@@ -53,6 +53,7 @@ const PersonalInfo = () => {
                     setUserInfo(responseData["data"])
                     setLoading(false);
                     console.log("Fetch successful")
+                    // console.log(responseData["data"])
                 } else {
                     // Fetch failed
                     console.log("Fetch failed")
@@ -70,7 +71,8 @@ const PersonalInfo = () => {
         try {
             const dataToSend = {
                 token: localStorage.getItem('token'),
-                name: values["name"],
+                firstname: values["firstname"],
+                surname: values["surname"],
                 gender: values["gender"],
                 birthday: values["birthday"],
                 email: values["email"],
@@ -123,13 +125,24 @@ const PersonalInfo = () => {
                                     labelCol={{ span: 5}}
                                     onFinish={onFinish}
                                     // initialValues={userInfo}
+                                    className="persoanl-info-form-member"
                                 >   
                                     {/* Name form */}
                                     <Form.Item 
                                         className="form-item left-align"
-                                        name="name"
-                                        label= {t('form_label_name')}
-                                        initialValue={userInfo.name}
+                                        name="firstname"
+                                        label= "Firstname"
+                                        initialValue={userInfo.firstname}
+                                        // onChange={handleNameChange}
+                                    >
+                                        <Input/>
+                                    </Form.Item>
+
+                                    <Form.Item 
+                                        className="form-item left-align"
+                                        name="surname"
+                                        label= "Surname"
+                                        initialValue={userInfo.surname}
                                         // onChange={handleNameChange}
                                     >
                                         <Input/>
