@@ -218,7 +218,7 @@ const Register = () => {
                         ]}
                     >
                         <Checkbox>
-                            {t('link_agree')} <a href="/">{t('link_agreement')}</a>
+                            {t('link_agree')} <a href="/register">{t('link_agreement')}</a>
                         </Checkbox>
                     </Form.Item>
                     
