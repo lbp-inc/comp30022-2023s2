@@ -7,6 +7,7 @@ import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
 const JWT_SECRET = "liTq9vasHanieW0Sb8ClegPSs6dZV05xHLKSiEZhPUC4KPSurj0pmJJs66L8biTNSvTxM11rUacxXX0P23clrB8vmC7i0e0RMVc";
 
+import Course from "../models/courseModel.js";
 import Activity from "../models/activity.js";
 import Notification from "../models/notificationModel.js";
 
@@ -181,8 +182,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     }
     if (userModel) {
       userModel.firstname = firstname;
-      userModel.surname = surname,
-      userModel.gender = gender;
+      (userModel.surname = surname), (userModel.gender = gender);
       userModel.birthday = birthday;
       userModel.email = email;
       userModel.phone = phone;
@@ -403,10 +403,10 @@ const emailCodeMatch = asyncHandler(async (req, res) => {
  * @returns {Promise<void>}
  */
 const getUserGroups = asyncHandler(async (req, res) => {
-  const activities = await Activity.find({});
-  if (activities) {
-    let activityNames = activities.map((activity) => activity.name);
-    res.json(activityNames);
+  const courses = await Course.find({});
+  if (courses) {
+    let courseNames = courses.map((course) => course.course_name);
+    res.json(courseNames);
   } else {
     res.status(404);
     throw new Error("Courses not found");
